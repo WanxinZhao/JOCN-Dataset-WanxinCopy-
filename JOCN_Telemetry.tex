@@ -1,0 +1,489 @@
+\documentclass[9pt,twocolumn,twoside]{osajnl}
+\usepackage{comment}
+\usepackage{threeparttable}
+\usepackage{siunitx}
+\usepackage{subcaption}
+\usepackage{threeparttable}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{ragged2e}
+\setcounter{secnumdepth}{3}
+\usepackage{stfloats}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{lipsum}
+% \usepackage{subfigure}
+\usepackage[normalem]{ulem}
+\journal{jocn} 
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\usepackage{afterpage}
+\usepackage{makecell} % 在导言区添加这一行以引入宏包
+\usepackage{tabularx} % 导言区加载 tabularx 宏包
+\usepackage{cleveref}
+\usepackage{xurl}
+\Urlmuskip=0mu plus 1mu
+
+% Set the article type for journal submissions. Comment out this line for Optica Open preprint submissions.
+\setboolean{shortarticle}{false}
+% true = letter / tutorial
+% false = research / review article
+
+\title{{Open-Source Cross-Domain Datasets Enabled by LLM-Driven Digital Twins and Network Telemetry}}
+
+\author[1]{Sen Shen\textsuperscript{\textdagger,}}
+\author[1]{Wanxin Zhao\textsuperscript{\textdagger,}}
+\author[1]{Xuewen Chen\textsuperscript{\textdagger,}}
+
+\author[1]{Jing Han}
+\author[1]{Xueqing Zhou}
+\author[1]{Ruizhi Yang}
+\author[1]{Peiyun Ge}
+\author[1]{Zhuojun Cai}
+\author[1]{Vaigai Yokar}
+\author[1]{Yulei Wu}
+\author[1]{Shuangyi Yan*}
+\author[1]{Dimitra Simeonidou}
+
+
+\affil[1]{Smart Internet Lab, Faculty of Science and Engineering, University of Bristol, Bristol, United Kingdom.\newline
+\textsuperscript{$\dagger$}These authors contributed equally to this work.}
+
+\affil[*]{shuangyi.yan@bristol.ac.uk}
+
+
+
+
+%% To be edited by editor
+% \dates{Compiled \today}
+
+%% To be edited by editor
+% \doi{\url{http://dx.doi.org/10.1364/XX.XX.XXXXXX}}
+
+\begin{abstract}
+
+% Machine learning (ML)-enabled network intelligence requires diverse and accessible data across heterogeneous network domains, whereas open-source datasets jointly covering optical transport, fibre sensing, and wireless access remain limited. This paper presents an open-source cross-domain dataset framework that combines practical measurements with large-language-model (LLM)-driven multi-agent digital twins (DTs) for automated data generation in optical–wireless networks. We provide practical datasets collected from experimental testbeds, including long-term optical transmission performance data over the UK National Dark Fibre Facility, fibre communication and sensing data over deployed urban links, and multi-access wireless performance data involving 5G, Wi-Fi, and LiFi. To support cross-domain fusion, three semantic-module designs are investigated, with the privacy-aware bottlenecked module achieving the most favourable overall privacy–utility trade-off. Furthermore, the proposed LLM-driven multi-agent DT framework translates data-generation requests into executable simulation workflows and iteratively refined dataset outputs. In a GNPy-based optical QoT use case, it produces 8,160 valid samples from 8,192 executed scenarios. The proposed datasets and generation framework provide an open foundation for ML development in future cross-domain network intelligence.
+
+
+With the wide application of machine learning (ML) in telecommunication networks, networks are becoming increasingly intelligent and autonomous. However, sufficient practical data and high-quality synthetic data remain difficult to obtain for ML model training and updating. This challenge is more pronounced in cross-domain optical and wireless networks, where heterogeneous infrastructures, diverse telemetry interfaces, inconsistent data formats, and privacy concerns make data collection, alignment, fusion, and sharing particularly difficult. Meanwhile, generating high-quality synthetic cross-domain data requires substantial human effort to design, configure, and validate diverse simulation scenarios. In this paper, we present an open-source cross-domain dataset framework enabled by network telemetry, semantic data abstraction, and large language model (LLM)-driven multi-agent digital twins (DTs). The proposed framework integrates distributed and centralised data repositories, Kafka-based telemetry pipelines, DTs, AI engines, and network controllers to support scalable data collection, cross-domain data fusion, and automated dataset generation. Based on this framework, we release practical datasets collected from real optical and wireless testbeds, covering optical transmission performance monitoring, fibre sensing, and multi-access wireless network performance. To enable efficient and privacy-aware cross-domain fusion, we design and evaluate wireless semantic modules that transform raw wireless telemetry into compact task-relevant representations. In addition, we propose an LLM-driven multi-agent DT framework that translates high-level user requests into executable data-generation workflows and enables autonomous scenario construction, simulation execution, result analysis, and iterative refinement. The released datasets and data generation framework provide an open and extensible foundation for training, evaluating, and updating AI models in future cross-domain optical and wireless networks.
+
+
+\end{abstract}
+
+\setboolean{displaycopyright}{false} % Do not include copyright or licensing information in submission.
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In recent years, machine learning (ML) has been widely investigated in telecommunication networks to support intelligent and autonomous network operation. In optical networks, ML has been applied to quality of transmission (QoT) estimation, traffic prediction, anomaly detection, and resource allocation~\cite{villa2023IEEEAccess}. In wireless networks, ML-based methods have also been explored for radio resource management, multi-access optimisation, traffic prediction, mobility management, and service quality assurance~\cite{sun2019IEEE}. These advances indicate a clear trend towards AI-native network intelligence, where data-driven models support monitoring, optimisation, and closed-loop control.
+
+% Despite these advances, the performance and generalisation capability of ML models strongly depend on the availability of representative and high-quality datasets. In practical telecommunication networks, however, obtaining sufficient data remains challenging. Real operational data are often difficult to access because they contain sensitive information related to network topology, device configurations, service conditions, customer traffic, and operator policies. As a result, network operators are generally reluctant to disclose such data. Although several open-source datasets have been released for optical or wireless network research, most existing datasets are still limited to a single network domain, a specific task, or a restricted experimental scenario. This limits their applicability to future intelligent networks, where decisions increasingly depend on joint observations across multiple domains.
+
+However, the effectiveness of ML models strongly depends on the availability of representative and high-quality datasets. In practical telecommunication networks, data collection and sharing remain difficult because operational data may contain sensitive information, including network topology, device configurations, service conditions, customer traffic, and operator policies. Although several open-source datasets~\cite{zhai2024alibaba}~\cite{filer2016microsoft} have been released for optical or wireless network research, most of them focus on a single domain, a specific task, or a limited experimental scenario. This restricts their applicability to future intelligent networks, where decisions increasingly rely on joint observations across multiple domains. The lack of open-source cross-domain datasets is particularly important for converged optical and wireless networks, where wireless access and optical transport domains are tightly coupled to support end-to-end services. Service degradation may arise from wireless channel variations, optical transmission impairments, traffic dynamics, or their combined effects. Therefore, cross-domain datasets are essential for end-to-end service monitoring, fault diagnosis, resource coordination, and AI-assisted orchestration. However, constructing such datasets is challenging due to heterogeneous infrastructures, telemetry interfaces, data formats, time scales, and control mechanisms. Privacy concerns in wireless telemetry and confidentiality issues in optical-domain topology and configuration data further complicate data collection, fusion, and sharing. Synthetic data generation can complement practical measurements by covering diverse network scenarios and rare operating conditions. Digital twins (DTs) provide an effective approach for generating synthetic network data by emulating network behaviour under configurable topologies, traffic patterns, device parameters, and service requirements. However, existing DT-based data generation still relies heavily on manual scenario design, parameter configuration, experiment execution, result analysis, and simulation refinement. This process is time-consuming and difficult to scale, especially for cross-domain networks with large configuration spaces and domain-specific constraints.
+
+% The lack of open-source cross-domain datasets is particularly critical for converged optical and wireless networks. In such networks, wireless access domains and optical transport domains are tightly coupled to support end-to-end services. Service performance degradation may originate from wireless access conditions, optical transmission impairments, traffic dynamics, or their combined effects. Therefore, cross-domain data are required to support tasks such as end-to-end service monitoring, cross-domain fault diagnosis, resource coordination, and AI-assisted orchestration. However, constructing such datasets is difficult because optical and wireless domains rely on heterogeneous infrastructures, telemetry interfaces, data formats, time scales, and control mechanisms. In addition, raw wireless telemetry may contain privacy-sensitive information, while optical-domain data often involve confidential topology and configuration details. These factors make cross-domain data collection, alignment, fusion, and sharing substantially more challenging than single-domain dataset construction.
+
+% To address these challenges, this paper presents an open-source cross-domain dataset framework enabled by network telemetry, semantic data abstraction, and LLM-driven multi-agent digital twins. The proposed framework integrates distributed and centralised data repositories, Kafka-based telemetry pipelines, digital twins, AI engines, and network controllers to support scalable data collection, cross-domain data fusion, and automated dataset generation. Practical datasets are collected from real optical and wireless testbeds, covering optical transmission performance monitoring, fibre sensing, and multi-access wireless network performance. These datasets provide practical data sources for studying network monitoring, sensing, prediction, and cross-domain optimisation.
+
+To address these challenges, this paper presents an open-source cross-domain dataset framework enabled by network telemetry, semantic data abstraction, and LLM-driven multi-agent DTs. The proposed framework integrates distributed and centralised data repositories, Kafka-based telemetry pipelines, DTs, AI engines, and network controllers to support scalable data collection, cross-domain fusion, and automated dataset generation. Practical datasets are collected from real optical and wireless testbeds, covering optical transmission performance monitoring, fibre sensing, and multi-access wireless network performance. These datasets support research on network monitoring, sensing, prediction, and cross-domain optimisation. Then, this work further introduces semantic data abstraction for efficient and privacy-aware cross-domain fusion. Instead of directly transmitting raw wireless telemetry to the cross-domain repository, semantic modules transform wireless-domain observations into compact task-relevant representations. Three designs are investigated, including a hand-crafted semantic module, a learned latent semantic module, and a privacy-aware bottlenecked semantic module. Their utility and privacy are evaluated under a unified cross-domain fusion framework, showing that semantic abstraction can support cross-domain learning while reducing unnecessary exposure of wireless-side information. Furthermore, this paper proposes an LLM-driven multi-agent DT framework for automated cross-domain data generation. Collaborative agents interpret high-level user requests, decompose data-generation tasks, expand simulation scenarios, invoke DT execution engines, analyse generated results, and refine the search space. By combining LLM-driven reasoning with DT-based simulation, the framework reduces manual effort in scenario design and enables scalable generation of synthetic datasets under configurable network conditions.
+
+% In addition to practical data collection, this work introduces semantic data abstraction for efficient and privacy-aware cross-domain fusion. Instead of directly transmitting raw wireless telemetry to the cross-domain repository, semantic modules transform wireless-domain observations into compact task-relevant representations. Three semantic module designs are investigated, including a hand-crafted semantic module, a learned latent semantic module, and a privacy-aware bottlenecked semantic module. Their performance is evaluated from both utility and privacy perspectives under a unified cross-domain fusion framework. The results show that semantic abstraction can support cross-domain learning while reducing unnecessary exposure of wireless-side information.
+
+
+% Furthermore, this paper proposes an LLM-driven multi-agent DT framework for automated cross-domain data generation. The framework uses collaborative agents to interpret high-level user requests, decompose data-generation tasks, expand simulation scenarios, invoke DT execution engines, analyse generated results, and refine the search space. By combining LLM-driven reasoning with DT-based simulation, the framework reduces manual effort in scenario design and enables scalable generation of synthetic datasets under configurable network conditions. The feasibility of the framework is demonstrated through DT-based data-generation use cases in optical and wireless network scenarios.
+
+% The main contributions of this paper are summarised as follows. First, we propose a unified open-source cross-domain dataset framework for converged optical and wireless networks, integrating telemetry, distributed and centralised data repositories, DTs, AI engines, and network controllers. Second, we release practical datasets collected from real optical and wireless testbeds, covering transmission performance monitoring, fibre sensing, and multi-access wireless performance. Third, we design and evaluate semantic modules for privacy-aware wireless data abstraction and cross-domain fusion. Fourth, we propose an LLM-driven multi-agent DT framework that automates scenario construction, simulation execution, result analysis, and iterative dataset refinement.
+
+The remaining sections are organised as follows: Related work on cross-domain data availability, network telemetry and semantic data abstraction are presented in Section 2, followed by an overview
+of DTs and LLM-Driven Network Automation. Section 3 presents the unified framework for cross-domain dataset collection and LLM-driven data generation. Section 4 details the proposed cross-domain telemetry architecture and practical datasets collected from optical and wireless testbeds. Then, Section 5 introduces the LLM-driven multi-agent DT framework and demonstrates its use for automated data generation. Finally, Section 6 concludes with a summary of this work and future research directions.
+
+% \section{Related Work}
+% \subsection{ML Applications}
+% With the successful application of ML in natural language processing, ML techniques have been widely applied to optical and wireless networks over the past decade for performance prediction, resource allocation, and network optimisation. These advances have accelerated the evolution towards AI-native networks. More recently, LLMs with strong reasoning and task-planning capabilities, have further enhanced network automation and reduced human intervention.
+
+% \subsubsection{Traditional ML in Optical and Wireless Networks}
+
+% Traditional ML can be categorised into four distinct groups: supervised learning, unsupervised learning, and reinforcement learning. Supervised learning including Random Forest, Decision Tree, Support Vector Machine and neural networks, is widely used in QoT estimation and traffic prediction. For example, in optical networks, an RF-based ML equaliser was developed for DP-64QAM coherent optical transmission, achieving deep-learning-level equalisation performance with substantially lower computational complexity. Also, an SVM-based ML approach was introduced to estimate lightpath QoT in optical transport networks, achieving high classification accuracy and significantly reduced computation time compared with semi-analytical methods. And an ANN-based multi-channel QoT prediction framework was demonstrated using real field-trial monitoring and configuration data, showing that the ML-based method can achieve accurate Q-factor estimation for dynamic optical network optimisation. Similarly, an SVM-based secure wireless communication framework was introduced by constructing signal-derived features and artificial training data from wireless propagation signals to detect active eavesdropping at the physical layer. In wireless networks, artificial neural networks have been extensively used to learn complex relationships from network data and support intelligent functions such as prediction, classification, resource optimisation, and autonomous network management.
+
+% Unsupervised learning such as K-means, autoencoder, DBSCAN, is widely used in tasks including anomaly detection and clustering. For example, A DBSCAN-based unsupervised anomaly detection loop was deployed in a microservice-based optical SDN controller, achieving scalable telemetry-driven monitoring without labeled training data and supporting up to 960 optical channels with 5–20 ms inference latency. Also, unsupervised DNN-based power control has been applied to energy-efficient wireless networks by directly optimising fractional energy-efficiency objectives through primal-dual learning, achieving real-time inference without requiring labeled solutions from conventional optimization algorithms. Compared with supervised and unsupervised learning, RL is mostly used in decision and control tasks. In optical networks, DRL is widely used in RMSA problem. For example, it has been applied to dynamic RMSCA in multi-core-fiber SDM-EONs, where PPO-based agents learn adaptive routing and core-allocation policies to improve spectrum utilization and reduce blocking probability under crosstalk constraints. In wireless networks, DRL is widely used to learn adaptive resource allocation and control policies under dynamic channel, traffic, and mobility conditions. In wireless networks, DRL is widely used to learn adaptive resource allocation and control policies under dynamic channel, traffic, and mobility conditions. For multi-server MEC networks, DRL has been used to support long-term resource planning, where DQN and multi-agent DDPG enable resource reservation and server cooperation, while optimization-based policies handle task offloading, transmission power allocation, and computing resource distribution.
+
+
+% \subsubsection{LLMs in Networks}
+
+% \subsection{Network Telemetry}
+
+
+\section{RELATED WORK}
+
+\subsection{Cross-Domain Data Availability and Network Telemetry}
+ 
+With the increasing use of ML in telecommunication networks, data have become a key enabling resource for model training, validation, inference, and updating. In cross-domain optical--wireless networks, practical telemetry is particularly valuable because it captures communication performance, device states, service requests, and environmental variations under real operating conditions. In optical transport and fibre-sensing systems, such data may include bit error rate (BER), optical signal-to-noise ratio (OSNR), Q-factor, optical power, route information, configuration records, device alarms, state-of-polarisation (SOP) evolution, backscatter traces, distributed acoustic sensing signals, and vibration-related features~\cite{he2023isac,zhao2025vibration,zhao2026train}. In wireless access networks, standardised telemetry may include throughput, packet loss, delay, signal strength, cell load, mobility, traffic distribution, and per-device access statistics~\cite{3gpp28552,etsi128554}. The value of these heterogeneous data lies not only in individual measurements, but also in their temporal alignment and shared service context across optical transport, fibre sensing, and wireless access domains.
+
+
+However, practical cross-domain data are difficult to collect, align, and share. Optical transport, fibre sensing, and wireless access systems rely on different infrastructures, telemetry interfaces, data formats, and time scales. In addition, operational data may expose real network topology, configuration, device states, customer traffic, service conditions, and operator policies, thereby limiting public data sharing. Consequently, only a limited number of open optical-network datasets are available. Representative examples include the Microsoft wide-area optical backbone dataset for operational network-performance analysis~\cite{filer2016microsoft,delezoide2020field}, the Fraunhofer HHI QoT dataset collection for ML-assisted QoT estimation in elastic optical networks~\cite{bergk2022qotdataset}, and the Alibaba disaggregated production-network dataset for field-data-based QoT estimation and parameter optimisation~\cite{zhai2024alibaba,he2023qot}. Recent dataset-oriented efforts have further covered space-division-multiplexing networks, fibre sensing, optical-device modelling, and radio-over-fibre systems~\cite{akbari2025sdmdatasets,li2026dasdataset,yuan2026soadataset,zhao2026mmwavearof}. Nevertheless, most existing datasets remain limited to a single domain, topology, task, or measurement campaign, and rarely provide time-aligned optical-transport, fibre-sensing, and wireless-access observations under a common service context.
+
+Network telemetry provides the basis for scalable data collection~\cite{rfc9232}. Model-driven and streaming telemetry solutions based on NETCONF/YANG, gRPC, gNMI, and publish--subscribe mechanisms have been developed to expose network states and performance measurements~\cite{rfc9232,gnmi2018}. In optical networks, prior studies have demonstrated telemetry services for real-time monitoring in disaggregated optical networks, streaming-telemetry-assisted diagnosis, Kafka-based optical monitoring frameworks, and unified monitoring platforms integrating telemetry collection, time-series storage, configuration databases, and streaming pipelines~\cite{paolucci2018telemetry,tanaka2021diagnosis,sgambelluri2022kafka,shen2025telemetry}. In wireless networks, O-RAN and AI-native RAN architectures also rely on multi-source telemetry to expose radio, traffic, and service context to intelligent controllers and AI/ML applications~\cite{mahmoud2026oranintelligence}. However, most existing telemetry frameworks are designed for specific domains, vendor interfaces, or monitoring tasks. Cross-domain data collection, time alignment, format consistency, repository management, and service-level interpretation across optical transport, fibre sensing, and wireless access domains remain insufficiently addressed.
+
+\subsection{Semantic Data Abstraction for Privacy-Aware Cross-Domain Fusion}
+
+Cross-domain dataset generation requires not only collecting heterogeneous telemetry, but also deciding which information should be shared, stored, and fused. Directly aggregating raw wireless telemetry into a central repository may introduce unnecessary communication and storage overhead while exposing device-specific or service-sensitive information. This issue is particularly critical in multi-access wireless networks, where raw telemetry may reveal device identity, access behaviour, traffic patterns, mobility states, and service conditions~\cite{8792139}. Therefore, practical optical--wireless data fusion requires compact and task-relevant representations that preserve useful information for downstream analysis while reducing the exposure of sensitive raw observations.
+
+Task-oriented semantic communication provides a useful principle for such abstraction by transmitting information relevant to downstream tasks rather than reconstructing all source observations with equal fidelity~\cite{xie2022task,ma2023explainable}. Within telemetry systems, semantic representations can be constructed from expert-designed indicators or learned encoders. In particular, information-bottleneck methods can learn compact latent variables that preserve task-relevant information while discarding irrelevant input details~\cite{alemi2017vib}. Such representations can summarise wireless load, link stability, access diversity, congestion risk, and service degradation, thereby reducing data volume and enabling more efficient fusion with optical transmission and fibre-sensing measurements. However, compact representations are not automatically privacy preserving, because sensitive attributes may still be inferred from the transmitted features. Privacy-aware representation learning therefore requires information bottlenecks, noise injection, adversarial objectives, or representation regularisation to balance downstream utility against sensitive information leakage~\cite{alemi2017vib,edwards2016censor,madras2018fair,wang2024privacysemantic}.
+
+Existing studies on semantic-communication and privacy-aware representation mainly focus on single-domain communication data, end-to-end transmission efficiency, or downstream task accuracy. Limited work has investigated how wireless telemetry should be abstracted for cross-domain optical--wireless dataset generation, or how such representations should be evaluated jointly in terms of cross-domain utility, data reduction, and privacy exposure. This motivates the design of wireless semantic modules that transform raw multi-access telemetry into compact task-relevant representations for privacy-aware fusion with optical transmission and fibre-sensing data.
+
+\subsection{Digital Twins and LLM-Driven Data Generation}
+
+As telecommunication networks become increasingly data-driven, both practical measurements and high-quality synthetic data are essential for model development and system evaluation. However, real network measurements are difficult to collect at scale because of limited testbed access, operational cost, privacy constraints, safety requirements, and the rarity of abnormal or extreme operating conditions. This challenge is more pronounced in cross-domain optical--wireless networks, where heterogeneous infrastructures, telemetry interfaces, and data formats complicate data collection and alignment. Synthetic data can complement practical measurements by expanding scenario coverage and providing labelled samples under controllable conditions. Network DTs therefore provide a natural data-generation tool, as they can emulate network behaviour under configurable topology, traffic, device, channel, and service conditions~\cite{zhuge2023dt}.
+
+In optical networks, GNPy provides an open and vendor-independent physical-layer modelling framework for emulating optical paths under configurable topology, equipment, channel loading, and transmission parameters settings~\cite{curri2022gnpy}. Recent studies have used GNPy-based DTs to generate optical-network datasets under normal and degraded conditions, such as amplifier degradation, span-loss variation, and component misconfiguration~\cite{mohamed2025dtfailuredb,mohamed2025mlagentsdt}. In wireless networks, simulators and DT platforms, such as ns-3 and Colosseum, support repeatable packet-level, radio frequency, and protocol-stack emulation~\cite{riley2010ns3,polese2024colosseum}, while generative-AI-enabled wireless DTs have been explored for 6G modelling and scenario augmentation~\cite{tao2024wirelessdt,chai2024genaidt}. These studies demonstrate the value of DTs for controllable data generation. Nevertheless, DT-based dataset generation still requires substantial manual effort to define objectives, configure scenarios, execute simulations, validate results, and refine parameter settings. This manual process becomes costly and difficult to scale in cross-domain optical--wireless environments, where different DT tools rely on different abstractions, interfaces, and configuration formats.
+
+Recent studies have begun to integrate LLMs, AI agents, and DTs to reduce the manual burden of network automation. In optical-network DT research, modelling, telemetry, self-learning, and lifecycle management have been identified as key components for intelligent optical networks~\cite{wang2024dtreview}. GPT-enabled DT assistants have also been demonstrated to interpret user intentions and interact with DT functions for autonomous optical-network management~\cite{zhang2024gptdtassistant}. In addition, DTs have been used to provide updated network states and pre-verify LLM-generated strategies before deployment, with demonstrations covering performance optimisation, protection switching, and recovery after fibre cuts~\cite{song2025llmdt}. Other studies have explored fine-tuned local agents, DT-aided wavelength-loading control, AI-agent integration, and field-trial demonstrations for optical-network lifecycle automation~\cite{sun2025localaiagents,liu2024autodtwave,zhuge2025dtaiagent,liu2026fieldtrial}. These studies demonstrate the potential of LLMs and AI agents to interact with DTs, but their focus remains on network operation and management rather than autonomous dataset generation.
+
+Existing DT and LLM-agent workflows generally assume that simulation objectives, scenario spaces, parameter ranges, and data-generation requirements are manually specified. Limited work has considered dataset generation itself as an autonomous closed-loop workflow, especially across optical and wireless domains. In contrast, this work focuses on scalable cross-domain dataset generation, where LLM-driven multi-agent orchestration translates high-level data-generation requests into structured tasks, invokes optical and wireless DT execution engines, analyses generated KPIs, and iteratively refines the scenario space. This motivates an open-source framework that integrates practical telemetry, data repositories, DTs, AI engines, and LLM-driven agents for cross-domain dataset generation.
+
+
+
+
+
+
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/architecture_v1.png}
+    \captionsetup{justification=centering}
+    \vspace{-0.1cm}
+    \caption{Proposed unified framework for cross-domain dataset collection and LLM-driven data generation.}
+    \label{fig:proposed architecture.png}
+    \vspace{-0.3cm}
+\end{figure*}
+
+
+\section{Unified Framework For Cross-Domain Dataset Collection And LLM-Driven Data Generation}
+
+Figure~\ref{fig:proposed architecture.png} illustrates a unified framework for cross-domain dataset collection and LLM-driven data generation in wireless–optical network environments based on our previous work~\cite{shen2025telemetry}~\cite{Shen2026OFCdata}. The bottom layer represents the physical infrastructure of a general end-to-end network scenario, in which wireless access domains are interconnected through an optical transport network. This abstraction captures a practical multi-domain networking environment where heterogeneous devices, protocols, and control entities coexist across wireless and optical segments.
+
+From the physical infrastructure, multi-source network data are continuously collected, including performance monitoring metrics from network elements (NEs), network configuration information, and sensing data. These data can be acquired through common telemetry protocols and interfaces, such as NETCONF, gRPC and REST APIs. The collected data are first stored in distributed databases associated with individual domains or nearby physical nodes. In this design, each distributed database maintains local domain-specific information, thereby supporting scalable data collection and reducing the burden on centralized storage. Specifically, fine-grained time-series monitoring data can be stored in time-series databases such as InfluxDB~\cite{InfluxData}, while topology, configuration, and policy-related information can be organised in relational databases such as PostgreSQL~\cite{PostgreSQL}, either as structured tables or JSON-formatted records. To enable cross-domain optimisation and orchestration, task-relevant data can be selectively retrieved from distributed databases and forwarded to a centralized cross-domain data repository. This on-demand aggregation mechanism reduces unnecessary data movement while providing global network visibility when required. A Kafka-based telemetry pipeline is used to support high-throughput and low-latency data streaming between distributed databases and the centralized repository. Consequently, the centralised repository serves as a unified data foundation for network-wide analysis, optimization, and closed-loop decision-making.
+
+Built upon the data infrastructure, the proposed framework integrates LLM-driven multi-agents, referred to as Agentic AI, with DTs, AI engines, an orchestrator, and network controllers. In addition to supporting cross-domain optimisation and orchestration, the Agentic AI layer serves as an automated data generation engine for multi-scenario exploration in wireless–optical network environments. Given a user request or a target generation objective, the Agentic AI layer interprets the service intent, decomposes it into executable subtasks, and invokes DT models and AI engines according to predefined policies and task requirements. These components jointly support scenario construction, decision validation, QoT prediction, path optimization, and synthetic data generation under diverse network conditions. In particular, the DT provides a simulation and evaluation environment for assessing candidate decisions and generating scenario-specific data, whereas the AI engines provide ML and optimisation capabilities for data-driven inference.
+
+The orchestrator coordinates the interactions among multiple agents, DTs, AI engines, data repositories, and network controllers. It is responsible for task decomposition, agent collaboration, execution tracking, and feedback-based refinement, thereby enabling autonomous reasoning for complex cross-domain tasks and iterative refinement of generated datasets. Finally, the network controllers translate the optimised decisions or recommendations generated by the Agentic AI layer into executable network configurations, including path provisioning, cross-domain orchestration, and policy-based closed-loop control. These configurations can also be fed back to the DT environment to generate additional data samples under updated network states and service scenarios.
+
+The detailed design of the cross-domain telemetry architecture across optical and wireless networks is presented in Section~\ref{sec:cross-domain-telemetry}, while the LLM-driven multi-agent DT framework for cross-domain data generation is further elaborated in Section~\ref{sec:LLM}.
+
+\section{Cross-Domain Telemetry Architecture Across Optical And Wireless Networks}
+\label{sec:cross-domain-telemetry}
+
+\subsection{Proposed Cross-Domain Telemetry Architecture}
+\label{subsec:4.A}
+
+Figure~\ref{fig:cross-domain telemetry.png} presents the proposed cross-domain telemetry architecture for converged optical and wireless networks. The architecture integrates distributed local databases, a Kafka-based telemetry pipeline, a centralised cross-domain data repository, DTs, local and network-level AI engines, and network controllers. It is designed to support scalable monitoring, sensing, multi-domain data fusion, and closed-loop network control across heterogeneous optical transport and wireless access infrastructures.
+
+\subsubsection{Optical Transport Network Physical Layer}
+
+At the bottom of Fig. \ref{fig:cross-domain telemetry.png}, the physical layer of the optical transport network consists of multiple interconnected optical nodes, including aggregation and intermediate nodes. These nodes represent practical optical transport infrastructure, in which NEs such as transponders, fibre links, optical switches, reconfigurable optical add-drop multiplexers (ROADMs), and optical amplifiers generate heterogeneous operational data.
+
+The collected optical domain data can be categorised into three types: performance monitoring metrics, equipment parameters and topology information, and fibre sensing data. Performance monitoring metrics include receiver-side BER, OSNR, received optical power, amplifier input/output power levels, and per-port optical power measurements from optical switches. Equipment parameters and topology information include transmitter-side launch power, wavelength allocation, modulation format, amplifier gain, node configuration, and link information. Fibre sensing data include SOP, chromatic dispersion (CD), polarization mode dispersion (PMD), and backscatter traces. These data provide communication- and physical-layer visibility, supporting applications such as QoT estimation, anomaly detection, environment-aware operation, and proactive maintenance.
+
+% These data provide visibility at both the communication and physical layers. Performance monitoring metrics support ML applications such as QoT estimation, whereas fibre sensing data enable environment-aware network operation, anomaly detection, and proactive maintenance.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/cross-domain telemetry.png}
+    \captionsetup{justification=centering}
+    \vspace{-0.1cm}
+    \caption{Cross-domain telemetry architecture with distributed and centralised databases, local and network-level AI engines, DTs and network controllers across optical and wireless networks.}
+    \label{fig:cross-domain telemetry.png}
+    \vspace{-0.3cm}
+\end{figure*}
+
+
+\subsubsection{Distributed Node-Level Databases}
+Local databases deployed in each physical node, are responsible for collecting, storing, and pre-processing domain- or node-specific telemetry data. Unlike a single-database design, each distributed database uses a hybrid structure comprising a time-series database and a relational database. The time-series database, such as InfluxDB, is used for continuously sampled monitoring and sensing streams, whereas the relational database, such as PostgreSQL, is used for structured or semi-structured network information. Specifically, time-varying measurements, such as BER, OSNR, and optical power, are stored as timestamped time-series records. In contrast, network topology and equipment configurations are more suitably maintained in relational databases. Within local databases, the collected data are filtered and pre-processed before selected data are forwarded to the centralized repository. This reduces unnecessary data streaming and improves the scalability of the telemetry system. In addition, lightweight local AI/ML modules can be deployed on distributed databases to support local inference, such as short-term performance forecasting and anomaly detection~\cite{ShenOFC2023}.
+
+\subsubsection{Telemetry Service Design}
+
+The telemetry service provides a unified data acquisition and streaming mechanism across optical and wireless domains, consisting of local telemetry collection and cross-domain telemetry streaming. In local telemetry collection, optical and wireless devices expose monitoring, configuration, and sensing information through heterogeneous management and telemetry interfaces. Representative examples include NETCONF, gRPC/gNMI, REST APIs, HTTP interfaces, and vendor-specific management APIs. These interfaces provide access to device states, performance measurements, configuration parameters, and sensing-related measurements. For time-series telemetry ingestion, Telegraf, a plugin in InfluxDB, is used to interface with heterogeneous telemetry protocols, collect metrics from different sources, and write them to the corresponding local InfluxDB instances.
+
+
+For cross-domain telemetry streaming, a Kafka-based pipeline connects distributed databases with the centralised cross-domain data repository. In this design, telemetry data are first collected and stored in local databases associated with individual optical nodes or wireless domains. According to task requirements, selected data streams are then published to Kafka topics maintained by Kafka brokers, which buffer and distribute incoming telemetry streams. The centralised repository acts as a data consumer and subscribes to the required topics to retrieve data from different domains and nodes. After aggregation and alignment, it provides a unified data source for upper-layer applications, including DTs, AI engines, and network controllers.
+
+% This design decouples local data collection from centralised data consumption. Distributed databases act as domain-level or node-level data producers, while the centralised repository serves as the integration point for cross-domain data fusion. Upper-layer applications do not directly retrieve data from every distributed database; instead, they access the aggregated and aligned data from the centralised repository. This improves system scalability, simplifies application development, and provides a consistent data interface for network-wide analytics and control.
+
+The Kafka-based pipeline supports high-throughput and low-latency telemetry transfer through its append-only log structure, topic partitioning, and asynchronous producer–consumer model. Topic partitioning enables telemetry from different domains or nodes to be processed in parallel, whereas broker-side buffering absorbs bursty arrivals and reduces blocking between producers and consumers. In addition, subscribed consumers can continuously read data streams without repeatedly polling individual distributed databases, thereby reducing access overhead and improving streaming efficiency. This design enables telemetry from multiple optical nodes and wireless domains to be delivered to the centralised repository without tight coupling among heterogeneous data sources. It also supports on-demand aggregation, where only task-relevant telemetry streams are forwarded for cross-domain analysis, optimisation, or orchestration.
+
+Before wireless data are streamed to the centralised data repository, semantic modules are proposed to transform raw wireless telemetry into compact, task-relevant high-level representations. These semantic representations are then delivered through the Kafka-based pipeline and fused with optical-domain telemetry at the centralised data repository. Compared with raw-data transmission, this mechanism reduces communication overhead, protects sensitive wireless-domain information, and improves the efficiency of cross-domain data fusion. The detailed design and operation of semantic modules are further discussed in Section~\ref{sec:cross-domain-telemetry}.~\ref{subsec:SemanticModules}.
+
+\subsubsection{Centralised Cross-Domain Data Repository}
+
+At the upper centre of Fig. \ref{fig:cross-domain telemetry.png}, the centralised cross-domain data repository aggregates selected telemetry streams and structured information from distributed optical nodes and wireless domains, providing unified data access for cross-domain analytics, network-level ML applications and configuration management. Similar to the local databases, it uses a hybrid storage design that combines a centralised time-series database InfluxDB, for multi-domain monitoring and sensing streams, with a centralised relational database PostgreSQL, for structured cross-domain information. The time-series database stores time-aligned telemetry streams from optical and wireless domains, including performance monitoring data, sensing data, and other dynamic measurements, whereas the relational database maintains global topology information, device and service metadata and configuration records. Rather than collecting all raw data from distributed databases, the repository retrieves task-relevant data on demand for cross-domain optimisation, orchestration, AI/ML training, and DT-assisted evaluation. 
+
+% This selective aggregation mechanism improves scalability, avoids unnecessary centralization of large-volume telemetry, and provides the data foundation for network-wide visibility and cross-domain decision-making.
+
+\subsubsection{Network Intelligence and Controllers}
+
+Above the centralised repository, DTs, AI engines, and network controllers are integrated to support data-driven analysis, decision validation, and closed-loop network operation. The DTs maintain virtual representations of the optical transport network and wireless networks by using network topology and equipment parameters stored in the centralised repository. They emulate network states and provide a simulation environment for evaluating candidate decisions generated by AI engines or controllers before deployment. In addition, DTs can generate large-scale synthetic or augmented datasets by simulating diverse network conditions, traffic patterns, and configuration states. These datasets support ML model training, retraining, and performance evaluation, particularly when real-world labelled data are limited or hard to obtain.
+
+The AI engine platform provides network-level AI/ML capabilities, including data ingestion, preprocessing, task specification, model composition, training, deployment, inference, monitoring, and virtualisation. Scalable lifecycle management can be supported by containerised execution environments, such as Kubernetes, and model-management tools, such as MLflow. By leveraging both real telemetry data from the centralised repository and synthetic data generated by DTs, the AI engines support tasks such as QoT estimation, anomaly detection, and traffic prediction. The network controllers then translate AI outputs and DT-validated decisions into executable actions, including path provisioning, device reconfiguration, and closed-loop control across optical and wireless domains. Therefore, the proposed architecture forms an end-to-end intelligent control loop, where telemetry data are collected from the physical infrastructure, fused across domains, analysed by AI/ML models, validated through DTs, and enforced through network controllers.
+
+% The AI engine platform provides network-level AI/ML capabilities, including data ingestion and preprocessing, task specification, model composition, training or retraining, deployment and inference, monitoring, and virtualisation. Containerised execution environments, such as Kubernetes, and model-management tools, such as MLflow, can support scalable AI/ML lifecycle management. By leveraging both real telemetry data from the centralised repository and synthetic data generated by digital twins, AI engines can perform tasks such as QoT estimation, anomaly detection and traffic prediction.
+
+% Network controllers translate the outputs of AI engines and DT-based validation into executable network actions, including path provisioning, resource allocation, device reconfiguration, and closed-loop control across optical and wireless domains. By combining data repositories, DTs, AI engines, and controllers, the proposed architecture enables an end-to-end intelligent control loop, in which telemetry data are collected from the physical infrastructure, fused across domains, analysed by AI/ML models, validated through DTs, and finally applied to the network through controllers.
+
+\subsubsection{Wireless Access Network Domains}
+
+The upper left and upper right parts of Fig. \ref{fig:cross-domain telemetry.png} illustrate wireless access domains connected through the optical transport network. Each wireless domain follows a local telemetry and intelligence architecture similar to that of the optical nodes, while incorporating wireless-specific components. A wireless access domain may comprise heterogeneous radio access technologies, such as 5G, Wi-Fi, LiFi, and future 6G systems. These systems generate monitoring and sensing data related to throughput, signal quality, power consumption, access status, link quality, and radio-environment conditions. Each domain includes a local hybrid database, a wireless digital twin, a local AI/ML platform, a network controller, and semantic modules.
+
+The local hybrid database stores monitoring and sensing data in a time-series database and structured wireless-domain information in a relational database. The wireless DT maintains virtual representations of the wireless access domain and reflects current and historical network conditions based on telemetry data. The local AI/ML platform supports domain-level prediction, anomaly detection, and access optimisation, whereas the controller performs local reconfiguration and closed-loop wireless control. Semantic modules further abstract raw wireless telemetry into compact and task-relevant representations, improving transmission efficiency and privacy preservation before cross-domain data fusion.
+
+% Through the semantic module and Kafka-based telemetry pipeline, selected wireless-domain information is forwarded to the centralised cross-domain repository, where it is fused with optical-domain telemetry for global optimisation and unified network control.
+
+
+\subsection{Semantic Modules for Cross-domain Data Fusion}
+\label{subsec:SemanticModules}
+
+ Building upon the cross-domain telemetry architecture described above, the semantic module acts as the key interface between the wireless access domain and the subsequent cross-domain fusion stage. Although the preceding subsections have introduced the data platforms, telemetry service, network intelligence, and network control framework, an additional semantic abstraction layer is required to convert heterogeneous wireless data into compact and transferable representations suitable for fusion with optical-domain measurements. To this end, this work considers three semantic module variants, denoted as V1, V2, and V3: V1, a hand-crafted semantic module; V2, a learned latent semantic module; and V3, a privacy-aware bottlenecked semantic module.
+
+%Fig.\ref{fig:telemetry service design.png} details the novel design of both the local telemetry service from the physical layer of the optical network to distributed databases and the remote telemetry service from distributed databases to the centralized database in the aforementioned proposed unified platform. 
+
+\subsubsection{Semantic Module Designs}
+
+The three variants share a common objective but differ in their semantic abstraction mechanisms, latent dimensionalities, and reconstruction strategies before downstream fusion. Fig. \ref{fig:semantic modules.png} summarises their structural differences. 
+
+V1 uses a deterministic hand-crafted semantic design. Raw wireless observations are first converted into traffic-, signal-, and inactivity-related features, including 5G traffic, WiFi traffic, LiFi traffic, total wireless traffic, WiFi signal strength, LiFi signal level, WiFi inactivity, and traffic fluctuation. Explicit rule-based formulations are then used to construct interpretable semantic indicators, such as wireless load score, link stability score, access diversity score, congestion risk, signal quality, and inactivity risk. These indicators form an 8-dimensional semantic message, denoted as $z_1$--$z_8$. Since V1 relies on normalisation, rolling statistics, and predefined rules rather than neural training, each semantic dimension has a clear physical meaning and deterministic behavior, although its representation capability is constrained by expert-designed rules.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/semantic_case_V1_V2_V3_principle_comparison.png}
+    \captionsetup{justification=centering}
+    \caption{Structures of three semantic-module designs.}
+    \label{fig:semantic modules.png}
+\end{figure}
+
+V2 replaces the hand-crafted design with a learned neural latent representation. The same wireless features are fed into a neural encoder, which learns an 8-dimensional latent code as the semantic message. This latent representation is then passed to a neural decoder to reconstruct the semantic targets required for downstream fusion, including load, link stability, access diversity, and congestion risk. Compared with V1, V2 provides a more flexible data-driven abstraction and can capture correlations that are difficult to define manually. However, its relatively wide latent code may preserve more task-relevant information while also increasing the risk of retaining privacy-sensitive information.
+
+V3 introduces a privacy-aware bottlenecked semantic design. It follows the same neural encoder-decoder principle as V2, but compresses the latent representation from 8 dimensions to 3 dimensions. In addition, Gaussian noise is injected during training, and validation-based early stopping is used to improve robustness and generalisation. This narrower and regularised bottleneck encourages the semantic module to retain only information relevant to downstream fusion, thereby reducing unnecessary sensitive structure while maintaining compatibility with the cross-domain fusion pipeline.
+
+After semantic decoding, all three variants are evaluated under a unified downstream framework. The reconstructed wireless semantic targets are fused with optical-domain measurements to build the cross-domain dataset for binary service-risk prediction, 4-class degradation-source classification, and privacy-risk assessment. This consistent setting enables a fair comparison of V1, V2, and V3 in terms of predictive utility, interpretability, and privacy preservation.
+
+
+\subsubsection{Testing Results}
+
+The performance of the three semantic module variants, V1, V2, and V3, is evaluated within a unified cross-domain fusion framework from both utility and privacy perspectives. Utility is measured through binary service-risk prediction and 4-class degradation-source classification, where the decoded wireless semantic outputs are fused with optical-domain measurements. Privacy risk is assessed by an attacker model that attempts to infer sensitive wireless-side attributes from the transmitted semantic representations. Specifically, the attacker is implemented as a standardised random-forest classifier and is trained on the semantic message features, including latent variables and semantic confidence scores, to predict two privacy-sensitive labels, namely the dominant radio access technology (RAT) and the dominant customer premises equipment (CPE). These labels are derived from raw wireless traffic records by identifying the traffic-dominant RAT and CPE for each service instance. The attack dataset is formed by aligning the semantic messages with the corresponding wireless-side labels using time and service identifiers. The attacker is evaluated using a 70/30 train-test split with class filtering and stratified sampling when applicable. The quantitative results are summarised in Table \ref{tab:semantic_module_results}, and the utility performance is further illustrated in Fig. \ref{fig:semantic results}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.93\linewidth]{Figures/semantic_module_utility_comparison.png}
+    \captionsetup{justification=centering}
+    \vspace{-0.1cm}
+    \caption{Utility performance comparison of three semantic-module designs.}
+    \label{fig:semantic results}
+    \vspace{-0.2cm}
+\end{figure}
+
+Table \ref{tab:semantic_module_results} reports the quantitative results of the three variants, and Fig. \ref{fig:semantic results} further compares their utility performance. V3 achieves the best overall utility, obtaining the highest Accuracy, Macro F1-score, and AUC in binary service-risk prediction, as well as the highest Accuracy in 4-class degradation-source classification. V2 remains competitive and achieves the highest Macro F1-score in the 4-class classification task, indicating that its wider learned latent representation is more effective in capturing minority-class patterns. However, this improvement is accompanied by increased privacy leakage, as V2 yields the highest attacker Macro F1-score for dominant RAT inference. These results indicate that V3 better preserves task-relevant information for cross-domain fusion, whereas V2 tends to retain additional sensitive wireless-side information.
+
+\begin{table}[t]
+\caption{Overall quantitative results of three semantic modules in utility and privacy.}
+\label{tab:semantic_module_results}
+\centering
+\normalsize
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\hline
+Metric & V1 & V2 & V3 \\
+\hline
+Binary Acc.         & 0.786 & 0.816 & 0.835 \\
+Binary Macro-F1     & 0.741 & 0.749 & 0.757 \\
+Binary AUC          & 0.797 & 0.795 & 0.830 \\
+4-class Acc.        & 0.687 & 0.747 & 0.777 \\
+4-class Macro-F1    & 0.481 & 0.504 & 0.473 \\
+RAT Attack Acc.     & 0.985 & 0.987 & 0.988 \\
+RAT Attack Macro-F1 & 0.654 & 0.777 & 0.640 \\
+CPE Attack Acc.     & 0.311 & 0.295 & 0.301 \\
+CPE Attack Macro-F1 & 0.313 & 0.297 & 0.302 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Overall, V3 provides the most favorable privacy-utility trade-off. Although its 4-class Macro F1-score is slightly lower than that of V2, it achieves stronger overall utility while maintaining attacker inference performance close to the V1 baseline and substantially lower than V2. Therefore, V3 is selected as the final semantic module for the proposed cross-domain data fusion framework.
+
+
+
+\subsection{Practical Dataset Description}
+
+Under the proposed cross-domain telemetry architecture, we collected and open-sourced performance monitoring and sensing datasets from the optical transmission experimental platform over a one-month period, as well as 24-hour performance data from wireless access network testbed~\cite{Shen_dataset_2025}.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/setup.png}
+    \captionsetup{justification=centering}
+    \vspace{-0.1cm}
+    \caption{Experimental setups for practical dataset collection: (a) optical transmission performance monitoring over the NDFF, (b) bidirectional fibre sensing over deployed urban fibre links, and (c) multi-access wireless network testbed.}
+    \label{fig:setup.png}
+    \vspace{-0.3cm}
+\end{figure*}
+
+\subsubsection{One-Month Performance Monitoring Data from Optical Transport Network over NDFF}
+
+
+Figure~\ref{fig:setup.png} (a) presents the experimental setup implemented over part of the UK National Dark Fibre Facility (NDFF) that connects multiple sites with commercially available fibres and equipment, including transponders, erbium-doped fibre amplifiers (EDFAs), wavelength-selective switches (WSSs) and optical switches. In this experiment, seven equalised 200GHz-spaced PM-16QAM/QPSK optical signals were generated by Facebook Voyager transponders, ADVA FSP3000 TeraFlex platforms, and a Ciena device. Each Voyager transponder supports four transceiver ports, the ADVA platform supports two ports, and the Ciena device operates with one active transceiver module. The Voyager and ADVA transponders are powered by alternating current (AC), whereas the Ciena equipment is powered by direct current (DC). In terms of modulation capability, both Voyager and ADVA support 16QAM and QPSK, while the Ciena device supports only QPSK. The signals were then launched from our lab into the 339-km NDFF link passing Bradley Stoke, Froxfield, Reading, and Power Gate before looping back to Bristol, with carrier frequencies ranging from 193.25 to 194.45 THz. The launch power was set to $-5$~dBm to keep optimal transmission performance. A cloud network configuration and monitoring database (CMDB) was implemented to store the collected data from the field-trial testbed.
+
+The released dataset contains nearly one month of BER monitoring data collected from 26th December 2023 to 26th January 2024. Raw BER samples recorded every 10~s were resampled to 15-minute intervals, and converted into Q-factor values using $Q = \sqrt{2} * erfcinv(2*BER)$. This preprocessing reduces short-term measurement noise and aligns the sampling interval with that of the Microsoft open-source dataset. The related data processing scripts are also provided on GitHub~\cite{Shen_dataset_2025}. This dataset enables the study of long-term QoT variations in operational optical transport networks by capturing field-induced effects, including environmental changes, device drift, amplifier behaviour, and operational conditions. We also release a complementary dataset from a previous 986-km NDFF field trial~\cite{YangOFC2023} comprising two fibre links and ROADM nodes, where multi-channel Q-factor measurements were collected for end-to-end QoT prediction. Together, the 339-km and 986-km datasets provide representative short- and long-link field-trial scenarios for QoT estimation, short-term performance forecasting and anomaly detection.
+
+
+\vspace{-0.2cm}
+\subsubsection{Four-Week Sensing Data From BDFI And Mshed}
+
+Figure~\ref{fig:setup.png} (b) illustrates the experimental setup for long-term fibre sensing based on bidirectional transmission. The experiment was conducted over two deployed urban fibre links in Bristol: a 7.776-km link connecting our lab in Merchant Ventures Building (MVB) to Bristol Digital Futures Institute (BDFI), and an 8-km link connecting MVB to M Shed Museum. Along the MVB-BDFI route, the fibre passes beneath multiple railway tracks near Bristol Temple Meads Station at the 3.2-km point, where it laterally traverses beneath a railway bridge. In contrast, the MVB-M Shed route does not pass beneath railway tracks.
+
+An ADVA FSP 3000 Teraflex transponder generated two 32-GBaud PM-QPSK optical signals, which were launched into the fibre links through optical circulators to enable counter-propagating transmission. The endpoint Circulators were interconnected through the live field fibre, with the forward and backward channels centred at 193.4 THz and 191.3 THz respectively. At each endpoint, the received optical signal was split using an optical coupler: 90\% of the optical power was directed to the coherent receiver, while the remaining 10\% passed through a polariser and was delivered to a polarimeter and a real-time oscilloscope equipped with a photodetector. This configuration enables simultaneous communication monitoring and fibre sensing. The polariser projects the received state of polarisation (RSOP) onto a fixed eigenstate, allowing environmental disturbances along the fibre to be captured through the measured polarisation dynamics. For vibration localisation, a common trigger from an arbitrary waveform generator was used to synchronise both the polarimeter and oscilloscope.
+
+The dataset spans four weeks and is provided in both MAT and CSV formats. It contains communication KPIs, includign BER, Q-factor and OSNR, and polarisation telemetry (Stokes parameters $S_1$, $S_2$, and $S_3$). These measurements were continuously collected by the ISIC end-to-end monitoring platform, which supports real-time storage, analytics and visualisation. Since the data were collected from live deployed urban fibres rather than controlled laboratory spools, they capture realistic noise, environmental variations, and operational perturbations. This dataset provides a practical benchmark for integrated optical communication and distributed fibre sensing, including SOP evolution, vibration detection, event localisation, communication-performance degradation under physical disturbances, ML-based fiber sensing, multi-modal telemetry fusion, and communication-sensing integrated optical networks.
+
+
+\subsubsection{24-Hour Status And Performance Data From Wireless Access Network Testbed}
+
+The wireless dataset was collected from a wireless access network testbed originally developed in the 5G-CLARITY project and further extended in the REASON project. As shown in Fig. \ref{fig:setup.png} (c), the testbed integrates three radio access technologies:  5G New Radio (NR), Wi-Fi 6 (IEEE 802.11ax), and LiFi. The 5G subsystem consists of a gNB with split O-DU/O-CU functions connected to a full 5G Core, while the Wi-Fi and LiFi access points are managed by dedicated controllers and anchored to the same edge cluster for unified coordination across heterogeneous radio domains. Multiple CPE devices were used with simultaneous connectivity over different wireless interfaces. Multipath TCP (MPTCP) enables per-flow traffic aggregation and dynamic path selection across different wireless links. Four fixed CPEs were deployed: CPE1--CPE3 were dual-homed to 5G and Wi-Fi, while CPE4 was tri-homed to 5G, Wi-Fi, and LiFi. All CPEs used MPTCP v1 in fullmesh mode with the default BLEST scheduler. During data collection, CPE1--CPE3 generated randomised iPerf traffic flows towards CPE4 to emulate realistic multi-link data transfer across heterogeneous access technologies.
+
+The dataset provides 24 hours of time-aligned wireless telemetry, covering per-interface CPE traffic, 5G cell metrics, LiFi cell metrics, and Wi-Fi cell metrics. Specifically, it includes per-interface traffic distribution, 5G temperature, throughput and power, LiFi transmit/receive rates and signal power, and Wi-Fi bitrates, inactivity time and average signal levels. This dataset offers a comprehensive view of heterogeneous wireless performance and supports research on AI-driven multi-access optimisation, multi-connectivity control, MPTCP scheduling, and cross-technology coordination in 5G and beyond networks. By capturing the complementary characteristics of 5G, Wi-Fi, and LiFi in a unified testbed, it also provides a basis for wireless DTs, semantic telemetry abstraction, and cross-domain optimisation with optical datasets.
+
+
+
+
+% \begin{figure*}[t]
+%    \centering
+%    \begin{subfigure}[b]{0.47\linewidth}
+%        \centering
+%        \includegraphics[scale=0.45]{Figures/topology1.eps}
+%        \captionsetup{justification=centering}
+%        \caption{}
+%        \label{subfig:1}
+%    \end{subfigure}
+%    \hfill
+%    \begin{subfigure}[b]{0.42\linewidth}
+%        \centering
+%        \includegraphics[scale=0.42]{Figures/schedule2.eps}
+%        \captionsetup{justification=centering}
+%        \caption{}
+%        \label{subfig:2}
+%    \end{subfigure}
+%    \captionsetup{justification=centering}
+%    \caption{(a) Experimental setup for two use cases, (b) Sequence diagram of the proposed AI engine platform}
+%    \label{fig:figure8}
+% \end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/architecture_LLM.png}
+    \captionsetup{justification=centering}
+    \caption{Proposed LLM-driven multi-agent digital twin framework for automated cross-domain data generation.}
+    \label{fig:architecture_LLM}
+    \vspace{-0.3cm}
+\end{figure*}
+
+\section{LLM-Driven Multi-Agent Digital Twins For Automated Cross-Domain Data Generation}
+\label{sec:LLM}
+
+While the preceding section presents practical cross-domain datasets collected from real optical and wireless testbeds, continuously acquiring sufficient real-world data for diverse or newly emerging network conditions remains challenging. To complement practical telemetry data and support timely ML model training and updating, this section introduces an LLM-driven multi-agent DT framework for automated cross-domain data generation.
+
+
+
+\subsection{Proposed LLM-Driven Multi-Agent Digital Twin Framework}
+
+Figure~\ref{fig:architecture_LLM} illustrates the proposed framework. It translates high-level natural-language requests into an executable data-generation workflow across wireless access and optical transport domains. As shown in the figure, users can specify the target dataset, network scope, transmitter constraints, channel configurations, and modulation formats in natural language. The framework then automatically decomposes the request, constructs simulation scenarios, invokes the corresponding DT models, analyses the generated results, and produces structured datasets and reports.
+
+At the bottom of the framework, the physical network comprises multiple wireless domains interconnected through an optical transport network. The physical infrastructure provides network topology, device configurations, performance monitoring data, and other telemetry information required to construct realistic DT scenarios. As mentioned in Section~\ref{sec:cross-domain-telemetry}.\ref{subsec:4.A}, these data are stored in the network knowledge base. Time-dependent information, such as performance-monitoring metrics and telemetry records, is stored in InfluxDB with timestamps, whereas structured information required for agent reasoning and DT execution, including topology, device configurations, KPI definitions, policies, constraints, and action logs, is represented in JSON format and maintained in PostgreSQL. This organisation enables the agents and DTs to retrieve both historical observations and task-related logical knowledge for cross-domain scenario construction, execution, and refinement.
+
+The DT serves as the execution and evaluation environment of the framework. It integrates physics-based models, data-driven ML models, and decision or optimisation models to emulate cross-domain network behaviours under different traffic patterns, device settings, channel conditions, and network configurations. According to the tasks generated by the agents, the DT performs scenario-specific simulation and returns performance metrics and simulation results. These outputs are used to generate synthetic datasets for ML model training, retraining, validation, and cross-domain optimisation.
+
+The agentic AI layer consists of five collaborative LLM-driven agents. The Planner Agent interprets the user request and formulates a structured data-generation task, including the study objective, scenario scope, constraints, simulation tools, and target KPIs. The Scenario Expansion Agent converts the planned task into simulation-ready cases and configuration scripts, while validating each candidate case against the constraints maintained by the orchestrator and the knowledge base. The Results Analysis Agent aggregates the generated KPIs and simulation logs, checks compliance with the original task, and summarizes the sensitivity of network performance to different scenario parameters. Based on the analysis results, the Reflection Agent identifies insufficiently explored conditions or inappropriate constraints and updates the search space, policies, or optimisation strategies when further refinement is required. Finally, the Report Agent summarises the validated simulation results into structured datasets, figures, and user-facing reports.
+
+The orchestrator coordinates interactions among the agents, the network knowledge base, and the DT. It constructs task graphs, maintains KPI catalogues and optimisation strategies, manages agent invocation and execution policies, tracks intermediate execution status, and controls the lifecycle of each data-generation task. Through this closed-loop workflow, the generated results can be iteratively analysed and refined until the required dataset quality and coverage are achieved. Therefore, the proposed framework complements the practical datasets collected from real network testbeds by enabling scalable and automated cross-domain data generation for diverse and dynamically changing network scenarios.
+
+\subsection{Use Cases And Demonstration Results}
+
+To validate the feasibility of the proposed LLM-driven multi-agent DT framework, we implemented automated data-generation workflows in both the optical transport and wireless access domains. Specifically, GNPy and ns-3 were used as the DT execution engines for optical-domain and wireless-domain simulations, respectively. The following subsections present the corresponding data-generation use cases and demonstration results. The generated synthetic datasets and demonstration videos are open-sourced on GitHub~\cite {Shen_dataset_2026}.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/usecase1.png}
+    \captionsetup{justification=centering}
+    \caption{GNPy-based optical QoT dataset generation over the NDFF topology. (a) Agent-driven scenario expansion and dataset-generation workflow, (b) GSNR distributions for QPSK and 16QAM over the four paths at $P_{\mathrm{launch}}=-5.5$ dBm, (c) Route-dependent GSNR variation with launch power, averaged over QPSK and 16QAM and normalised to the results at $-5.5$ dBm, (d) Mean GSNR as a function of the number of active WDM channels for QPSK transmission at $P_{\mathrm{launch}}=-5.5$ dBm.}
+    \label{fig:usecase1}
+    \vspace{-0.3cm}
+\end{figure*}
+
+\subsubsection{GNPy-Based Network-Level QoT Data Generation}
+
+In this use case, the proposed LLM-driven multi-agent DT framework automatically generates an optical QoT dataset based over the NDFF topology. The user requests raw QoT data for all optical paths originating from Bristol, using Voyager transmitters, eight WDM channel slots, and two modulation formats,i.e., QPSK and 16QAM. Then, the Planner Agent formulates the study scope and target KPIs, while the Scenario Expansion Agent enumerates candidate optical paths, modulation formats, binary channel-occupancy patterns, and launch-power settings required for GNPy-based DT execution.
+
+As illustrated in Fig.~\ref{fig:usecase1}(a), the automated workflow expands the user request into four NDFF paths from Bristol to Bradley Stoke, Froxfield, Reading, and Powergate. For each path, the eight channel slots are represented by binary on/off states, resulting in ($2^8=256$) occupancy patterns. Combined with QPSK and 16QAM, the initial generation round produces 2,048 simulation cases at $-5.0$ dBm. Based on the returned GSNR results, the Reflection Agent further extends the execution space to evaluate three launch powers of $-5.5$, $-5.0$, and $-4.5$ dBm. With this iterative refinement, the framework executes 8,192 scenarios and generates 8,160 valid QoT samples; the remaining 32 cases correspond to configurations with no active optical channel. Figure~\ref{fig:usecase1}(c) further shows that the impact of launch power is route dependent. For Bristol--Bradley Stoke path, increasing the launch power from $-5.5$ to $-4.5$ dBm reduces the average GSNR by approximately 1.59 dB, whereas longer paths exhibit  smaller variations over the same range. Figure~\ref{fig:usecase1}(d) illustrates the impact of channel loading for QPSK transmission at $-5.5$ dBm. Across all four paths, the mean GSNR decreases as the number of active WDM channels increases. For example, the Bristol--Bradley Stoke path decreases from 26.35 dB with one active channel to 22.59 dB with eight active channels, while the Powergate path decreases from 9.95 to 5.24 dB. These results confirm that the generated dataset captures both route-dependent and channel-loading-dependent QoT variations.
+
+% Figure~\ref{fig:usecase1}(b) presents the GSNR distributions across the four investigated NDFF paths under QPSK and 16QAM configurations at a launch power of $-5.5$ dBm. The Bristol–Bradley Stoke path achieves substantially higher GSNR values than the longer paths, whereas the distributions for Froxfield, Reading, and Powergate are progressively concentrated in lower GSNR regions. 
+
+
+% This result demonstrates that the generated dataset captures route-dependent QoT characteristics associated with different transmission distances and network configurations. In addition, the figure shows modulation-dependent GSNR variations under the transceiver and spectrum configurations specified in the digital twin, thereby providing diversified samples for downstream QoT-related ML tasks.
+
+% The role of agent-driven iterative refinement is further illustrated in Fig.~\ref{fig:usecase1}(c). Rather than limiting data generation to a single predefined operating point, the Reflection Agent extends the initial execution space by introducing additional launch-power settings according to the evaluated GSNR results. For the Bristol–Bradley Stoke path, increasing the launch power from (-5.5) to (-4.5) dBm reduces the average GSNR by approximately 1.59 dB. In contrast, the longer paths exhibit considerably smaller variations within the investigated power range; in particular, the Powergate path achieves a slight GSNR improvement as the launch power increases. These results indicate that the influence of launch-power adjustment is route dependent, motivating iterative scenario expansion rather than fixed-parameter dataset generation.
+
+% Figure~\ref{fig:usecase1}(d) further examines the impact of channel loading using QPSK transmission at (-5.5) dBm. For all four NDFF paths, the mean GSNR decreases as the number of active WDM channels increases. Specifically, the mean GSNR of the Bristol–Bradley Stoke path decreases from 26.35 dB with one active channel to 22.59 dB with all eight channels active. Similarly, the corresponding GSNR values decrease from 10.21 to 5.48 dB for Froxfield, from 10.11 to 5.39 dB for Reading, and from 9.95 to 5.24 dB for Powergate. This consistent degradation trend demonstrates that the generated dataset captures channel-loading-dependent performance variation, which is important for QoT prediction and network optimisation under dynamically changing spectrum occupancy.
+
+Overall, this use case demonstrates that the proposed framework can translate a high-level user request into structured, large-scale QoT data generation through autonomous planning, simulation execution, analysis, and reflection-based refinement. Although this demonstration considers eight WDM channel slots over the NDFF topology, the framework can be extended to larger channel spaces and applied to different network topologies by updating the input constraints and DT configurations.
+
+
+\subsubsection{NS3-Based Multi-Access Network Performance Data Generation}
+
+In this use case, the proposed LLM-driven multi-agent DT framework assists in the automatic construction of ns-3 simulation scenarios for synthetic wireless dataset generation. The goal is not to reproduce the practical 5G/Wi-Fi/LiFi testbed described earlier, but to show that the framework can turn a high-level wireless multi-access request into an executable ns-3 simulation. The user requests an indoor scenario with three mobile CPEs connected to three heterogeneous access branches, namely Wi-Fi, an LTE/EPC-based cellular branch, and a LiFi-like access link. The target KPIs include per-flow throughput, packet loss, mean delay, and mean jitter over a 10~s simulation.
+
+Since the stock ns-3 distribution does not provide a native LiFi module, the LiFi-like branch is emulated using standard ns-3 primitives and recorded as a LiFi-surrogate branch. Here, ``LiFi-surrogate'' means a simplified proxy used for simulation, rather than a physical LiFi model. The Planner Agent formulates the request as a wireless multi-access data-generation task, while the Scenario Expansion Agent converts it into an executable ns-3 configuration with a Wi-Fi branch, an LTE/EPC branch, and a CSMA-based LiFi-surrogate branch. Each CPE is modelled as a multi-homed node with separate network interfaces for the three access branches. The ns-3 DT then compiles and executes the generated scratch program, producing per-flow simulation traces and an aggregated KPI file. During this process, the Reflection Agent updates the scenario and code-generation constraints according to build and runtime feedback until valid simulation outputs are obtained.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\linewidth]{Figures/fig_ns3_results.png}
+\captionsetup{justification=centering}
+\caption{ns-3-based wireless multi-access performance data generation results.
+(a) Application-level throughput across Wi-Fi, LTE/EPC, and LiFi-surrogate access branches.
+(b) Mean delay of the generated application flows.
+(c) Mean jitter of the generated application flows.
+The LiFi-surrogate branch is implemented as a CSMA-based proxy and is used only as an idealised upper-bound benchmark, not as a physical LiFi model.}
+\label{fig:ns3_results}
+\vspace{-0.3cm}
+\end{figure*}
+
+Figure~\ref{fig:ns3_results} summarises the application-level KPIs generated by the successful ns-3 run. As shown in Fig.~\ref{fig:ns3_results}(a), the LTE/EPC branch achieves lower throughput than the Wi-Fi and LiFi-surrogate branches under the adopted configuration, while the latter two branches approach the configured traffic load. The delay and jitter results in Fig.~\ref{fig:ns3_results}(b) and Fig.~\ref{fig:ns3_results}(c) further show clear access-dependent performance differences. The LTE/EPC branch exhibits the highest delay and jitter, the Wi-Fi branch shows moderate delay and non-negligible jitter, and the LiFi-surrogate branch achieves the lowest delay and near-zero jitter because it is represented by an idealised CSMA-based link. These results show that the generated simulation produces differentiated access-performance patterns rather than access-agnostic synthetic samples.
+
+Overall, this use case demonstrates that the proposed framework can automate ns-3 wireless scenario construction, simulation execution, KPI extraction, and refinement under practical simulator constraints. Together with the preceding GNPy use case, it shows that the same agentic workflow can invoke different DT execution engines and generate domain-specific synthetic datasets while preserving the modelling assumptions required for correct interpretation.
+
+\section{Conclusions}
+In this study, we presented an open-source cross-domain dataset framework for optical transport and wireless access networks, integrating practical network measurements, semantic data abstraction, and LLM-driven multi-agent DT-based data generation. The released practical datasets include long-term optical transmission performance over the NDFF, fibre-sensing measurements over deployed urban fibre links, and multi-access wireless network performance involving 5G, Wi-Fi, and LiFi. In addition, the proposed privacy-aware semantic module provides compact and task-relevant wireless representations for cross-domain fusion while achieving a favourable privacy–utility trade-off.
+
+To complement practical measurements, the proposed LLM-driven multi-agent DT framework enables automated data generation and iterative refinement under configurable network conditions. In the GNPy-based optical QoT use case, the framework generated 8,160 valid samples from 8,192 executed scenarios, covering multiple NDFF paths, modulation formats, channel-occupancy patterns, and launch-power settings. In the ns-3-based wireless use case, it generated multi-access performance data across Wi-Fi, LTE, and LiFi-surrogate branches, including throughput, packet loss, delay, and jitter KPIs. Overall, the released datasets, together with the proposed telemetry and data-generation framework, provide an open and extensible foundation for ML training, evaluation, and updating in future cross-domain network intelligence. Future work will extend DT-based data generation to more diverse wireless access scenarios and investigate joint learning from practical and synthetic cross-domain datasets.
+
+% Future work will focus on larger-scale optical–wireless co-simulation, more realistic wireless PHY/MAC modelling, and joint learning from practical and generated datasets.
+
+\section*{Acknowledgement}
+This work was partly supported by the European Commission’s Horizon research and innovation program: Allegro project (No. 101092766) and the EU-funded project: ECO-eNET (No. 10113933).
+
+\bibliography{sample.bib}
+
+\end{document}
+
+
+
+
+
+
+

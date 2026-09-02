@@ -14,6 +14,7 @@
 __pycache__/
 *.py[cod]
 MajorRevision/paper_preview*/
+*.baiduyun.uploading.cfg
 
 # Downloaded upstream GNPy source artifacts are reproducible from provenance.json.
 MajorRevision/E4_gnpy_audit/source/

@@ -1,0 +1,23 @@
+{
+  "split_source": "../E1_semantic_utility/experiment_config.json",
+  "attackers": [
+    "LogisticRegression",
+    "RandomForest",
+    "MLP",
+    "GradientBoosting"
+  ],
+  "seeds": [
+    3,
+    7,
+    11,
+    19,
+    23,
+    31,
+    42,
+    53,
+    71,
+    97
+  ],
+  "primary_privacy_target": "dominant_cpe",
+  "diagnostic_target": "dominant_rat_extremely_imbalanced"
+}

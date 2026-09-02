@@ -1,0 +1,55 @@
+{
+  "split": "chronological_60_20_20",
+  "purge_gap_records": 10,
+  "record_interval_seconds": 30,
+  "seeds": [
+    3,
+    7,
+    11,
+    19,
+    23,
+    31,
+    42,
+    53,
+    71,
+    97
+  ],
+  "optical_alignment": "sequence_based_constructed_benchmark_due_to_non_overlapping_campaigns",
+  "optical_risk_thresholds_fitted_on_training_target_times": {
+    "q_factor_15th_percentile": 1.8972261879547039,
+    "ber_85th_percentile": 0.028899046
+  },
+  "semantic_preprocessing_fitted_on_training_current_times": {
+    "active_thresholds": {
+      "5g": 14.7565625,
+      "wifi": 357.95012499999996,
+      "lifi": 27.42461
+    },
+    "minmax": {
+      "wifi_signal": {
+        "low": 52.25,
+        "high": 116.5
+      },
+      "lifi_signal": {
+        "low": -52.0,
+        "high": -50.0
+      },
+      "load": {
+        "low": 17.469929999999998,
+        "high": 1416.65833381
+      },
+      "inactivity": {
+        "low": 2.0,
+        "high": 455.625
+      },
+      "fluctuation": {
+        "low": 0.0,
+        "high": 433.29546528147495
+      },
+      "rolling_mean": {
+        "low": 196.4129132,
+        "high": 915.6163612
+      }
+    }
+  }
+}

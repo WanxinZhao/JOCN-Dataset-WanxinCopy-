@@ -1,0 +1,15 @@
+{
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "2.5.2",
+  "pandas": "3.0.5",
+  "scipy": "1.18.1",
+  "scikit_learn": "1.9.0",
+  "joblib": "1.6.0",
+  "source_files": {
+    "wireless_real_30s.csv": "5e0f7abf24546ae0e9e28b43d17e04b042420470bffc3dfbcb150a265f731ee2",
+    "voyager.csv": "879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209"
+  },
+  "runtime_seconds": 425.9096488952637,
+  "neural_implementation": "NumPy mini-batch Adam supervised bottleneck encoder-decoder"
+}

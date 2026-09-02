@@ -1,0 +1,284 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "dct": "http://purl.org/dc/terms/",
+    "conformsTo": "dct:conformsTo",
+    "recordSet": "cr:recordSet",
+    "field": "cr:field",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "source": "cr:source",
+    "fileObject": "cr:fileObject",
+    "extract": "cr:extract",
+    "column": "cr:column"
+  },
+  "@type": "sc:Dataset",
+  "name": "JOCN cross-domain dataset revision evaluation bundle",
+  "description": "Machine-readable metadata for the processed wireless and optical telemetry tables and the per-run evaluation artefacts used in the major-revision experiments. The optical and wireless measurements come from separate experimental domains and are associated only through explicitly constructed semantic labels; they are not presented as time-synchronised measurements of one physical event.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0-revision",
+  "dateModified": "2026-09-02",
+  "license": {
+    "@type": "sc:CreativeWork",
+    "name": "Academic research and non-commercial use under the repository terms; contact the authors for commercial use"
+  },
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "wireless_real_30s",
+      "name": "Processed wireless telemetry",
+      "description": "Thirty-second wireless telemetry table containing 5G, Wi-Fi and LiFi measurements plus service and wireless-domain labels.",
+      "contentUrl": "../semantic_case_v6/data/wireless_real_30s.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "790342 B",
+      "sha256": "5e0f7abf24546ae0e9e28b43d17e04b042420470bffc3dfbcb150a265f731ee2"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "voyager",
+      "name": "Processed Voyager optical telemetry",
+      "description": "Timestamped bit-error-rate measurements for eight Voyager optical channels.",
+      "contentUrl": "../semantic_case_v6/data/voyager.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "1789223 B",
+      "sha256": "879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "semantic_utility_results",
+      "name": "Semantic utility results",
+      "description": "Per-seed downstream-utility metrics for all evaluated semantic representations and baselines.",
+      "contentUrl": "E1_semantic_utility/utility_results_per_seed.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "22485 B",
+      "sha256": "0078561910fbb53385c581bcdfd263137f979a9be1e1e239fed1876736407b54"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "privacy_results",
+      "name": "Privacy attack results",
+      "description": "Per-seed attribute-inference results for multiple attacker families, targets and representations.",
+      "contentUrl": "E2_privacy/privacy_results_per_seed.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "85616 B",
+      "sha256": "769d4ca25059bfd918aa095a770f000c42c292310639130b53539c16ba9b1fdb"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "gnpy_unique_configurations",
+      "name": "Unique GNPy configuration audit",
+      "description": "Deduplicated GNPy scenario configurations and returned physical-layer metrics used for the revision audit.",
+      "contentUrl": "E4_gnpy_audit/unique_configurations.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "10091783 B",
+      "sha256": "502b6c8ea40596511c4033571897d0c0bad383df3c230f961bcd7ec53f9b2769"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "wireless_records",
+      "name": "Wireless telemetry records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "wireless_records/Time",
+          "name": "Time",
+          "description": "Wireless telemetry timestamp.",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": { "@id": "wireless_real_30s" },
+            "extract": { "column": "Time" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "wireless_records/service_id",
+          "name": "service_id",
+          "description": "Service label used by the semantic experiments.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "wireless_real_30s" },
+            "extract": { "column": "service_id" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "wireless_records/wireless_domain",
+          "name": "wireless_domain",
+          "description": "Wireless-domain identifier used only as a semantic grouping attribute.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "wireless_real_30s" },
+            "extract": { "column": "wireless_domain" }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "optical_records",
+      "name": "Voyager optical telemetry records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Timestamp",
+          "name": "Timestamp",
+          "description": "Optical telemetry timestamp.",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Timestamp" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch1_BER",
+          "name": "Voyager_ch1_BER",
+          "description": "Measured bit-error rate on Voyager channel 1.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch1_BER" }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "semantic_utility_records",
+      "name": "Semantic utility result records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "semantic_utility_records/method",
+          "name": "method",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "semantic_utility_results" },
+            "extract": { "column": "method" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "semantic_utility_records/seed",
+          "name": "seed",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": { "@id": "semantic_utility_results" },
+            "extract": { "column": "seed" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "semantic_utility_records/macro_f1",
+          "name": "macro_f1",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "semantic_utility_results" },
+            "extract": { "column": "macro_f1" }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "privacy_records",
+      "name": "Attribute-inference result records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "privacy_records/representation",
+          "name": "representation",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "privacy_results" },
+            "extract": { "column": "representation" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "privacy_records/attacker",
+          "name": "attacker",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "privacy_results" },
+            "extract": { "column": "attacker" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "privacy_records/macro_f1",
+          "name": "macro_f1",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "privacy_results" },
+            "extract": { "column": "macro_f1" }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "gnpy_audit_records",
+      "name": "Unique GNPy audit records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_audit_records/scenario_id",
+          "name": "scenario_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "gnpy_unique_configurations" },
+            "extract": { "column": "scenario_id" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_audit_records/modulation",
+          "name": "modulation",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "gnpy_unique_configurations" },
+            "extract": { "column": "modulation" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_audit_records/channel_pattern",
+          "name": "channel_pattern",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "gnpy_unique_configurations" },
+            "extract": { "column": "channel_pattern" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_audit_records/status",
+          "name": "status",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "gnpy_unique_configurations" },
+            "extract": { "column": "status" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_audit_records/gsnr_db",
+          "name": "gsnr_db",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "gnpy_unique_configurations" },
+            "extract": { "column": "gsnr_db" }
+          }
+        }
+      ]
+    }
+  ]
+}

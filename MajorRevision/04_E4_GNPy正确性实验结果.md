@@ -29,6 +29,6 @@
 - 用 GNPy 2.13.0 再做单例兼容性检查，得到完全相同的失败。
 - 公开仓库未锁定原始 GNPy commit，因此目前不能从所给输入独立重生论文数值。
 
-这不是“仿真结果为 0”，而是公开复现包存在版本/模式不兼容。论文需补充原始 GNPy commit 或容器、修正后的设备文件，并重新生成数值与警告审计。
+这不是“仿真结果为 0”，而是公开复现包存在版本/模式不兼容。该阻断随后由 E5 继续处理：固定官方 GNPy v2.12 commit 后，96/96 个分层样本在 CLI 输出精度内重现归档数值；修正设备 schema 并改用 GNPy 2.14.2 后，96/96 可执行，但相对归档的 GSNR 平均/最大差异为 0.6281/1.4345 dB，且配置级警告仍存在。详见 `07_E5_恢复源码复现实验结果.md`。
 
 详细表见 `E4_gnpy_audit/`，尤其是 `execution_and_coverage_summary.csv`、`published_warning_summary.csv`、`independent_reproduction_96_cases.csv` 和 `gnpy_version_compatibility.csv`。

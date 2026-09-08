@@ -7,11 +7,11 @@
 - Measured missing, extra and duplicate configurations.
 - Audited the two published iterations and their launch powers.
 
-## Cannot be truthfully rerun from the available repository
+## Recovered implementation evidence
 
-The public repository does not provide the agent/orchestrator source code, system prompts, tool schemas, model snapshot, API settings, per-call logs, token usage, latency, cost, retry trace, or human-intervention trace. Consequently, single-LLM, no-reflection and repeated full multi-agent trials cannot be reconstructed from the artifacts alone.
+The later-recovered local source contains the Planner, Scenario Expander and Reflection prompts and JSON constraints. Its default OpenAI path uses `gpt-4o-mini`, temperature 0.2, a 90-second timeout and at most three attempts. A two-iteration refine path contains up to six LLM call sites. The source snapshot and hashes are retained under `../E5_recovered_gnpy_replay/source/`.
 
-The corresponding fields are recorded as `not_reported` rather than inferred or fabricated. A complete E3 requires the original agent implementation and its runtime credentials/logging instrumentation.
+The archived run still lacks its environment variables, date-stamped model snapshot, per-call requests/responses, actual calls/retries, token usage, latency, cost, failures and human-intervention trace. Therefore the source default is reported separately from the unverified actual runtime, and those run-level fields remain `not_reported`. Single-LLM, no-reflection and repeated full multi-agent trials cannot be reconstructed without fabricating conditions.
 
 ## Published reflection evidence
 

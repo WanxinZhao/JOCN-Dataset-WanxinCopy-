@@ -21,8 +21,8 @@
   "name": "JOCN cross-domain dataset revision evaluation bundle",
   "description": "Machine-readable metadata for the processed wireless and optical telemetry tables and the per-run evaluation artefacts used in the major-revision experiments. The optical and wireless measurements come from separate experimental domains and are associated only through explicitly constructed semantic labels; they are not presented as time-synchronised measurements of one physical event.",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
-  "version": "1.0-revision",
-  "dateModified": "2026-09-02",
+  "version": "1.1-revision",
+  "dateModified": "2026-09-07",
   "license": {
     "@type": "sc:CreativeWork",
     "name": "Academic research and non-commercial use under the repository terms; contact the authors for commercial use"
@@ -77,6 +77,16 @@
       "encodingFormat": "text/csv",
       "contentSize": "10091783 B",
       "sha256": "502b6c8ea40596511c4033571897d0c0bad383df3c230f961bcd7ec53f9b2769"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "gnpy_replay_results",
+      "name": "Recovered-source GNPy replay results",
+      "description": "Case-level comparison of a pinned GNPy v2.12 compatibility replay and a schema-corrected GNPy 2.14.2 strict run against 96 archived results.",
+      "contentUrl": "E5_recovered_gnpy_replay/replay_results_96_cases.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "22566 B",
+      "sha256": "3e0c004a346713e171ef8cb908355f321a80402681414cf8f4e11abe1b168ef4"
     }
   ],
   "recordSet": [
@@ -276,6 +286,53 @@
           "source": {
             "fileObject": { "@id": "gnpy_unique_configurations" },
             "extract": { "column": "gsnr_db" }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "gnpy_replay_records",
+      "name": "Recovered-source GNPy replay records",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_replay_records/scenario_id",
+          "name": "scenario_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": { "@id": "gnpy_replay_results" },
+            "extract": { "column": "scenario_id" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_replay_records/historical_gsnr_db",
+          "name": "historical_gsnr_db",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "gnpy_replay_results" },
+            "extract": { "column": "historical_gsnr_db" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_replay_records/strict_gsnr_db",
+          "name": "strict_gsnr_db",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "gnpy_replay_results" },
+            "extract": { "column": "strict_gsnr_db" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gnpy_replay_records/strict_abs_gsnr_difference_db",
+          "name": "strict_abs_gsnr_difference_db",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": { "@id": "gnpy_replay_results" },
+            "extract": { "column": "strict_abs_gsnr_difference_db" }
           }
         }
       ]

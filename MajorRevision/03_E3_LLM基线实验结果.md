@@ -11,12 +11,14 @@
 | 确定性枚举器 | 0 次仿真执行 | 6,144 | 0% | 1.0 / 1.0 | 0 API；0.0063 s |
 | 公开多智能体产物 | 8,192 | 6,144 | 25% | 1.0 / 1.0 | 未报告 |
 
-## 无法从公开材料完成的部分
+## 恢复源码后可确认的实现信息
 
-公开仓库缺少智能体/编排源码、system prompt、工具 schema、模型快照、API 参数、逐调用日志、token、成本、延迟、重试和人工干预记录。因此无法诚实重跑 single-LLM、no-reflection 和多随机种子的完整 multi-agent 对照。这些字段在结果中保留为 `not_reported`，没有估算或编造。
+后来找到的本地工程包含 Planner、Scenario Expander 和 Reflection 三处 LLM 调用及其完整 prompt/JSON 输出约束。源码默认 provider 为 OpenAI，硬编码模型名 `gpt-4o-mini`，system message 为 optical network expert，temperature=0.2，超时默认 90 s，最多尝试 3 次；两轮 refine 控制流至多触发 6 次 LLM 调用。源码快照和哈希保存在 `E5_recovered_gnpy_replay/source/recovered_orchestration_snapshot/`。
+
+这些是“恢复源码的默认值”，不是原运行的完整 API 证据：目录没有 Git 元数据，也没有当时的环境变量、逐调用请求/响应、实际重试次数、token、成本、延迟、失败率或人工干预日志。因此模型的日期快照、实际 provider 和逐次调用统计仍应标为 `not_reported`，不能根据控制流反推或编造。
 
 ## 论文修改建议
 
-在补齐源码与运行日志前，把“多智能体显著提高效率/正确性”的强结论降级为案例性描述，并把确定性枚举器列为必需基线。8,192 应称为 execution records，而数据集唯一配置数应写为 6,144。原稿若将第一轮功率写为 -5.0 dBm，应改为公开产物实际使用的 -5.5 dBm。
+在补齐逐调用日志前，把“多智能体显著提高效率/正确性”的强结论降级为案例性描述，并把确定性枚举器列为必需基线。正文可以披露恢复源码的默认模型与参数，但必须与未记录的实际运行元数据区分。8,192 应称为 execution records，而数据集唯一配置数应写为 6,144。原稿若将第一轮功率写为 -5.0 dBm，应改为公开产物实际使用的 -5.5 dBm。
 
 数据表见 `E3_llm_baseline/observable_baseline_comparison.csv` 和 `published_iteration_audit.csv`。

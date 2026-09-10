@@ -1,0 +1,44 @@
+dataset,field,unit,description
+application,run_id,identifier,Run-level configuration identifier
+application,seed,integer,ns-3 random seed
+application,offered_load_mbps,Mbps,Offered UDP load per application flow
+application,mobility_speed_mps,m/s,RandomWalk2d speed
+application,lifi_fov_deg,degree,LiFi receiver field of view for the run
+application,branch,categorical,NR Wi-Fi80211ax or LiFi access branch
+application,CPE,identifier,Common mobile CPE identifier
+application,FlowId,identifier,FlowMonitor flow identifier
+application,source_ip,IPv4 address,Application source address
+application,destination_ip,IPv4 address,Application destination address
+application,source_port,port number,Application source port
+application,destination_port,port number,Application destination port
+application,tx_packets,packets,Transmitted packet count
+application,rx_packets,packets,Received packet count
+application,lost_packets,packets,FlowMonitor lostPackets field exported by the run
+application,FlowMonitor_lostPackets,packets,Explicit copy of the FlowMonitor lostPackets field
+application,rx_bytes,bytes,Received byte count
+application,first_tx_s,s,First transmitted-packet time
+application,last_rx_s,s,Last received-packet time
+application,duration_s,s,Last-reception time minus first-transmission time
+application,throughput_mbps,Mbps,Flow throughput computed from received bytes and FlowMonitor times
+application,mean_delay_ms,ms,Mean FlowMonitor delay
+application,mean_jitter_ms,ms,Mean FlowMonitor jitter
+application,FlowMonitor_reported_loss_ratio,ratio,FlowMonitor lostPackets divided by transmitted packets
+application,mapping_status,categorical,Declared five-tuple mapping result
+application,interface_route_status,categorical,Declared interface and route check result
+optical_state,time_s,s,Sampled optical-state time
+optical_state,cpe_id,identifier,LiFi receiver CPE identifier
+optical_state,distance_m,m,Transmitter-receiver distance
+optical_state,irradiance_angle_rad,rad,Irradiance angle
+optical_state,incidence_angle_rad,rad,Incidence angle
+optical_state,in_fov,boolean,Receiver-FOV gate result
+optical_state,lambertian_order,dimensionless,Lambertian emission order
+optical_state,h_los,dimensionless,LOS optical channel gain
+optical_state,received_optical_power_w,W,Received optical power
+optical_state,signal_current_a,A,Photodetector signal current
+optical_state,shot_variance_a2,A^2,Shot-noise variance
+optical_state,thermal_variance_a2,A^2,Thermal-noise variance
+optical_state,snr,dimensionless,Electrical signal-to-noise ratio
+optical_state,ber,ratio,OOK bit-error probability
+optical_state,per,ratio,Packet-error probability
+optical_state,packet_count,packets,Packets sampled at the optical-state record
+optical_state,corrupted_packets,packets,Packets marked corrupted by the optical error decision

@@ -32,7 +32,9 @@ Croissant metadata assertion.
 
 4. **Release terms and paths**
    - Confirm the formal licence or repository terms for every claimed raw,
-     derived, and synthetic artifact, including the final W4C bundle.
+     derived, and synthetic artifact. The final W4C bundle now has a public
+     path at `NS3_Wireless_W4C_ThreeRAT/`; its formal SPDX/licence status
+     remains to be confirmed.
    - Confirm whether the constructed fusion benchmark is released as a
      materialized file or is intentionally code-reconstructable only.
 

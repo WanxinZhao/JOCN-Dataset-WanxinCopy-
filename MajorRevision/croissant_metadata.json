@@ -15,14 +15,15 @@
     "source": "cr:source",
     "fileObject": "cr:fileObject",
     "extract": "cr:extract",
-    "column": "cr:column"
+    "column": "cr:column",
+    "unit": "cr:unit"
   },
   "@type": "sc:Dataset",
   "name": "JOCN cross-domain dataset revision evaluation bundle",
-  "description": "Machine-readable metadata for the processed wireless and optical telemetry tables and the per-run evaluation artefacts used in the major-revision experiments. The optical and wireless measurements come from separate experimental domains and are associated only through explicitly constructed semantic labels; they are not presented as time-synchronised measurements of one physical event.",
+  "description": "Machine-readable metadata for the processed wireless and optical telemetry tables, the per-run evaluation artefacts, and the final W4C synthetic three-RAT wireless dataset used in the major-revision experiments. The optical and wireless measurements come from separate experimental domains and are associated only through explicitly constructed semantic labels; they are not presented as time-synchronised measurements of one physical event.",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
-  "version": "1.1-revision",
-  "dateModified": "2026-09-07",
+  "version": "1.2-w4c-release",
+  "dateModified": "2026-09-10",
   "license": {
     "@type": "sc:CreativeWork",
     "name": "Academic research and non-commercial use under the repository terms; contact the authors for commercial use"
@@ -35,8 +36,8 @@
       "description": "Thirty-second wireless telemetry table containing 5G, Wi-Fi and LiFi measurements plus service and wireless-domain labels.",
       "contentUrl": "../semantic_case_v6/data/wireless_real_30s.csv",
       "encodingFormat": "text/csv",
-      "contentSize": "790342 B",
-      "sha256": "5e0f7abf24546ae0e9e28b43d17e04b042420470bffc3dfbcb150a265f731ee2"
+      "contentSize": "787492 B",
+      "sha256": "93ca0be6a00dca989455ab6681acc0ee5fc4fdf103b5052b7bb69ba70c565dec"
     },
     {
       "@type": "cr:FileObject",
@@ -45,8 +46,18 @@
       "description": "Timestamped bit-error-rate measurements for eight Voyager optical channels.",
       "contentUrl": "../semantic_case_v6/data/voyager.csv",
       "encodingFormat": "text/csv",
-      "contentSize": "1789223 B",
-      "sha256": "879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209"
+      "contentSize": "1768224 B",
+      "sha256": "55ec2a257fa88458f31ea180a91b74142244bf10ced443fe3ec0b6ebc21654e4"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "practical_wireless_field_dictionary",
+      "name": "Practical wireless field inventory",
+      "description": "Complete inventory of the 46 practical wireless telemetry columns. The public source file does not declare physical units for the numeric fields; those entries are explicitly marked as not documented.",
+      "contentUrl": "practical_field_dictionary.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "4605 B",
+      "sha256": "4a6999ee502928dc339dc7212274db2f5ab763ed4da018839235d1e896bb1905"
     },
     {
       "@type": "cr:FileObject",
@@ -87,6 +98,96 @@
       "encodingFormat": "text/csv",
       "contentSize": "22566 B",
       "sha256": "3e0c004a346713e171ef8cb908355f321a80402681414cf8f4e11abe1b168ef4"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_application_dataset",
+      "name": "Final W4C synthetic application-flow dataset",
+      "description": "Final synthetic three-RAT ns-3.44 application-flow table with 432 records: 144 NR, 144 Wi-Fi 802.11ax, and 144 LiFi records from 48 configurations.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/final_application_flow_dataset.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "91708 B",
+      "sha256": "9fb8fe3b4b51f9502246847c3001d5dafd0711fc3166c5f9ef15bef19da9e214"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_run_level_kpi",
+      "name": "W4C run-level KPI summaries",
+      "description": "Run-level summaries obtained after averaging the three CPE application flows within each access branch.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/run_level_kpi.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "23992 B",
+      "sha256": "83ca44cf48e2d796007c650bfa41c53c095fb5f270836eec22a830c4d7bea329"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_lifi_physical_summary",
+      "name": "W4C LiFi optical-state summaries",
+      "description": "Per-run and per-CPE summaries of the sampled equation-driven LOS LiFi/OWC state variables.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/lifi_physical_summary.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "27851 B",
+      "sha256": "59b0d9deac4e17cbd18db5146cab5fc197bcae960e8a1eb5e30d4a8bce8bbe63"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_sweep_structure",
+      "name": "W4C structural validation summary",
+      "description": "Structural validation summary for the 48-run W4C sweep, including application-flow counts and mapping status.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/sweep_structure_summary.json",
+      "encodingFormat": "application/json",
+      "contentSize": "635 B",
+      "sha256": "00262182581e2e85d8f26981c454dbda57e8e3bf5b33afe79834eb78f1f1c733"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_data_dictionary",
+      "name": "W4C field dictionary",
+      "description": "Field names, units, and descriptions for the final application-flow and sampled optical-state tables.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/data_dictionary.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "2814 B",
+      "sha256": "7931360e832c08feda42ceebbec1b373024a98ac89796eb0543ffa434b60caa2"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_source",
+      "name": "W4C release documentation",
+      "description": "Release documentation for the project-local ns-3 source, configuration, per-run outputs, LiFi validation files, and analysis results for the final W4C dataset.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/README.md",
+      "encodingFormat": "text/markdown",
+      "contentSize": "3269 B",
+      "sha256": "d5cc4e4c786d48360eae5f77cd83f9c654d77f0d2687de36eab238c3f78b3e0b"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_source_main",
+      "name": "W4C ns-3 source",
+      "description": "Project-local integrated ns-3 source for the final three-RAT scenario.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/ns3/three_rat_smoke.cc",
+      "encodingFormat": "text/x-c++src",
+      "contentSize": "31138 B",
+      "sha256": "3532d01b3280438bd8ad4c947af5e75d7c7e72e0131db5e32259d29102f554d8"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_optical_state_example",
+      "name": "Representative W4C optical-state table",
+      "description": "Representative optical_state.csv file documenting the schema repeated in the per-run W4C optical-state outputs.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/runs/load2p0_speed0p5_fov40p0_seed1/optical_state.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "45587 B",
+      "sha256": "c7bcb3fc132b1b1c69968541b514e3287276be74a78c3a66290833dfed4db805"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "w4c_validation_report",
+      "name": "W4C final sweep report",
+      "description": "Observed structural checks, bounded factor analysis, validation evidence, and claim boundaries for the final W4C synthetic wireless dataset.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/W4C_FINAL_SWEEP_REPORT.md",
+      "encodingFormat": "text/markdown",
+      "contentSize": "24937 B",
+      "sha256": "cb2e726f7d64cf1954628a880c1eb864111f3df105a88515c9ada0b1387bcaec"
     }
   ],
   "recordSet": [
@@ -132,6 +233,19 @@
     },
     {
       "@type": "cr:RecordSet",
+      "@id": "practical_wireless_field_inventory_records",
+      "name": "Practical wireless field-inventory records",
+      "description": "Metadata records for all 46 practical wireless columns; units are reported only where established by the source artifact.",
+      "field": [
+        {"@type":"cr:Field","@id":"practical_wireless_field_inventory_records/dataset","name":"dataset","dataType":"sc:Text","source":{"fileObject":{"@id":"practical_wireless_field_dictionary"},"extract":{"column":"dataset"}}},
+        {"@type":"cr:Field","@id":"practical_wireless_field_inventory_records/field","name":"field","dataType":"sc:Text","source":{"fileObject":{"@id":"practical_wireless_field_dictionary"},"extract":{"column":"field"}}},
+        {"@type":"cr:Field","@id":"practical_wireless_field_inventory_records/data_type","name":"data_type","dataType":"sc:Text","source":{"fileObject":{"@id":"practical_wireless_field_dictionary"},"extract":{"column":"data_type"}}},
+        {"@type":"cr:Field","@id":"practical_wireless_field_inventory_records/unit_status","name":"unit_status","dataType":"sc:Text","source":{"fileObject":{"@id":"practical_wireless_field_dictionary"},"extract":{"column":"unit_status"}}},
+        {"@type":"cr:Field","@id":"practical_wireless_field_inventory_records/description","name":"description","dataType":"sc:Text","source":{"fileObject":{"@id":"practical_wireless_field_dictionary"},"extract":{"column":"description"}}}
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
       "@id": "optical_records",
       "name": "Voyager optical telemetry records",
       "field": [
@@ -152,9 +266,94 @@
           "name": "Voyager_ch1_BER",
           "description": "Measured bit-error rate on Voyager channel 1.",
           "dataType": "sc:Float",
+          "unit": "ratio",
           "source": {
             "fileObject": { "@id": "voyager" },
             "extract": { "column": "Voyager_ch1_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch2_BER",
+          "name": "Voyager_ch2_BER",
+          "description": "Measured bit-error rate on Voyager channel 2.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch2_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch3_BER",
+          "name": "Voyager_ch3_BER",
+          "description": "Measured bit-error rate on Voyager channel 3.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch3_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch4_BER",
+          "name": "Voyager_ch4_BER",
+          "description": "Measured bit-error rate on Voyager channel 4.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch4_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch5_BER",
+          "name": "Voyager_ch5_BER",
+          "description": "Measured bit-error rate on Voyager channel 5.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch5_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch6_BER",
+          "name": "Voyager_ch6_BER",
+          "description": "Measured bit-error rate on Voyager channel 6.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch6_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch7_BER",
+          "name": "Voyager_ch7_BER",
+          "description": "Measured bit-error rate on Voyager channel 7.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch7_BER" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "optical_records/Voyager_ch8_BER",
+          "name": "Voyager_ch8_BER",
+          "description": "Measured bit-error rate on Voyager channel 8.",
+          "dataType": "sc:Float",
+          "unit": "ratio",
+          "source": {
+            "fileObject": { "@id": "voyager" },
+            "extract": { "column": "Voyager_ch8_BER" }
           }
         }
       ]
@@ -335,6 +534,65 @@
             "extract": { "column": "strict_abs_gsnr_difference_db" }
           }
         }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "w4c_application_records",
+      "name": "Final W4C application-flow records",
+      "description": "One record per run, access branch, and CPE. The loss field is the FlowMonitor lostPackets field and is not interpreted as terminal packet loss.",
+      "field": [
+        {"@type":"cr:Field","@id":"w4c_application_records/run_id","name":"run_id","dataType":"sc:Text","unit":"identifier","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"run_id"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/seed","name":"seed","dataType":"sc:Integer","unit":"integer","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"seed"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/offered_load_mbps","name":"offered_load_mbps","dataType":"sc:Float","unit":"Mbps","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"offered_load_mbps"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/mobility_speed_mps","name":"mobility_speed_mps","dataType":"sc:Float","unit":"m/s","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"mobility_speed_mps"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/lifi_fov_deg","name":"lifi_fov_deg","dataType":"sc:Float","unit":"degree","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"lifi_fov_deg"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/branch","name":"branch","dataType":"sc:Text","unit":"categorical","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"branch"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/CPE","name":"CPE","dataType":"sc:Integer","unit":"identifier","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"CPE"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/FlowId","name":"FlowId","dataType":"sc:Integer","unit":"identifier","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"FlowId"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/source_ip","name":"source_ip","dataType":"sc:Text","unit":"IPv4 address","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"source_ip"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/destination_ip","name":"destination_ip","dataType":"sc:Text","unit":"IPv4 address","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"destination_ip"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/source_port","name":"source_port","dataType":"sc:Integer","unit":"port number","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"source_port"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/destination_port","name":"destination_port","dataType":"sc:Integer","unit":"port number","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"destination_port"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/tx_packets","name":"tx_packets","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"tx_packets"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/rx_packets","name":"rx_packets","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"rx_packets"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/lost_packets","name":"lost_packets","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"lost_packets"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/FlowMonitor_lostPackets","name":"FlowMonitor_lostPackets","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"FlowMonitor_lostPackets"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/rx_bytes","name":"rx_bytes","dataType":"sc:Integer","unit":"bytes","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"rx_bytes"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/first_tx_s","name":"first_tx_s","dataType":"sc:Float","unit":"s","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"first_tx_s"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/last_rx_s","name":"last_rx_s","dataType":"sc:Float","unit":"s","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"last_rx_s"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/duration_s","name":"duration_s","dataType":"sc:Float","unit":"s","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"duration_s"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/throughput_mbps","name":"throughput_mbps","dataType":"sc:Float","unit":"Mbps","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"throughput_mbps"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/mean_delay_ms","name":"mean_delay_ms","dataType":"sc:Float","unit":"ms","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"mean_delay_ms"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/mean_jitter_ms","name":"mean_jitter_ms","dataType":"sc:Float","unit":"ms","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"mean_jitter_ms"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/FlowMonitor_reported_loss_ratio","name":"FlowMonitor_reported_loss_ratio","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"FlowMonitor_reported_loss_ratio"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/mapping_status","name":"mapping_status","dataType":"sc:Text","unit":"categorical","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"mapping_status"}}},
+        {"@type":"cr:Field","@id":"w4c_application_records/interface_route_status","name":"interface_route_status","dataType":"sc:Text","unit":"categorical","source":{"fileObject":{"@id":"w4c_application_dataset"},"extract":{"column":"interface_route_status"}}}
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "w4c_optical_state_records",
+      "name": "W4C sampled LiFi optical-state records",
+      "description": "Sampled optical-state records repeated in the per-run W4C optical_state.csv files; the representative source below documents the common schema.",
+      "field": [
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/time_s","name":"time_s","dataType":"sc:Float","unit":"s","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"time_s"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/cpe_id","name":"cpe_id","dataType":"sc:Integer","unit":"identifier","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"cpe_id"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/distance_m","name":"distance_m","dataType":"sc:Float","unit":"m","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"distance_m"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/irradiance_angle_rad","name":"irradiance_angle_rad","dataType":"sc:Float","unit":"rad","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"irradiance_angle_rad"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/incidence_angle_rad","name":"incidence_angle_rad","dataType":"sc:Float","unit":"rad","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"incidence_angle_rad"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/in_fov","name":"in_fov","dataType":"sc:Boolean","unit":"boolean","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"in_fov"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/lambertian_order","name":"lambertian_order","dataType":"sc:Float","unit":"dimensionless","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"lambertian_order"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/h_los","name":"h_los","dataType":"sc:Float","unit":"dimensionless","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"h_los"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/received_optical_power_w","name":"received_optical_power_w","dataType":"sc:Float","unit":"W","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"received_optical_power_w"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/signal_current_a","name":"signal_current_a","dataType":"sc:Float","unit":"A","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"signal_current_a"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/shot_variance_a2","name":"shot_variance_a2","dataType":"sc:Float","unit":"A^2","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"shot_variance_a2"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/thermal_variance_a2","name":"thermal_variance_a2","dataType":"sc:Float","unit":"A^2","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"thermal_variance_a2"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/snr","name":"snr","dataType":"sc:Float","unit":"dimensionless","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"snr"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/ber","name":"ber","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"ber"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/per","name":"per","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"per"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/packet_count","name":"packet_count","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"packet_count"}}},
+        {"@type":"cr:Field","@id":"w4c_optical_state_records/corrupted_packets","name":"corrupted_packets","dataType":"sc:Integer","unit":"packets","source":{"fileObject":{"@id":"w4c_optical_state_example"},"extract":{"column":"corrupted_packets"}}}
       ]
     }
   ]

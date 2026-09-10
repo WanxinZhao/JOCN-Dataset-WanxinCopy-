@@ -1,6 +1,8 @@
 # Major Revision experiments
 
-本目录保存本轮大修实验。无线/ns-3 新实验按作者分工未处理。
+本目录保存本轮大修实验及其审稿证据。最终三 RAT synthetic wireless release
+另行发布在 synthetic-data repository 的 `NS3_Wireless_W4C_ThreeRAT/`；旧
+LTE/EPC + 802.11n + CSMA-surrogate 目录仍仅作为 legacy/development baseline。
 
 | 编号 | 实验 | 独立结果文件 | 原始输出目录 | 状态 |
 |---|---|---|---|---|
@@ -9,6 +11,7 @@
 | E3 | LLM/多智能体基线与证据审计 | `03_E3_LLM基线实验结果.md` | `E3_llm_baseline/` | 可观测部分完成；已恢复源码默认参数，逐调用 API 日志仍缺失 |
 | E4 | GNPy 唯一性、警告与独立复现 | `04_E4_GNPy正确性实验结果.md` | `E4_gnpy_audit/` | 原始公开包审计完成；严格 schema 阻断已由 E5 继续处理 |
 | E5 | 恢复源码复放与严格版本对照 | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/` | 已完成；两条实验臂各 96/96 成功 |
+| W4C | 最终三 RAT synthetic wireless sweep | 外部 W4C release report | `NS3_Wireless_W4C_ThreeRAT/`（synthetic-data repository） | 已完成；48 configurations / 432 application-flow records |
 
 复现实验脚本为 `run_e1_e2.py`、`run_e3_e4.py` 与 `run_e5_recovered_gnpy.py`。每个输出目录包含 provenance、依赖版本、逐次结果、汇总表和必要的图。E1/E2 的神经表示使用 NumPy mini-batch Adam 实现的监督瓶颈编码器；它是本次修订实验实现，不应在论文中误称为 TensorFlow 原实现的逐权重复现。
 

@@ -1,0 +1,4 @@
+geometry,distance_m,irradiance_angle_rad,incidence_angle_rad,in_fov,h_los,received_optical_power_w,snr,ber,per
+aligned_near,2,0,0,1,4.3334886216591318e-05,0.00043334886216591316,2201621513.5351,0,0
+aligned_far,4,0,0,1,1.0833721554147829e-05,0.00010833721554147829,514560668.70447528,0,0
+out_of_fov,2,0,1.3962634015954636,0,0,0,0,0.5,1

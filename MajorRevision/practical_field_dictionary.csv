@@ -1,0 +1,47 @@
+dataset,field,data_type,unit_status,description
+practical_wireless,Time,datetime,datetime,Wireless telemetry timestamp
+practical_wireless,payload_data_bbmod1_temp3 5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,payload_data_bbmod1_temp1 5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,payload_data_bbmod1_temp2 5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,Total 5G Cell Uplink Traffic,numeric,not documented in source file,Source telemetry column
+practical_wireless,Total 5G Cell Downlink Traffic,numeric,not documented in source file,Source telemetry column
+practical_wireless,payload_data_rmod_power 5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,inactiveTime_CPE3_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,inactiveTime_CPE1_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,inactiveTime_CPE2_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,inactiveTime_CPE4_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,rxBytes_CPE1_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,rxBytes_CPE4_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,txBytes_CPE4_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,txBytes_CPE2_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,rxBytes_CPE2_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,rxBytes_CPE3_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,txBytes_CPE1_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,txBytes_CPE3_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,signalAvg_CPE2_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,signalAvg_CPE3_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,signalAvg_CPE1_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,signalAvg_CPE4_WiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,txBytes_CPE4_LiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,rxBytes_CPE4_LiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,signal_CPE4_LiFi,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE4_lifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE1_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE1_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE2_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE1_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE4_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE2_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE3_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE3_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE4_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE2_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE4_lifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE4_5G,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE4_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE2_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE3_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,recv_CPE3_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,trans_CPE1_wifi,numeric,not documented in source file,Source telemetry column
+practical_wireless,service_id,categorical,identifier,Service identifier in source telemetry
+practical_wireless,wireless_domain,categorical,identifier,Wireless-domain identifier in source telemetry

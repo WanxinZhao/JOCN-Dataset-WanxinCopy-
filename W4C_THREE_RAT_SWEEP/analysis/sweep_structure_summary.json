@@ -1,0 +1,23 @@
+{
+  "run_configurations_expected": 48,
+  "run_configurations_observed": 48,
+  "raw_flowmonitor_rows_total": 624,
+  "raw_flowmonitor_rows_per_run": [
+    13
+  ],
+  "application_rows_expected": 432,
+  "application_rows_observed": 432,
+  "NR_rows": 144,
+  "WiFi80211ax_rows": 144,
+  "LiFi_rows": 144,
+  "all_run_structures_pass": true,
+  "all_required_kpis_finite": true,
+  "all_mappings_pass": true,
+  "duplicate_application_keys": 0,
+  "physical_rows_observed": 144,
+  "grouped_kpi_cells": 48,
+  "expected_configuration_key_count": 48,
+  "missing_configurations": [],
+  "extra_configurations": [],
+  "duplicate_configuration_keys": 0
+}

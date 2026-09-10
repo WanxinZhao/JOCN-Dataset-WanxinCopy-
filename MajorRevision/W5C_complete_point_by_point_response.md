@@ -76,27 +76,33 @@ bounded feasibility claim is supported.
 ### R1C3 — Add a dataset summary table and machine-readable metadata such as Croissant.
 
 **Response.** We added the dataset summary table and retained
-`MajorRevision/croissant_metadata.json`. The W5C matrix now separates
-practical, synthetic, and derived artifacts and records supported counts,
-formats, paths, and known limitations. Unknown external file paths, raw
-units, formal licence terms, and unresolved optical lineage are marked rather
-than fabricated.
+`MajorRevision/croissant_metadata.json`. The public synthetic-data repository
+now contains the final W4C release at `NS3_Wireless_W4C_ThreeRAT/`. The
+Croissant record identifies the final application-flow table, run-level and
+LiFi summaries, structural validation, source documentation, and the complete
+application/optical-state field dictionary with units. Unknown external file
+paths, raw practical-telemetry units, formal licence terms, and unresolved
+optical lineage remain explicitly marked rather than fabricated.
 
 **Exact manuscript change/location.** `tab:dataset_summary` and the practical
 dataset subsection. The complete machine-readable audit is
 `W5C_dataset_metadata_matrix.md`.
 
 **Evidence/result.** The current Croissant file documents the processed
-wireless/Voyager tables, E1/E2 result tables, and deduplicated GNPy audit CSV,
-with recorded sizes and hashes. The final W4C row reports 48 configurations,
-432 application-flow records, and 624 raw FlowMonitor rows.
+wireless/Voyager tables, E1/E2 result tables, deduplicated GNPy audit CSV, and
+the public W4C release with recorded public paths, sizes, hashes, and field
+units. The final W4C row reports 48 configurations, 432 application-flow
+records, and 624 raw FlowMonitor rows.
 
-**Limitation.** The current checkout does not contain the 986-km and urban
-sensing primary files, a standalone constructed-fusion CSV, or the final W4C
-bundle. No standard LICENSE/SPDX file is present in the checkout. Authoritative
-release paths and terms must be confirmed before final submission.
+**Limitation.** The 986-km and urban-sensing primary files, and a standalone
+materialised constructed-fusion CSV, are not included in the current release.
+The practical wireless source does not preserve formal units for every raw
+field, and no standard LICENSE/SPDX file is present; these facts are stated as
+release limitations rather than inferred.
 
-**Status.** `BLOCKED_ON_AUTHOR_CONFIRMATION` for release packaging.
+**Status.** `PARTIALLY_CLOSED`; the final W4C release is public, while
+external-file scope, undocumented practical-field units, and formal licence
+terms remain author-confirmation items.
 
 ## Reviewer 2
 
@@ -485,8 +491,8 @@ GNPy versions cannot load the released equipment file, so independent GNPy
 numerical replay is not claimed.
 
 **Exact manuscript change/location.** Synthetic GNPy results;
-`sec:ns3_wireless`; Table~\ref{tab:ns3_validation}; W4B/W4C evidence under
-`/home/ubuntu/Desktop/LLM Driven wireless environment generation/`.
+`sec:ns3_wireless`; Table~\ref{tab:ns3_validation}; public W4C evidence under
+`NS3_Wireless_W4C_ThreeRAT/` in the synthetic-data repository.
 
 **Evidence/result.** W4C confirms the final synthetic wireless structural and
 equation checks. E4 records the 96-case GNPy compatibility failure under

@@ -1,0 +1,10 @@
+test,status,observed,expected,absolute_error,tolerance,note
+lambertian_order_60deg,PASS,1,1,2.220446049250313e-16,1e-14,m=1 at 60 degrees
+aligned_los_gain,PASS,2.027687487435669e-05,2.027687487435669e-05,0,0,finite positive aligned LOS gain
+inverse_square,PASS,0.25,0.25,0,1e-14,H(4 m)/H(2 m)
+fov_inside,PASS,1,1,0,0,boundary is included
+fov_outside,PASS,0,0,0,0,outside FOV is gated
+received_power,PASS,0.0002027687487435669,0.0002027687487435669,0,1e-18,P_r=P_t H_LOS
+zero_power_noise_snr,PASS,0,0,0,0,finite zero-power SNR
+per_decreases_with_snr,PASS,0.002345495031220681,1,0.9976545049687793,0,PER(SNR) non-increasing
+physical_bounds,PASS,1,1,0,0,BER and PER bounds

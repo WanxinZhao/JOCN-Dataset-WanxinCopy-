@@ -15,7 +15,7 @@ These tests substantially strengthen confidence that the final synthetic dataset
 
 The FlowMonitor field is reported as the **FlowMonitor-reported packet-loss ratio**, `lostPackets/txPackets`. It is not interpreted as terminal packet loss at the finite simulation stopping time; in the W4C application table, 172/432 rows have `tx_packets-rx_packets` different from the FlowMonitor `lostPackets` field.
 
-Evidence: the public synthetic-data repository contains the complete release at `NS3_Wireless_W4C_ThreeRAT/`, including the source, preflight, 48 run directories, aggregate tables, independent LiFi tests, and final-source repeatability outputs. The release summary is `NS3_Wireless_W4C_ThreeRAT/W4C_FINAL_SWEEP_REPORT.md`.
+Evidence: the public dataset repository contains the complete release at `W4C_THREE_RAT_SWEEP/`, including the source, preflight, 48 run directories, aggregate tables, independent LiFi tests, and final-source repeatability outputs. The release summary is `W4C_THREE_RAT_SWEEP/W4C_FINAL_SWEEP_REPORT.md`.
 
 ## Reviewer 3, Comment 3 — Simulation-side evaluation of the LLM workflow
 
@@ -41,6 +41,6 @@ The dataset-summary table now separates the practical measured wireless campaign
 
 ## Evidence locations and claim boundary
 
-The final manuscript locations are `sec:ns3_wireless`, `tab:dataset_summary`, `tab:ns3_validation`, `fig:w4c_throughput`, and `fig:w4c_lifi_fov`. The final synthetic application table is `NS3_Wireless_W4C_ThreeRAT/analysis/final_application_flow_dataset.csv`; the structure summary is `NS3_Wireless_W4C_ThreeRAT/analysis/sweep_structure_summary.json`; the run-aware factor analysis is `NS3_Wireless_W4C_ThreeRAT/analysis/scientific_sweep_analysis.md`.
+The final manuscript locations are `sec:ns3_wireless`, `tab:dataset_summary`, `tab:ns3_validation`, `fig:w4c_throughput`, and `fig:w4c_lifi_fov`. The final synthetic application table is `W4C_THREE_RAT_SWEEP/analysis/final_application_flow_dataset.csv`; the structure summary is `W4C_THREE_RAT_SWEEP/analysis/sweep_structure_summary.json`; the run-aware factor analysis is `W4C_THREE_RAT_SWEEP/analysis/scientific_sweep_analysis.md`.
 
 The added evidence supports the claim that the workflow generated a bounded, reproducible, internally checked synthetic three-RAT dataset under declared ns-3 and optical-model assumptions. It does not support calibrated reproduction of the practical 5G NR/Wi-Fi 6/LiFi testbed, a complete physical LiFi simulator, a terminal-loss interpretation of the FlowMonitor field, or a universal superiority claim for any RAT.

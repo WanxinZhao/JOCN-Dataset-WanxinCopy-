@@ -104,7 +104,7 @@
       "@id": "w4c_application_dataset",
       "name": "Final W4C synthetic application-flow dataset",
       "description": "Final synthetic three-RAT ns-3.44 application-flow table with 432 records: 144 NR, 144 Wi-Fi 802.11ax, and 144 LiFi records from 48 configurations.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/final_application_flow_dataset.csv",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/analysis/final_application_flow_dataset.csv",
       "encodingFormat": "text/csv",
       "contentSize": "91708 B",
       "sha256": "9fb8fe3b4b51f9502246847c3001d5dafd0711fc3166c5f9ef15bef19da9e214"
@@ -114,7 +114,7 @@
       "@id": "w4c_run_level_kpi",
       "name": "W4C run-level KPI summaries",
       "description": "Run-level summaries obtained after averaging the three CPE application flows within each access branch.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/run_level_kpi.csv",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/analysis/run_level_kpi.csv",
       "encodingFormat": "text/csv",
       "contentSize": "23992 B",
       "sha256": "83ca44cf48e2d796007c650bfa41c53c095fb5f270836eec22a830c4d7bea329"
@@ -124,7 +124,7 @@
       "@id": "w4c_lifi_physical_summary",
       "name": "W4C LiFi optical-state summaries",
       "description": "Per-run and per-CPE summaries of the sampled equation-driven LOS LiFi/OWC state variables.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/lifi_physical_summary.csv",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/analysis/lifi_physical_summary.csv",
       "encodingFormat": "text/csv",
       "contentSize": "27851 B",
       "sha256": "59b0d9deac4e17cbd18db5146cab5fc197bcae960e8a1eb5e30d4a8bce8bbe63"
@@ -134,7 +134,7 @@
       "@id": "w4c_sweep_structure",
       "name": "W4C structural validation summary",
       "description": "Structural validation summary for the 48-run W4C sweep, including application-flow counts and mapping status.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/analysis/sweep_structure_summary.json",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/analysis/sweep_structure_summary.json",
       "encodingFormat": "application/json",
       "contentSize": "635 B",
       "sha256": "00262182581e2e85d8f26981c454dbda57e8e3bf5b33afe79834eb78f1f1c733"
@@ -144,7 +144,7 @@
       "@id": "w4c_data_dictionary",
       "name": "W4C field dictionary",
       "description": "Field names, units, and descriptions for the final application-flow and sampled optical-state tables.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/data_dictionary.csv",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/data_dictionary.csv",
       "encodingFormat": "text/csv",
       "contentSize": "2814 B",
       "sha256": "7931360e832c08feda42ceebbec1b373024a98ac89796eb0543ffa434b60caa2"
@@ -154,17 +154,17 @@
       "@id": "w4c_source",
       "name": "W4C release documentation",
       "description": "Release documentation for the project-local ns-3 source, configuration, per-run outputs, LiFi validation files, and analysis results for the final W4C dataset.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/README.md",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/README.md",
       "encodingFormat": "text/markdown",
-      "contentSize": "3269 B",
-      "sha256": "d5cc4e4c786d48360eae5f77cd83f9c654d77f0d2687de36eab238c3f78b3e0b"
+      "contentSize": "2976 B",
+      "sha256": "f200ee63511df780e4422ccf7a8f5d3780ab2b7c12e029ee584cabbe4226b29b"
     },
     {
       "@type": "cr:FileObject",
       "@id": "w4c_source_main",
       "name": "W4C ns-3 source",
       "description": "Project-local integrated ns-3 source for the final three-RAT scenario.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/ns3/three_rat_smoke.cc",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/ns3/three_rat_smoke.cc",
       "encodingFormat": "text/x-c++src",
       "contentSize": "31138 B",
       "sha256": "3532d01b3280438bd8ad4c947af5e75d7c7e72e0131db5e32259d29102f554d8"
@@ -174,7 +174,7 @@
       "@id": "w4c_optical_state_example",
       "name": "Representative W4C optical-state table",
       "description": "Representative optical_state.csv file documenting the schema repeated in the per-run W4C optical-state outputs.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/runs/load2p0_speed0p5_fov40p0_seed1/optical_state.csv",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/runs/load2p0_speed0p5_fov40p0_seed1/optical_state.csv",
       "encodingFormat": "text/csv",
       "contentSize": "45587 B",
       "sha256": "c7bcb3fc132b1b1c69968541b514e3287276be74a78c3a66290833dfed4db805"
@@ -184,10 +184,10 @@
       "@id": "w4c_validation_report",
       "name": "W4C final sweep report",
       "description": "Observed structural checks, bounded factor analysis, validation evidence, and claim boundaries for the final W4C synthetic wireless dataset.",
-      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation/main/NS3_Wireless_W4C_ThreeRAT/W4C_FINAL_SWEEP_REPORT.md",
+      "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/W4C_FINAL_SWEEP_REPORT.md",
       "encodingFormat": "text/markdown",
-      "contentSize": "24937 B",
-      "sha256": "cb2e726f7d64cf1954628a880c1eb864111f3df105a88515c9ada0b1387bcaec"
+      "contentSize": "24883 B",
+      "sha256": "c5f47875f5b21dc53c0c1af2918a2329e073982aaf4f55f950bddd378fb0073b"
     }
   ],
   "recordSet": [

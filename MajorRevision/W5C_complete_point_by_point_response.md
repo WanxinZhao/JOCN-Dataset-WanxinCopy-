@@ -76,8 +76,8 @@ bounded feasibility claim is supported.
 ### R1C3 — Add a dataset summary table and machine-readable metadata such as Croissant.
 
 **Response.** We added the dataset summary table and retained
-`MajorRevision/croissant_metadata.json`. The public synthetic-data repository
-now contains the final W4C release at `NS3_Wireless_W4C_ThreeRAT/`. The
+`MajorRevision/croissant_metadata.json`. The public dataset repository now
+contains the final W4C release at `W4C_THREE_RAT_SWEEP/`. The
 Croissant record identifies the final application-flow table, run-level and
 LiFi summaries, structural validation, source documentation, and the complete
 application/optical-state field dictionary with units. Unknown external file
@@ -492,7 +492,7 @@ numerical replay is not claimed.
 
 **Exact manuscript change/location.** Synthetic GNPy results;
 `sec:ns3_wireless`; Table~\ref{tab:ns3_validation}; public W4C evidence under
-`NS3_Wireless_W4C_ThreeRAT/` in the synthetic-data repository.
+`W4C_THREE_RAT_SWEEP/` in the public dataset repository.
 
 **Evidence/result.** W4C confirms the final synthetic wireless structural and
 equation checks. E4 records the 96-case GNPy compatibility failure under

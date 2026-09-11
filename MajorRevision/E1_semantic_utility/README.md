@@ -6,6 +6,14 @@ Important interpretation: the optical and wireless campaigns do not overlap in t
 
 All scalers, semantic thresholds, optical risk thresholds, encoders and downstream models are fitted after the chronological split. Ten records are purged at each boundary. The four-class result is exploratory if the final test block contains too few samples of class 3.
 
+The same script now materialises the deterministic benchmark inputs and labels
+at `../../semantic_case_v6/data/cross_domain_fusion_dataset.csv`. Its 2,848
+rows include the 1,698/560/570 train/validation/test assignments and 20 purged
+boundary rows. The 52 fields include current and target source-row identifiers,
+training-only Q/BER thresholds, current risk components, and next-record
+targets. Learned V2/V3 representations remain seed-specific outputs and are
+therefore not misrepresented as fixed columns in this deterministic table.
+
 ## Top binary results
 
 | method               | task   |   runs |   accuracy_mean |   accuracy_std |   accuracy_ci95 |   balanced_accuracy_mean |   balanced_accuracy_std |   balanced_accuracy_ci95 |   macro_f1_mean |   macro_f1_std |   macro_f1_ci95 |   auroc_mean |   auroc_std |   auroc_ci95 |   auprc_mean |   auprc_std |   auprc_ci95 |

@@ -190,6 +190,7 @@ def build_optical_aligned(wireless_times: pd.Series) -> pd.DataFrame:
     q_values = np.sqrt(2.0) * erfcinv(2.0 * clean.to_numpy(dtype=float))
 
     optical = pd.DataFrame({"original_optical_timestamp": source["Timestamp"]})
+    optical["source_optical_row"] = np.arange(len(source), dtype=int)
     optical["ber_mean"] = clean.mean(axis=1)
     optical["ber_max"] = clean.max(axis=1)
     optical["ber_min"] = clean.min(axis=1)
@@ -628,6 +629,53 @@ def save_split_and_label_information(
     pd.DataFrame(label_rows).to_csv(E2_DIR / "label_distributions.csv", index=False)
 
 
+def save_constructed_benchmark(
+    semantic_frame: pd.DataFrame,
+    optical: pd.DataFrame,
+    splits: dict[str, np.ndarray],
+    optical_risk: np.ndarray,
+    wireless_risk: np.ndarray,
+    service_risk: np.ndarray,
+    degradation: np.ndarray,
+    q_threshold: float,
+    ber_threshold: float,
+) -> None:
+    """Materialise the exact leakage-controlled E1/E2 benchmark.
+
+    Each row contains the current-record inputs and both current- and
+    next-record rule-derived targets.  The optical source-row identifier makes
+    the positional mapping auditable; ``split`` records the chronological
+    train/validation/test assignment and the two purged boundary regions.
+    """
+    sample_count = len(semantic_frame) - 1
+    split_labels = np.full(sample_count, "purged", dtype=object)
+    for split_name in ("train", "validation", "test"):
+        split_labels[splits[split_name]] = split_name
+
+    wireless_columns = [
+        "time", *WIRELESS_FEATURES, *TARGET_COLUMNS, "semantic_confidence",
+        "dominant_cpe", "dominant_rat",
+    ]
+    benchmark = semantic_frame.loc[: sample_count - 1, wireless_columns].reset_index(drop=True)
+    benchmark.insert(1, "source_wireless_row", np.arange(sample_count, dtype=int))
+    benchmark.insert(2, "target_wireless_row", np.arange(1, sample_count + 1, dtype=int))
+    benchmark.insert(3, "split", split_labels)
+
+    optical_export = optical.iloc[:sample_count].drop(columns=["time"]).reset_index(drop=True)
+    benchmark = pd.concat([benchmark, optical_export], axis=1)
+    benchmark["target_optical_timestamp"] = optical["original_optical_timestamp"].iloc[1:].reset_index(drop=True)
+    benchmark["target_optical_row"] = optical["source_optical_row"].iloc[1:].reset_index(drop=True)
+    benchmark["q_threshold_train"] = q_threshold
+    benchmark["ber_threshold_train"] = ber_threshold
+    benchmark["optical_risk"] = optical_risk[:-1]
+    benchmark["wireless_risk"] = wireless_risk[:-1]
+    benchmark["service_risk"] = service_risk[:-1]
+    benchmark["degradation_class"] = degradation[:-1]
+    benchmark["service_risk_next"] = service_risk[1:]
+    benchmark["degradation_class_next"] = degradation[1:]
+    benchmark.to_csv(SOURCE_DIR / "cross_domain_fusion_dataset.csv", index=False, lineterminator="\n")
+
+
 def main() -> None:
     started = time.time()
     E1_DIR.mkdir(parents=True, exist_ok=True)
@@ -639,7 +687,10 @@ def main() -> None:
     splits = temporal_indices(sample_count)
     semantic_frame, preprocessing = derive_semantics(base, splits["train"])
 
-    optical_feature_columns = [column for column in optical.columns if column not in {"time", "original_optical_timestamp"}]
+    optical_feature_columns = [
+        column for column in optical.columns
+        if column not in {"time", "original_optical_timestamp", "source_optical_row"}
+    ]
     optical_features = optical[optical_feature_columns].to_numpy(dtype=float)
     q_threshold = float(optical.iloc[splits["train"] + 1]["q_factor"].quantile(0.15))
     ber_threshold = float(optical.iloc[splits["train"] + 1]["ber"].quantile(0.85))
@@ -665,6 +716,10 @@ def main() -> None:
     cpe_target = semantic_frame["dominant_cpe"].to_numpy()[:-1]
     rat_target = semantic_frame["dominant_rat"].to_numpy()[:-1]
     save_split_and_label_information(splits, current_times, binary_target, multi_target, cpe_target, rat_target)
+    save_constructed_benchmark(
+        semantic_frame, optical, splits, optical_risk, wireless_risk,
+        service_risk, degradation, q_threshold, ber_threshold,
+    )
 
     x = semantic_frame[WIRELESS_FEATURES].to_numpy(dtype=float)[:-1]
     y = semantic_frame[TARGET_COLUMNS].to_numpy(dtype=float)[:-1]

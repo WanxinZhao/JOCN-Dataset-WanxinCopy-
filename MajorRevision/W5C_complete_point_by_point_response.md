@@ -1,6 +1,14 @@
-# Complete point-by-point reviewer response for W5C-A
+# Complete point-by-point reviewer response
 
-## Important source note
+## Source note
+
+The original reviewer text was checked against
+`C:/Users/admin/.codex/attachments/87037826-6321-4f1f-8d5b-da6ac392b380/pasted-text.txt`.
+Reviewer 3 Comment 4 requests independent correctness validation of generated
+data; the response therefore reports the GNPy and wireless evidence tracks
+together under that identifier.
+
+<!-- Superseded W5C-A source note:
 
 The local workspace does not contain the original decision letter or full
 reviewer PDFs. The comment text below is the normalized English rendering of
@@ -13,6 +21,7 @@ without silently changing the original identifier.
 
 No new experiment was run in W5C-A. References to results point to existing
 artifacts and the current manuscript.
+-->
 
 ## Reviewer 1
 
@@ -25,35 +34,40 @@ constructed sequence-aligned interoperability benchmark. The optical and
 wireless files are read separately and their ordered records are mapped by
 relative sequence position; no timestamp equality, optical-to-wireless signal
 conversion, physical causal relation, or simultaneous campaign is claimed.
-The current Voyager file's timestamp coverage and interval pattern are now
-reported as file-level observations rather than silently identified with the
-historical campaign dates.
+The public release and manuscript now distinguish two campaigns on the same
+339-km NDFF loop: the earlier 1,373-record, four-channel, 15-minute product
+from 2023--2024, and the separate Christmas 2025 eight-channel source used by
+E1/E2. The latter contains 20,960 valid records, retains real timestamps from
+2025-12-22 to 2026-01-24, and was not resampled to 15-minute intervals.
 
 **Exact manuscript change/location.** Abstract; Introduction; `sec:SemanticModules`
 benchmark paragraph; `tab:dataset_summary`; practical-data subsection. The
 implementation is `MajorRevision/run_e1_e2.py:180-210`.
 
-**Evidence/result.** W1A found zero timestamp intersection between the current
-optical and wireless files and verified that mapping uses
-`round(linspace(...))`; the benchmark has 2,848 one-step samples.
+**Evidence/result.** The Christmas 2025 source is published byte-identically
+under `OTN Monitoring Data_one_month/NDFF_Voyager_Christmas_2025/`, with
+SHA-256 `879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209`.
+W1A found zero timestamp intersection with the wireless file and verified that
+mapping uses `round(linspace(...))`; the benchmark has 2,848 one-step samples.
 
-**Limitation.** The physical Voyager product identity/date and the relation to
-any earlier 10-s/15-minute product are not established by the current files.
-`W5C_author_confirmation_required.md` records the required confirmation.
+**Limitation.** The benchmark remains a positional interoperability test, not
+a contemporaneous or causal optical--wireless measurement.
 
-**Status.** `BLOCKED_ON_AUTHOR_CONFIRMATION` for final provenance closure;
-the scientific constructed-benchmark wording is closed.
+**Status.** `CLOSED`; the source lineage and constructed-benchmark boundary
+are both explicit.
 
 ### R1C2 — Report the LLM model, calls, failures, cost, latency, human intervention, and a script baseline.
 
 **Response.** We added and retain a deterministic enumeration baseline for the
 6,144 expected GNPy configuration keys. It enumerates the set in 0.0063 s
 without an LLM/API call, while the published artifact contains 8,192
-execution records and 6,144 unique configurations. The manuscript now
-explicitly states that the public materials do not report the LLM model or
-version, prompts, tool schema, API calls, tokens, cost, latency, retries,
-failures, or human interventions. We therefore limit the claim to a bounded
-LLM-driven workflow feasibility demonstration and do not claim LLM
+execution records and 6,144 unique configurations. The recovered source
+supplies role prompts and JSON constraints and defaults to `gpt-4o-mini`,
+temperature 0.2, a 90-s timeout, at most three attempts, and a two-iteration
+control path containing up to six LLM invocations. The archived run does not
+retain its actual model snapshot, per-call traces, calls/retries, tokens, cost,
+latency, failures, or human interventions. We therefore report those items as
+not recorded, limit the claim to workflow feasibility, and do not claim LLM
 superiority over the deterministic script.
 
 **Exact manuscript change/location.** `JOCN_Telemetry.tex`,
@@ -66,43 +80,46 @@ and GNPy results subsection. Existing evidence is summarized in
 against the expected set; the published artifact has 25% duplicate execution
 records. The current source contains no historical LLM trace bundle.
 
-**Limitation.** A controlled LLM-vs-script advantage study cannot be claimed
-without the missing logs or new controlled trials. The author must confirm
-whether the unavailable records truly do not exist.
+**Limitation.** Source defaults do not prove the exact historical runtime
+provider or trace, and a controlled LLM-vs-script advantage study cannot be
+claimed without those logs or new trials.
 
-**Status.** `BLOCKED_ON_AUTHOR_CONFIRMATION` for historical metadata; the
-bounded feasibility claim is supported.
+**Status.** `CLOSED_WITH_UNAVAILABLE_HISTORICAL_TRACE`; all recoverable
+settings are reported and the claim is bounded accordingly.
 
 ### R1C3 — Add a dataset summary table and machine-readable metadata such as Croissant.
 
 **Response.** We added the dataset summary table and retained
 `MajorRevision/croissant_metadata.json`. The public dataset repository now
 contains the final W4C release at `W4C_THREE_RAT_SWEEP/`. The
-Croissant record identifies the final application-flow table, run-level and
-LiFi summaries, structural validation, source documentation, and the complete
-application/optical-state field dictionary with units. Unknown external file
-paths, raw practical-telemetry units, formal licence terms, and unresolved
-optical lineage remain explicitly marked rather than fabricated.
+Croissant record identifies the two distinct 339-km Voyager products, the
+materialised constructed-fusion table, final application-flow table, run-level
+and LiFi summaries, structural validation, source documentation, and the
+complete application/optical-state field dictionary with units. Unknown raw
+practical-telemetry units and formal licence terms remain explicitly marked
+rather than fabricated.
 
 **Exact manuscript change/location.** `tab:dataset_summary` and the practical
 dataset subsection. The complete machine-readable audit is
 `W5C_dataset_metadata_matrix.md`.
 
 **Evidence/result.** The current Croissant file documents the processed
-wireless/Voyager tables, E1/E2 result tables, deduplicated GNPy audit CSV, and
-the public W4C release with recorded public paths, sizes, hashes, and field
-units. The final W4C row reports 48 configurations, 432 application-flow
-records, and 624 raw FlowMonitor rows.
+wireless table, both Voyager campaigns, the 2,848-row/52-field materialised benchmark,
+E1/E2 result tables, deduplicated GNPy audit CSV, recovered GNPy replay, and
+the public W4C release with recorded paths, sizes, hashes, and field units.
+The final W4C row reports 48 configurations, 432 application-flow records,
+and 624 raw FlowMonitor rows.
 
-**Limitation.** The 986-km and urban-sensing primary files, and a standalone
-materialised constructed-fusion CSV, are not included in the current release.
+**Limitation.** Exact aggregate counts and sizes for the externally referenced
+986-km and urban-sensing collections are not consolidated in the manuscript.
 The practical wireless source does not preserve formal units for every raw
 field, and no standard LICENSE/SPDX file is present; these facts are stated as
 release limitations rather than inferred.
 
-**Status.** `PARTIALLY_CLOSED`; the final W4C release is public, while
-external-file scope, undocumented practical-field units, and formal licence
-terms remain author-confirmation items.
+**Status.** `PARTIALLY_CLOSED`; the Voyager, constructed-fusion, and W4C
+release metadata are closed, while externally referenced collection totals,
+undocumented practical-field units, and formal licence terms remain author
+confirmation items.
 
 ## Reviewer 2
 
@@ -421,17 +438,19 @@ related optical/semantic quantities rather than independent field annotations.
 subsections; `MajorRevision/run_e1_e2.py:213-276`, `404-443`, `461-556`, and
 `640-677`; E1/E2 configuration and temporal split artifacts.
 
-**Evidence/result.** E1 records 1,698/560/570 evaluated samples, ten seeds,
-and train-only preprocessing. The optical and wireless campaigns remain
-separate and the benchmark uses positional sequence mapping.
+**Evidence/result.** E1 records 1,698/560/570 evaluated samples, 20 purged
+boundary records, ten seeds, and train-only preprocessing. The byte-identical
+20,960-record Voyager source and the 2,848-row/52-field materialised benchmark
+are now public. The table records both source-row indices, split membership,
+and the training-only Q/BER thresholds. The optical and wireless campaigns
+remain separate and the benchmark uses positional sequence mapping.
 
-**Limitation.** The exact optical product lineage remains unresolved. No
-matched raw-wireless-only ablation exists, so no incremental fusion gain is
-claimed. Author confirmation is required if a different optical product was
-intended.
+**Limitation.** No matched raw-wireless-only ablation exists, so no incremental
+fusion gain is claimed; the labels remain rule-derived rather than field fault
+annotations.
 
-**Status.** `BLOCKED_ON_AUTHOR_CONFIRMATION` for source freeze; split-leakage
-control is supported.
+**Status.** `CLOSED`; the source snapshot, construction, labels, settings, and
+leakage-free temporal protocol are reproducible within the stated boundary.
 
 ### R3C2 — The original Table 1 did not prove privacy improvement.
 
@@ -485,27 +504,35 @@ mapping. The final wireless track adds: (1) independent LiFi equation tests,
 9/9 pass; (2) 15/15 compiled-ns-3 versus independent-Python LiFi comparisons;
 (3) integrated three-RAT mapping with 9/9 application flows mapped; (4)
 byte-identical same-seed repeatability; and (5) a complete W4C sweep with
-48/48 configurations and 432/432 mappings passing. The GNPy track is reported
-separately: artifact uniqueness and warning audits are complete, but public
-GNPy versions cannot load the released equipment file, so independent GNPy
-numerical replay is not claimed.
+48/48 configurations and 432/432 mappings passing. For GNPy, we recovered the
+legacy equipment and scenario artifacts and replayed 96 cases stratified by
+path, modulation/spectrum configuration, launch power, and active-channel
+load. Official GNPy v2.12 at commit
+`7ce665010970f57e46672db1ec0864ae448077e6` completed 96/96 and reproduced the
+archived GSNR values with mean/max absolute errors of 0.00015/0.00050 dB. A
+schema-corrected GNPy 2.14.2 run also completed 96/96, with mean/max GSNR
+differences of 0.628/1.435 dB.
 
 **Exact manuscript change/location.** Synthetic GNPy results;
-`sec:ns3_wireless`; Table~\ref{tab:ns3_validation}; public W4C evidence under
-`W4C_THREE_RAT_SWEEP/` in the public dataset repository.
+Table~\ref{tab:gnpy_replay}; `sec:ns3_wireless`;
+Table~\ref{tab:ns3_validation}; `MajorRevision/E5_recovered_gnpy_replay/`;
+and public W4C evidence under `W4C_THREE_RAT_SWEEP/`.
 
 **Evidence/result.** W4C confirms the final synthetic wireless structural and
-equation checks. E4 records the 96-case GNPy compatibility failure under
-GNPy 2.14.2 and the matching 2.13.0 check.
+equation checks. E5 records 96/96 successful CLI runs in both GNPy replay arms,
+case-level comparisons, frozen dependencies, source manifests, input files,
+and logs.
 
 **Limitation.** The wireless checks establish implementation consistency and
 reproducibility under declared assumptions, not physical-model fidelity. The
-GNPy numerical replay gap remains. The local ledger and earlier wireless
-response use the R3C4 identifier differently; the original letter must be
-used to finalise the numbering.
+GNPy v2.12 arm is an exact-output compatibility reconstruction rather than
+proof of the unavailable original run commit, while the v2.14.2 differences
+and persistent EDFA/ROADM warnings prevent a warning-free physical-calibration
+claim.
 
-**Status.** `STILL_PARTIAL` for the combined generated-data concern because
-the GNPy numerical replay is unavailable; the wireless component is closed.
+**Status.** `CLOSED_WITH_DECLARED_MODEL_LIMITATIONS`; independent numerical,
+equation, mapping, repeatability, and version-sensitivity evidence is now
+reported for both generated-data tracks.
 
 ### R3C5 — The Abstract must distinguish implemented, evaluated, demonstrated, and proposed elements.
 
@@ -521,8 +548,8 @@ evaluation subsection.
 **Evidence/result.** The manuscript labels LLM results as feasibility and
 does not present prospective closed-loop blocks as evaluated experiments.
 
-**Limitation.** The original reviewer wording should still be checked against
-the local normalized ledger.
+**Limitation.** The distinction is terminological and evidential; it does not
+add scalability or field-validation results that were not actually measured.
 
 **Status.** `CLOSED` for active claim separation.
 
@@ -638,10 +665,11 @@ full text is not present locally.
 
 ## Response-level closure statement
 
-For the current bounded manuscript claims, W5C-A does not require a new
-experiment. The remaining author actions concern factual source lineage,
-external release metadata, unavailable LLM provenance, the original reviewer
-identifier set, and the decision whether the paper should retain any claim
-requiring independent GNPy numerical replay. The final response must preserve
-the distinction between measured practical data, constructed optical--wireless
+For the current bounded manuscript claims, no new experiment is required. The
+Voyager lineage, constructed-benchmark release, reviewer identifier set, GNPy
+numerical replay, and final W4C release are closed. Remaining author actions
+are limited to exact metadata for externally referenced collections,
+undocumented practical-wireless units, formal licence terms, and any historical
+LLM run traces that may still exist. The final response preserves the
+distinction between measured practical data, constructed optical--wireless
 interoperability, and synthetic DT outputs.

@@ -1,20 +1,38 @@
-# Major Revision experiments
+# Major-revision evidence and experiments
 
-本目录保存本轮大修实验及其审稿证据。最终三 RAT synthetic wireless release
-另行发布在 public dataset repository 的 `W4C_THREE_RAT_SWEEP/`；旧
-LTE/EPC + 802.11n + CSMA-surrogate 目录仍仅作为 legacy/development baseline。
+This directory contains the experiments, raw outputs, reproducibility files,
+and reviewer-response evidence used for the JOCN major revision. The current
+authoritative reviewer status is in
+`W5C_complete_point_by_point_response.md`; facts that still require a data
+owner are isolated in `W5C_author_confirmation_required.md`.
 
-| 编号 | 实验 | 独立结果文件 | 原始输出目录 | 状态 |
+| ID | Evaluation | Main report | Reproducibility material | Current status |
 |---|---|---|---|---|
-| E1 | 无泄漏时序划分下的语义效用 | `01_E1_语义效用实验结果.md` | `E1_semantic_utility/` | 已完成，10 seeds |
-| E2 | 多攻击器隐私泄露与效用权衡 | `02_E2_隐私泄露实验结果.md` | `E2_privacy/` | 已完成，10 seeds |
-| E3 | LLM/多智能体基线与证据审计 | `03_E3_LLM基线实验结果.md` | `E3_llm_baseline/` | 可观测部分完成；已恢复源码默认参数，逐调用 API 日志仍缺失 |
-| E4 | GNPy 唯一性、警告与独立复现 | `04_E4_GNPy正确性实验结果.md` | `E4_gnpy_audit/` | 原始公开包审计完成；严格 schema 阻断已由 E5 继续处理 |
-| E5 | 恢复源码复放与严格版本对照 | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/` | 已完成；两条实验臂各 96/96 成功 |
-| W4C | 最终三 RAT synthetic wireless sweep | 外部 W4C release report | `W4C_THREE_RAT_SWEEP/`（public dataset repository） | 已完成；48 configurations / 432 application-flow records |
+| E1 | Semantic utility with chronological, leakage-controlled splits | `01_E1_语义效用实验结果.md` | `E1_semantic_utility/`, `run_e1_e2.py` | Complete, 10 seeds |
+| E2 | Privacy--utility trade-off under several attackers | `02_E2_隐私泄露实验结果.md` | `E2_privacy/`, `run_e1_e2.py` | Complete, 10 seeds |
+| E3 | LLM/multi-agent baseline and evidence audit | `03_E3_LLM基线实验结果.md` | `E3_llm_baseline/`, `run_e3_e4.py` | Observable evidence complete; historical per-call API traces unavailable |
+| E4 | GNPy uniqueness, warning, and provenance audit | `04_E4_GNPy正确性实验结果.md` | `E4_gnpy_audit/`, `run_e3_e4.py` | Complete artifact audit |
+| E5 | Recovered-source GNPy replay and strict-version comparison | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/`, `run_e5_recovered_gnpy.py` | Complete; both arms 96/96 |
+| W4C | Final three-RAT synthetic wireless sweep | release documentation | `W4C_THREE_RAT_SWEEP/` | Public; 48 configurations and 432 application-flow records |
 
-复现实验脚本为 `run_e1_e2.py`、`run_e3_e4.py` 与 `run_e5_recovered_gnpy.py`。每个输出目录包含 provenance、依赖版本、逐次结果、汇总表和必要的图。E1/E2 的神经表示使用 NumPy mini-batch Adam 实现的监督瓶颈编码器；它是本次修订实验实现，不应在论文中误称为 TensorFlow 原实现的逐权重复现。
+The release also includes:
 
-论文写作时应以独立结果文件中的限制性表述为准，特别避免：把 8,192 写成唯一配置数、把 RAT 高准确率写成隐私成功、把非同时采集的光/无线数据写成真实时间对齐，以及把联合改变调制与槽宽的结果解释为纯调制效应。
+- machine-readable Croissant 1.0 metadata in `croissant_metadata.json`;
+- the materialised 2,848-row, 52-field leakage-controlled fusion table at
+  `../semantic_case_v6/data/cross_domain_fusion_dataset.csv`, including source
+  row indices, chronological split membership, and training-only thresholds;
+- provenance for two distinct 339-km NDFF Voyager campaigns: the 2023--2024
+  15-minute processed product and the Christmas 2025 raw eight-channel source.
 
-论文正文已根据上述结果完成第一轮修改并通过独立 job name 编译。修改清单和仍需作者补充的材料见 `05_论文正文修改说明.md`。
+Important interpretation boundaries:
+
+- The optical and wireless traces were not measured contemporaneously. Their
+  positional sequence mapping is an interoperability benchmark, not evidence
+  of a shared physical incident.
+- E1/E2 labels are deterministic next-record targets derived from the released
+  variables. No incremental fusion-superiority claim is made.
+- The pinned GNPy v2.12-compatible replay closely reproduces the released
+  GSNR values; the larger GNPy 2.14.2 differences are reported as version/model
+  sensitivity.
+- W4C validates reproducible bounded synthetic telemetry, not calibrated
+  fidelity to the practical wireless testbed.

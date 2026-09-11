@@ -20,13 +20,13 @@
   },
   "@type": "sc:Dataset",
   "name": "JOCN cross-domain dataset revision evaluation bundle",
-  "description": "Machine-readable metadata for the processed wireless and optical telemetry tables, the per-run evaluation artefacts, and the final W4C synthetic three-RAT wireless dataset used in the major-revision experiments. The optical and wireless measurements come from separate experimental domains and are associated only through explicitly constructed semantic labels; they are not presented as time-synchronised measurements of one physical event.",
+  "description": "Machine-readable metadata for two distinct 339-km NDFF Voyager campaigns, the processed wireless telemetry and materialised constructed-fusion table, the per-run evaluation artefacts, and the final W4C synthetic three-RAT wireless dataset used in the major-revision experiments. The optical and wireless measurements come from separate campaigns and are associated only through an explicitly constructed positional benchmark; they are not time-synchronised measurements of one physical event.",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
-  "version": "1.2-w4c-release",
-  "dateModified": "2026-09-10",
+  "version": "1.3-optical-provenance",
+  "dateModified": "2026-09-11",
   "license": {
     "@type": "sc:CreativeWork",
-    "name": "Formal licence and reuse terms are not specified in the current public repository; author confirmation is required"
+    "name": "Practical data are provided for academic, non-commercial research under the practical-repository README; the revision/W4C repository does not specify a formal SPDX licence"
   },
   "distribution": [
     {
@@ -42,12 +42,22 @@
     {
       "@type": "cr:FileObject",
       "@id": "voyager",
-      "name": "Processed Voyager optical telemetry",
-      "description": "Timestamped bit-error-rate measurements for eight Voyager optical channels.",
-      "contentUrl": "../semantic_case_v6/data/voyager.csv",
+      "name": "Christmas 2025 raw Voyager optical telemetry",
+      "description": "A separate 2025-12-22 to 2026-01-24 campaign on the 339-km NDFF loop, containing 20,960 valid timestamped bit-error-rate records for eight Voyager channels. Real timestamps and 38 embedded headers from 39 acquisition segments are preserved in the source file.",
+      "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/Open-Source-Data-for-Multi-Domain-Network-Monitoring-and-Sensing-in-Optical-and-Wireless-Networks/main/OTN%20Monitoring%20Data_one_month/NDFF_Voyager_Christmas_2025/Voyager_NDFF_339km_2025-12-22_to_2026-01-24_raw.csv",
       "encodingFormat": "text/csv",
-      "contentSize": "1768224 B",
-      "sha256": "55ec2a257fa88458f31ea180a91b74142244bf10ced443fe3ec0b6ebc21654e4"
+      "contentSize": "1789223 B",
+      "sha256": "879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "voyager_2023_15min",
+      "name": "2023--2024 processed Voyager optical telemetry",
+      "description": "The earlier, distinct 339-km NDFF campaign: 1,373 processed 15-minute records from 2023-12-26 to 2024-01-26, with four BER channels and four derived Q-factor columns.",
+      "contentUrl": "https://media.githubusercontent.com/media/hpn-bristol/Open-Source-Data-for-Multi-Domain-Network-Monitoring-and-Sensing-in-Optical-and-Wireless-Networks/main/OTN%20Monitoring%20Data_one_month/Voyager_onemonth_15minsampling.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "147537 B",
+      "sha256": "9cc61219ee29f48975257a0a556e6c69b12fa0af17552a0984b5a9abb5d78608"
     },
     {
       "@type": "cr:FileObject",
@@ -78,6 +88,16 @@
       "encodingFormat": "text/csv",
       "contentSize": "85616 B",
       "sha256": "769d4ca25059bfd918aa095a770f000c42c292310639130b53539c16ba9b1fdb"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "constructed_fusion_dataset",
+      "name": "Materialised constructed optical--wireless interoperability benchmark",
+      "description": "The exact 2,848-row leakage-controlled E1/E2 table produced by positional sequence mapping of non-contemporaneous optical and wireless campaigns. It records source-row indices, chronological split membership, training-only label thresholds, current-record inputs, and next-record targets. It is a constructed representation benchmark, not a jointly measured physical session.",
+      "contentUrl": "../semantic_case_v6/data/cross_domain_fusion_dataset.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "1599700 B",
+      "sha256": "6f290cddd06836042699a6cff615aff90fb3e30a2d3790e1cdf92d8c01412681"
     },
     {
       "@type": "cr:FileObject",
@@ -356,6 +376,83 @@
             "extract": { "column": "Voyager_ch8_BER" }
           }
         }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "optical_2023_records",
+      "name": "Earlier 15-minute Voyager records",
+      "description": "The complete columns are Date, channel1--channel4, and Qfactor1--Qfactor4.",
+      "field": [
+        {"@type":"cr:Field","@id":"optical_2023_records/Date","name":"Date","dataType":"sc:DateTime","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"Date"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/channel1","name":"channel1","description":"Voyager channel-1 BER ratio.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"channel1"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/channel2","name":"channel2","description":"Voyager channel-2 BER ratio.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"channel2"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/channel3","name":"channel3","description":"Voyager channel-3 BER ratio.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"channel3"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/channel4","name":"channel4","description":"Voyager channel-4 BER ratio.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"channel4"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/Qfactor1","name":"Qfactor1","description":"Q-factor derived from channel-1 BER.","dataType":"sc:Float","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"Qfactor1"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/Qfactor2","name":"Qfactor2","description":"Q-factor derived from channel-2 BER.","dataType":"sc:Float","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"Qfactor2"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/Qfactor3","name":"Qfactor3","description":"Q-factor derived from channel-3 BER.","dataType":"sc:Float","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"Qfactor3"}}},
+        {"@type":"cr:Field","@id":"optical_2023_records/Qfactor4","name":"Qfactor4","description":"Q-factor derived from channel-4 BER.","dataType":"sc:Float","source":{"fileObject":{"@id":"voyager_2023_15min"},"extract":{"column":"Qfactor4"}}}
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "constructed_fusion_records",
+      "name": "Constructed interoperability benchmark records",
+      "description": "The exact materialised 2,848-row E1/E2 benchmark with deterministic wireless semantics, positionally selected optical telemetry, chronological split membership, training-only thresholds, and rule-derived next-record targets.",
+      "field": [
+        {"@type":"cr:Field","@id":"constructed_fusion_records/time","name":"time","dataType":"sc:DateTime","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"time"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/source_wireless_row","name":"source_wireless_row","description":"Zero-based row in the chronologically sorted processed wireless source.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"source_wireless_row"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/target_wireless_row","name":"target_wireless_row","description":"Zero-based next wireless row from which the prediction target is derived.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"target_wireless_row"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/split","name":"split","description":"Chronological train, validation, test, or purged-boundary assignment.","dataType":"sc:Text","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"split"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/traffic_5g","name":"traffic_5g","description":"Aggregate practical 5G traffic; the raw source does not declare a formal physical unit.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"traffic_5g"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/traffic_wifi","name":"traffic_wifi","description":"Aggregate practical Wi-Fi traffic; the raw source does not declare a formal physical unit.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"traffic_wifi"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/traffic_lifi","name":"traffic_lifi","description":"Aggregate practical LiFi traffic; the raw source does not declare a formal physical unit.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"traffic_lifi"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/total_wireless_traffic","name":"total_wireless_traffic","description":"Sum of the three access-branch traffic aggregates.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"total_wireless_traffic"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/wifi_signal_mean","name":"wifi_signal_mean","description":"Mean of the four practical Wi-Fi signal fields; source unit is undocumented.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"wifi_signal_mean"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/lifi_signal","name":"lifi_signal","description":"Practical LiFi signal field; source unit is undocumented.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"lifi_signal"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/wifi_inactivity_mean","name":"wifi_inactivity_mean","description":"Mean of the four practical Wi-Fi inactivity fields; source unit is undocumented.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"wifi_inactivity_mean"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/traffic_fluctuation","name":"traffic_fluctuation","description":"Five-record rolling standard deviation of total wireless traffic.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"traffic_fluctuation"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/active_5g","name":"active_5g","description":"5G activity indicator derived using the training-period 25th percentile.","dataType":"sc:Float","unit":"indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"active_5g"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/active_wifi","name":"active_wifi","description":"Wi-Fi activity indicator derived using the training-period 25th percentile.","dataType":"sc:Float","unit":"indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"active_wifi"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/active_lifi","name":"active_lifi","description":"LiFi activity indicator derived using the training-period 25th percentile.","dataType":"sc:Float","unit":"indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"active_lifi"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/signal_quality","name":"signal_quality","description":"Training-fitted normalised weighted Wi-Fi/LiFi signal score.","dataType":"sc:Float","unit":"score [0,1]","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"signal_quality"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/wireless_load_score","name":"wireless_load_score","description":"Training-fitted normalised total-load score.","dataType":"sc:Float","unit":"score [0,1]","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"wireless_load_score"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/link_stability_score","name":"link_stability_score","description":"Weighted signal, fluctuation, and inactivity stability score.","dataType":"sc:Float","unit":"score [0,1]","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"link_stability_score"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/access_diversity_score","name":"access_diversity_score","description":"Fraction of the three access branches classified as active.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"access_diversity_score"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/congestion_risk","name":"congestion_risk","description":"Deterministic logistic congestion-risk score.","dataType":"sc:Float","unit":"score [0,1]","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"congestion_risk"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/semantic_confidence","name":"semantic_confidence","description":"One minus the training-normalised traffic-fluctuation score.","dataType":"sc:Float","unit":"score [0,1]","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"semantic_confidence"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/dominant_cpe","name":"dominant_cpe","description":"Highest-traffic CPE privacy-evaluation target.","dataType":"sc:Text","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"dominant_cpe"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/dominant_rat","name":"dominant_rat","description":"Highest-traffic access-technology privacy-evaluation target.","dataType":"sc:Text","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"dominant_rat"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/original_optical_timestamp","name":"original_optical_timestamp","dataType":"sc:DateTime","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"original_optical_timestamp"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/source_optical_row","name":"source_optical_row","description":"Zero-based clean Voyager row selected by the positional mapping.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"source_optical_row"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber_mean","name":"ber_mean","description":"Mean clipped BER across eight Voyager channels.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber_mean"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber_max","name":"ber_max","description":"Maximum clipped BER across eight Voyager channels.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber_max"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber_min","name":"ber_min","description":"Minimum clipped BER across eight Voyager channels.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber_min"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber_std","name":"ber_std","description":"Sample standard deviation of clipped BER across eight Voyager channels.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber_std"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/q_factor_mean","name":"q_factor_mean","description":"Mean Q-factor derived across eight Voyager channels.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"q_factor_mean"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/q_factor_min","name":"q_factor_min","description":"Minimum Q-factor derived across eight Voyager channels.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"q_factor_min"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/q_factor_max","name":"q_factor_max","description":"Maximum Q-factor derived across eight Voyager channels.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"q_factor_max"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber","name":"ber","description":"Worst-channel BER, equal to ber_max.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/q_factor","name":"q_factor","description":"Worst-channel Q-factor, equal to q_factor_min.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"q_factor"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch1_BER","name":"Voyager_ch1_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch1_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch2_BER","name":"Voyager_ch2_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch2_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch3_BER","name":"Voyager_ch3_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch3_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch4_BER","name":"Voyager_ch4_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch4_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch5_BER","name":"Voyager_ch5_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch5_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch6_BER","name":"Voyager_ch6_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch6_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch7_BER","name":"Voyager_ch7_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch7_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/Voyager_ch8_BER","name":"Voyager_ch8_BER","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"Voyager_ch8_BER"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/target_optical_timestamp","name":"target_optical_timestamp","description":"Real timestamp of the next positionally selected Voyager record used for the target.","dataType":"sc:DateTime","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"target_optical_timestamp"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/target_optical_row","name":"target_optical_row","description":"Zero-based clean Voyager row used to derive the next-record target.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"target_optical_row"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/q_threshold_train","name":"q_threshold_train","description":"Training-period 15th-percentile worst-channel Q threshold.","dataType":"sc:Float","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"q_threshold_train"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/ber_threshold_train","name":"ber_threshold_train","description":"Training-period 85th-percentile worst-channel BER threshold.","dataType":"sc:Float","unit":"ratio","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"ber_threshold_train"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/optical_risk","name":"optical_risk","description":"Current-record optical risk derived from the training-only Q/BER thresholds.","dataType":"sc:Integer","unit":"binary indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"optical_risk"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/wireless_risk","name":"wireless_risk","description":"Current-record wireless risk derived from declared semantic-score thresholds.","dataType":"sc:Integer","unit":"binary indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"wireless_risk"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/service_risk","name":"service_risk","description":"Logical OR of current optical and wireless risk.","dataType":"sc:Integer","unit":"binary indicator","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"service_risk"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/degradation_class","name":"degradation_class","description":"Current class: 0 neither, 1 wireless only, 2 optical only, 3 both.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"degradation_class"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/service_risk_next","name":"service_risk_next","description":"Rule-derived binary next-record service-risk target.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"service_risk_next"}}},
+        {"@type":"cr:Field","@id":"constructed_fusion_records/degradation_class_next","name":"degradation_class_next","description":"Next-record class: 0 neither, 1 wireless only, 2 optical only, 3 both.","dataType":"sc:Integer","source":{"fileObject":{"@id":"constructed_fusion_dataset"},"extract":{"column":"degradation_class_next"}}}
       ]
     },
     {

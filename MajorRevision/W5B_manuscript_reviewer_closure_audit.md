@@ -1,5 +1,14 @@
 # W5B Manuscript-Wide Reviewer-Comment Closure Audit
 
+> **Superseded status update (2026-09-11).** This file is retained as the
+> historical W5B audit. Later evidence closes the former Voyager lineage
+> conflict (the 2023--24 processed product and Christmas 2025 raw campaign are
+> distinct), materialises the fusion CSV, publishes the W4C bundle, verifies
+> the reviewer identifiers, and supplies pinned/current GNPy replays. The
+> authoritative current status is
+> `W5C_complete_point_by_point_response.md`; remaining author inputs are listed
+> in `W5C_author_confirmation_required.md`.
+
 Audit scope: current manuscript and available major-revision evidence only.
 No simulation, ML experiment, optical experiment, semantic experiment, or
 wireless experiment was run in W5B. No manuscript or reviewer-response text

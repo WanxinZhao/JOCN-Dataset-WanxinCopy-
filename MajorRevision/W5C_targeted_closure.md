@@ -1,26 +1,27 @@
-# W5C-A targeted P0 closure
+# W5C targeted P0 closure (updated after source and replay recovery)
 
 ## Executive verdict
 
-W5C-A made only targeted evidence-alignment edits. No simulation, ML run,
-semantic retraining, ns-3 execution, GNPy execution, or new optical analysis
-was performed. The wireless W4C/W4D/W4E evidence remains frozen.
+The original W5C-A audit was subsequently superseded by the E5 GNPy replay,
+the public W4C release, and author confirmation of the Christmas 2025 Voyager
+campaign. No semantic retraining was required because the public source is
+byte-identical to the E1/E2 provenance hash.
 
 The five W5B P0 items are now handled as follows:
 
 | P0 item | W5C-A result |
 |---|---|
-| Optical date/sampling lineage | The manuscript no longer presents the unsupported 2023/10-s/15-min lineage as the current Voyager file's fact. File-level observations are reported; unresolved campaign/product identity is isolated in `W5C_author_confirmation_required.md`. |
+| Optical date/sampling lineage | Closed. The manuscript and metadata distinguish the earlier 2023--2024 15-minute product from the separate 20,960-record Christmas 2025 E1/E2 source on the same 339-km loop. |
 | z1-z8 mapping | Closed for the current implementation. The manuscript now gives the deterministic definitions and the report gives the complete raw-column mapping. |
 | Label endogeneity/fusion boundary | Closed for the bounded claim. The manuscript now separates split leakage control from rule-derived target endogeneity and states that no incremental fusion gain is established without a matched raw-wireless-only ablation. |
-| Complete point-by-point response | A new response document contains all 31 normalized comments exactly once, with response, manuscript location, evidence, and limitations. Original reviewer text was unavailable locally, so the author must verify the normalized wording and especially the R3C4 identifier. |
-| Release metadata | A definitive matrix and short author questionnaire were created. No licence, unit, source path, date, or count was invented. Release-critical unknowns remain explicitly author-confirmation items. |
+| Complete point-by-point response | The response contains all 31 comments, and the original reviewer text confirms that R3C4 is the generated-data correctness comment covering both GNPy and wireless evidence. |
+| Release metadata | Voyager, constructed-fusion, GNPy-replay, and W4C public paths are closed. External collection totals, undocumented wireless units, and formal licence terms remain explicit limitations. |
 
-The overall W5C-A result is therefore **targeted closure achieved for the
-current bounded scientific claims, with four comments blocked on author facts
-and one comment still partial because the GNPy numerical replay evidence is
-not available**. No new experiment is required for the current bounded
-claims.
+The updated result is **targeted closure achieved for the current bounded
+scientific claims**. R1C1, R3C1, and R3C4 are closed by the confirmed source,
+materialised benchmark, and E5 replay. R1C3 remains partially closed only for
+external metadata/terms, while unavailable historical LLM traces are reported
+as such. No new experiment is required for the current bounded claims.
 
 ## Evidence conventions
 
@@ -43,17 +44,15 @@ rows by relative sequence position. It does not resample to 15 minutes.
 
 | Dataset | Raw source | Raw time period | Reported duration | Raw sample count | Processed sample count | Sampling interval / rate | Derivation / filtering | Current wording and evidence | Status |
 |---|---|---|---|---:|---:|---|---|---|---|
-| 339-km NDFF / Voyager optical telemetry | **OBSERVED**: `semantic_case_v6/data/voyager.csv` | **SUPPORTED_BY_PRIMARY_DATA**: `2025-12-22 16:38:43` to `2026-01-24 16:10:55` in valid rows | About 33 days of file timestamp coverage; physical campaign duration **AUTHOR_CONFIRMATION_REQUIRED** | 20,998 CSV data rows before cleaning | 20,960 valid rows after repeated-header, timestamp, and BER filtering | Mostly 70--72 s; median about 71 s; larger gaps occur | Eight BER columns; BER numeric conversion, clipping, Q via `sqrt(2)*erfcinv(2*BER)`; no 15-min resampling in current code | Manuscript now reports file-level facts and does not identify this file as a 10-s product resampled to 15 min | File facts supported; physical product/date lineage **AUTHOR_CONFIRMATION_REQUIRED** |
+| 339-km NDFF / Voyager Christmas 2025 | **OBSERVED AND AUTHOR-CONFIRMED**: public raw file and `semantic_case_v6/data/voyager.csv` | Real timestamps `2025-12-22 16:38:43` to `2026-01-24 16:10:55`; no shift/anonymisation | About 33 days on the same 339-km loop as the earlier campaign | 20,999 physical lines including 38 embedded headers | 20,960 valid rows after header/timestamp/BER filtering | Mostly 70--72 s; larger gaps occur | Eight BER columns; Q derived by `sqrt(2)*erfcinv(2*BER)`; no 15-min resampling | Public byte-identical SHA-256 `879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209` | `CLOSED` |
 | 986-km NDFF QoT dataset | **MISSING** in current checkout; cited as `YangOFC2023` | **AUTHOR_CONFIRMATION_REQUIRED** | **AUTHOR_CONFIRMATION_REQUIRED** | **AUTHOR_CONFIRMATION_REQUIRED** | **AUTHOR_CONFIRMATION_REQUIRED** | **AUTHOR_CONFIRMATION_REQUIRED** | Manuscript-level description of two links/ROADM nodes; exact source/preparation not local | No unsupported count/date added | Secondary description only; release lineage **AUTHOR_CONFIRMATION_REQUIRED** |
 | Deployed urban fibre sensing | **MISSING** MAT/CSV source files in current checkout | **AUTHOR_CONFIRMATION_REQUIRED** | Four weeks is stated in manuscript secondary description | **AUTHOR_CONFIRMATION_REQUIRED** | **AUTHOR_CONFIRMATION_REQUIRED** | 97.656 kSa/s polarimeter rate stated; other rates **AUTHOR_CONFIRMATION_REQUIRED** | MAT/CSV traces and Stokes/BER/Q/OSNR/power fields described; filtering not locally auditable | No new counts or dates invented | Secondary description only; primary release lineage **AUTHOR_CONFIRMATION_REQUIRED** |
-| Derived optical table for E1/E2 | **OBSERVED**: constructed in memory by `build_optical_aligned()` | Inherits current Voyager source values; not a contemporaneous paired period | 2,849 wireless-indexed rows before one-step shift | 20,960 optical source rows available to positional selection | 2,848 benchmark samples after target shift | Wireless index timestamps are assigned; no native optical resampling | Repeated headers/timestamp/BER filtering; BER clipping; positional `round(linspace(...))` mapping | Described as a constructed sequence-aligned benchmark, not a released joint measurement | Code-reconstructable; standalone release path **AUTHOR_CONFIRMATION_REQUIRED** |
-| Synthetic GNPy artifact | **OBSERVED**: `MajorRevision/E4_gnpy_audit/` | Scenario execution history; no single physical sampling period | Execution duration not a dataset field | 8,192 execution records | 6,144 unique; 6,120 `ok`, 24 no-signal | Scenario-dependent | Deduplication, status/warning scan, and independent preparation audit | Wording is limited to artifact coverage, uniqueness, warnings, and feasibility | `PARTIAL`: numerical replay unavailable without original environment |
+| Derived optical table for E1/E2 | **OBSERVED**: materialised by `build_optical_aligned()` | Inherits current Voyager source values; not a contemporaneous paired period | 2,849 wireless-indexed rows before one-step shift | 20,960 optical source rows available to positional selection | 2,848 benchmark samples after target shift | Wireless index timestamps are assigned; no native optical resampling | Repeated headers/timestamp/BER filtering; positional `round(linspace(...))` mapping | `semantic_case_v6/data/cross_domain_fusion_dataset.csv` plus reconstruction script | Released; constructed-boundary limitation retained |
+| Synthetic GNPy artifact | **OBSERVED**: E4 audit plus E5 replay | Scenario execution history; no physical sampling period | Execution duration not a dataset field | 8,192 execution records | 6,144 unique; 96 stratified replay cases | Scenario-dependent | Deduplication, warning scan, v2.12 compatibility replay, v2.14.2 strict-schema replay | 96/96 complete in both arms; mean/max GSNR error 0.00015/0.00050 dB for v2.12 and 0.628/1.435 dB for v2.14.2 | `CLOSED_WITH_MODEL_LIMITATIONS` |
 
-The current manuscript's optical subsection now makes the important
-distinction between a timestamp range observed in the released CSV and the
-physical campaign date. The W1A conflict is not silently resolved. The
-questionnaire requests the original campaign/product confirmation and the
-source of any 10-s or 15-minute product.
+The manuscript now identifies both products explicitly: the 2023--2024
+1,373-record 15-minute product and the separate Christmas 2025 E1/E2 source.
+Their dates, channel counts, sampling, public paths, and roles are not mixed.
 
 ## 2. Definitive z1-z8 reconstruction
 
@@ -151,12 +150,21 @@ LLM-driven feasibility claim, deterministic enumeration baseline, and
 wireless W4C correctness evidence. It does not claim LLM superiority, lower
 cost/latency, or complete historical prompt/token/provider provenance.
 
-The GNPy text permits artifact generation, uniqueness/warning auditing, and
-workflow feasibility. It explicitly states that current public GNPy releases
-cannot load the released equipment file and that the published numerical
-values were not independently replayed. No GNPy command was run in W5C-A.
+The GNPy track now has two explicit numerical replays. The historical
+v2.12-compatible environment at commit
+`7ce665010970f57e46672db1ec0864ae448077e6` reproduced all 96 channel records
+with mean/max absolute GSNR errors of 0.00015/0.00050 dB. A strict replay with
+GNPy 2.14.2 also completed all 96 records, but produced larger mean/max
+differences of 0.628/1.435 dB. The manuscript therefore claims reproducibility
+for the pinned historical environment and reports the newer-version mismatch
+as model/version sensitivity rather than concealing it.
 
 ## 7. Complete response and partial-comment reassessment
+
+Current update (2026-09-11): the original reviewer attachment is available,
+and the R1/R2/R3 identifiers have been checked against it. The next paragraph
+is retained only as the historical W5C-A record; its statement that the letter
+was unavailable and its identifier-check request are superseded.
 
 `W5C_complete_point_by_point_response.md` contains R1C1--R1C3,
 R2C1--R2C16, and R3C1--R3C12 exactly once. It gives concrete manuscript
@@ -165,20 +173,20 @@ materials do not contain the original reviewer letter; therefore the response
 labels the comment text as normalized from
 `MajorRevision/06_审稿意见处理状态.md` and requests a final identifier check.
 
-| W5B partial comment | W5C-A status | Reason |
+| W5B partial comment | Current status | Reason |
 |---|---|---|
-| R1C1 | `BLOCKED_ON_AUTHOR_CONFIRMATION` | Constructed cross-domain wording is corrected, but optical product/campaign date and sampling lineage remain unresolved. |
-| R1C2 | `BLOCKED_ON_AUTHOR_CONFIRMATION` | The bounded feasibility response is complete, but unavailable LLM model/log/cost/latency facts must be confirmed as unavailable or supplied if they exist. |
-| R1C3 | `BLOCKED_ON_AUTHOR_CONFIRMATION` | Matrix and manuscript table are improved, but external dataset paths and formal release terms are not recoverable locally. |
+| R1C1 | `CLOSED` | The two 339-km Voyager campaigns are separated, the Christmas 2025 raw source is public, and the constructed-pairing limitation is explicit. |
+| R1C2 | `CLOSED_WITH_UNAVAILABLE_HISTORICAL_TRACE` | Source defaults and retry policy are documented; unavailable historical per-call traces are disclosed instead of reconstructed. |
+| R1C3 | `PARTIALLY_CLOSED` | Voyager, W4C, GNPy, and fusion artifacts are public/machine-readable; exact external sensing metadata, practical-wireless units, and formal licence terms still require owners. |
 | R2C9 | `CLOSED` | Exact deterministic z1-z8 mapping, train-only fitting scope, and confidence interpretation are now documented. |
 | R2C14 | `CLOSED` | Complete response states the qualitative role decomposition and unmeasured communication overhead; no efficiency claim is made. |
-| R3C1 | `BLOCKED_ON_AUTHOR_CONFIRMATION` | Leakage control and semantic mapping are documented, but the optical source/product conflict propagates to the exact E1/E2 snapshot. |
+| R3C1 | `CLOSED` | Leakage control, semantic mapping, the materialised fusion table, and the exact optical source distinction are documented. |
 | R3C3 | `CLOSED` | Complete response separates LLM-architecture evidence from generated-data correctness and discloses missing historical logs. |
-| R3C4 | `STILL_PARTIAL` | Wireless correctness is closed, but the GNPy track still lacks independent numerical replay; the response states this rather than claiming closure. The original identifier must also be checked. |
+| R3C4 | `CLOSED_WITH_DECLARED_MODEL_LIMITATIONS` | W4C is public and the pinned GNPy environment reproduces the released values; the current-version mismatch is reported quantitatively. |
 
 ## 8. Build verification
 
-The edited manuscript was built from `/tmp/jocn-w0-github` with:
+The edited manuscript was rebuilt from the checked-out paper repository with:
 
 ```text
 latexmk -pdf -interaction=nonstopmode -file-line-error JOCN_Telemetry.tex
@@ -192,28 +200,27 @@ package-name, and PDF page-group warnings remain outside this targeted task.
 
 ## 9. No-experiment statement
 
-W5C-A ran no simulations, ML experiments, semantic retraining, ns-3,
-GNPy, or new optical analysis. Current bounded claims need no new experiment.
-An affected E1/E2 rerun is conditional only if authors identify a different
-optical primary product; a GNPy rerun is conditional only if independent
-numerical reproduction is retained as a requested claim; a fusion ablation
-is conditional only if an incremental fusion-gain claim is added.
+No semantic retraining, ns-3 run, or new optical acquisition was needed in
+this closure pass. The existing E5 evidence supplies both pinned and current
+GNPy replays. A fusion ablation is required only if the authors later add an
+incremental fusion-gain claim; the current manuscript makes only a bounded
+interoperability/feasibility claim.
 
-W5C_VERDICT=TARGETED_P0_CLOSURE_WITH_AUTHOR_BLOCKERS
-P0_OPTICAL_LINEAGE_STATUS=MANUSCRIPT_CONFLICT_REMOVED_FROM_ACTIVE_FACT_CLAIM; FILE_FACTS_REPORTED; CAMPAIGN_PRODUCT_LINEAGE_AUTHOR_CONFIRMATION_REQUIRED
+W5C_VERDICT=TARGETED_P0_CLOSURE_WITH_RESIDUAL_EXTERNAL_METADATA_ITEMS
+P0_OPTICAL_LINEAGE_STATUS=CLOSED_TWO_339KM_CAMPAIGNS_SEPARATED_AND_PUBLIC_SOURCES_IDENTIFIED
 P0_Z1_Z8_MAPPING_STATUS=CLOSED_EXACT_DETERMINISTIC_MAPPING_DOCUMENTED
 P0_LABEL_ENDOGENEITY_STATUS=CLOSED_FOR_BOUNDED_CLAIM_RULE_DERIVED_NEXT_RECORD_TARGETS_EXPLICIT
 P0_FUSION_CLAIM_STATUS=CLOSED_FOR_NARROW_CONSTRUCTION_CLAIM_NO_INCREMENTAL_GAIN_CLAIM
-P0_POINT_BY_POINT_RESPONSE_STATUS=COMPLETE_31_COMMENT_DOCUMENT_CREATED; ORIGINAL_LETTER_IDENTIFIER_CHECK_REQUIRED
-P0_RELEASE_METADATA_STATUS=COMPLETE_MATRIX_CREATED; EXTERNAL_PATHS_UNITS_AND_FORMAL_TERMS_AUTHOR_CONFIRMATION_REQUIRED
+P0_POINT_BY_POINT_RESPONSE_STATUS=COMPLETE_31_COMMENT_DOCUMENT_CREATED_AND_IDENTIFIERS_CHECKED
+P0_RELEASE_METADATA_STATUS=MACHINE_READABLE_CORE_RELEASE_COMPLETE; EXTERNAL_SENSING_METADATA_WIRELESS_UNITS_AND_FORMAL_TERMS_AUTHOR_CONFIRMATION_REQUIRED
 CROSS_DOMAIN_PAIRING_STATUS=CONSTRUCTED_SEQUENCE_ALIGNED_INTEROPERABILITY_BENCHMARK_NOT_CONTEMPORANEOUS_MEASUREMENT
 LLM_SUPERIORITY_CLAIM_STATUS=NOT_MADE; FEASIBILITY_ONLY
-GNPY_VALIDATION_CLAIM_STATUS=ARTIFACT_AUDIT_ONLY; INDEPENDENT_NUMERICAL_REPLAY_NOT_ESTABLISHED
+GNPY_VALIDATION_CLAIM_STATUS=PINNED_HISTORICAL_REPLAY_MATCHES; CURRENT_2_14_2_VERSION_SENSITIVITY_QUANTIFIED
 STRICT_BUILD_STATUS=PASS_LATEXMK_EXIT_0_PDF_14_PAGES_UNDEFINED_CITATIONS_0_UNDEFINED_REFERENCES_0_NO_NEW_OVERFULL_BOX
-PARTIAL_COMMENTS_CLOSED=R2C9;R2C14;R3C3
-COMMENTS_BLOCKED_ON_AUTHOR_CONFIRMATION=R1C1;R1C2;R1C3;R3C1
-STILL_PARTIAL_COMMENTS=R3C4
-NEW_EXPERIMENTS_RUN=NO
+PARTIAL_COMMENTS_CLOSED=R1C1;R1C2;R2C9;R2C14;R3C1;R3C3;R3C4
+COMMENTS_BLOCKED_ON_AUTHOR_CONFIRMATION=NONE
+STILL_PARTIAL_COMMENTS=R1C3
+NEW_EXPERIMENTS_RUN=GNPY_E5_REPLAY_ALREADY_AVAILABLE_AND_INTEGRATED
 NEW_EXPERIMENTS_REQUIRED_FOR_CURRENT_CLAIMS=NO
-AUTHOR_CONFIRMATION_ITEMS=OPTICAL_CAMPAIGN_PRODUCT_DATE_AND_SAMPLING;EXTERNAL_DATASET_PATHS_COUNTS_AND_TERMS;WIRELESS_UNITS;LLM_LOG_AVAILABILITY;ORIGINAL_REVIEWER_IDENTIFIERS
-READY_FOR_W5C_B_FINALIZATION=YES_AFTER_AUTHOR_CONFIRMATION_ITEMS_ARE_RESOLVED_OR_EXPLICITLY_RETAINED_AS_LIMITATIONS
+AUTHOR_CONFIRMATION_ITEMS=EXACT_986KM_AND_SENSING_METADATA;PRACTICAL_WIRELESS_UNITS;FORMAL_LICENCE_SPDX;HISTORICAL_LLM_PER_CALL_TRACES_IF_ANY
+READY_FOR_W5C_B_FINALIZATION=YES_WITH_RESIDUAL_ITEMS_EXPLICITLY_RETAINED_AS_LIMITATIONS

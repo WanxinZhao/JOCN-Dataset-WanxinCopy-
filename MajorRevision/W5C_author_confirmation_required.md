@@ -1,66 +1,60 @@
-# W5C author confirmation required
+# Remaining author confirmations after provenance closure
 
-This is the minimum factual confirmation list remaining after the W5C-A
-artifact audit. Items are listed only where the current files cannot establish
-the answer. No answer should be inferred from a filename, timestamp, or
-Croissant metadata assertion.
+The Voyager campaign identity, reviewer numbering, final W4C release, and
+GNPy numerical replay are now resolved. This file lists only facts that the
+available primary artifacts still cannot establish.
 
-## Required for final manuscript/response closure
+## Confirmed and closed
 
-1. **Voyager optical product lineage**
-   - Is `semantic_case_v6/data/voyager.csv` the intended primary file for the
-     339-km optical dataset and the E1/E2 benchmark?
-   - What is the actual physical campaign period for that product?
-   - Do the 2023-12-26--2024-01-26 and 10-s/raw-to-15-min statements refer to
-     a different raw or processed product? If yes, provide its exact file
-     path/release and explain the transformation to `voyager.csv`.
-   - Were the current 2025-12-22--2026-01-24 timestamp values shifted,
-     anonymised, regenerated, or otherwise transformed? If unknown, state
-     that explicitly.
+- `semantic_case_v6/data/voyager.csv` is the optical source used by E1/E2.
+  It is a separate Christmas 2025 campaign on the same 339-km NDFF loop as
+  the earlier public dataset. Its real timestamps span 2025-12-22 16:38:43
+  to 2026-01-24 16:10:55; they were not shifted or anonymised.
+- The 2023-12-26--2024-01-26, 10-s-to-15-min description belongs to the
+  earlier 1,373-record, four-channel processed product, not to the 20,960-row
+  E1/E2 source.
+- The byte-identical 20,960-row source is public under
+  `OTN Monitoring Data_one_month/NDFF_Voyager_Christmas_2025/`, SHA-256
+  `879d7b6143b04b995165360d1600b81b8134312fed08b2bdeb577b5cb8b6e209`.
+- The exact leakage-controlled constructed benchmark is now released as a
+  2,848-row, 52-field table at
+  `semantic_case_v6/data/cross_domain_fusion_dataset.csv`, SHA-256
+  `6f290cddd06836042699a6cff615aff90fb3e30a2d3790e1cdf92d8c01412681`.
+- The final W4C source, data dictionary, run outputs, and aggregate tables are
+  public under `W4C_THREE_RAT_SWEEP/` in the revision repository.
+- Reviewer 3 Comment 4 is the independent-correctness/reproducibility comment.
+- E5 now supplies a 96-case GNPy numerical replay in both the pinned v2.12
+  compatibility environment and the schema-corrected v2.14.2 environment.
 
-2. **External optical datasets**
-   - For the 986-km NDFF QoT data, provide the authoritative release/source
-     path, record counts, timestamp coverage, file formats/sizes, and the
-     applicable terms.
-   - For the deployed urban fibre-sensing data, provide the authoritative
-     MAT/CSV release path, record counts, timestamp coverage, file sizes, and
-     applicable terms.
+## Still requiring author confirmation
 
-3. **Wireless field definitions**
-   - Confirm the physical units and exact definitions of the traffic, signal,
-     and inactivity columns used by `run_e1_e2.py`.
+1. **External optical datasets**
+   - For the 986-km NDFF QoT data, confirm the authoritative release path,
+     exact record counts, timestamp coverage, file sizes, and reuse terms.
+   - For the deployed urban fibre-sensing data, confirm the authoritative
+     MAT/CSV release path, exact record counts, timestamp coverage, aggregate
+     size, and reuse terms.
 
-4. **Release terms and paths**
-   - Confirm the formal licence or repository terms for every claimed raw,
-     derived, and synthetic artifact. The final W4C bundle now has a public
-     path at `W4C_THREE_RAT_SWEEP/`; its formal SPDX/licence status
-     remains to be confirmed.
-   - Confirm whether the constructed fusion benchmark is released as a
-     materialized file or is intentionally code-reconstructable only.
+2. **Practical wireless field definitions**
+   - Confirm the physical units and authoritative definitions of the traffic,
+     signal, temperature, power, bitrate, and inactivity columns. The current
+     field dictionary marks undocumented units explicitly.
 
-5. **Reviewer-letter identifiers**
-   - Verify the original reviewer comment text and numbering. In particular,
-     local materials assign R3C4 inconsistently to the GNPy and wireless
-     correctness concerns; the final response must use the original letter's
-     identifier.
+3. **Formal release terms**
+   - Decide whether to add a standard top-level licence/SPDX identifier. The
+     practical repository currently states academic, non-commercial terms in
+     its README; the revision/W4C repository does not state formal terms.
 
-## Conditional confirmations
+4. **Historical LLM run provenance**
+   - If original run records exist, supply the actual provider/model snapshot,
+     calls, retries, tokens, cost, latency, failures, and human interventions.
+   - If they do not exist, retain the manuscript's explicit `not reported`
+     statement and the bounded workflow-feasibility claim.
 
-6. **LLM provenance**
-   - If original records exist, provide model/provider/version, prompts/tool
-     schema, calls, retries, token/cost/latency data, and human interventions.
-   - If they do not exist, confirm that these quantities are unavailable and
-     will remain explicitly unreported; no LLM-superiority claim is then made.
+## No further experiment required for current bounded claims
 
-7. **GNPy numerical replay**
-   - If independent numerical reproduction is required by the original
-     comment, provide the original working GNPy commit/container and the
-     corresponding equipment/configuration files. Otherwise confirm that the
-     paper should retain only the bounded artifact-audit claim.
-
-## Not requested from the authors
-
-- No new simulation or ML experiment is required for the current bounded
-  claims.
-- No new wireless/ns-3 validation is required; W4C/W4E remains frozen.
-- No timestamp-level optical-wireless pairing should be fabricated.
+- E1/E2 need not be rerun because the newly published Voyager file matches the
+  experiment-source SHA-256 exactly.
+- No additional GNPy or wireless simulation is required for the current
+  correctness and feasibility wording.
+- No timestamp-level optical--wireless pairing should be inferred or created.

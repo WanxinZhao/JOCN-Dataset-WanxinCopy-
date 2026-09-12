@@ -13,6 +13,7 @@ owner are isolated in `W5C_author_confirmation_required.md`.
 | E3 | LLM/multi-agent baseline and evidence audit | `03_E3_LLM基线实验结果.md` | `E3_llm_baseline/`, `run_e3_e4.py` | Observable evidence complete; historical per-call API traces unavailable |
 | E4 | GNPy uniqueness, warning, and provenance audit | `04_E4_GNPy正确性实验结果.md` | `E4_gnpy_audit/`, `run_e3_e4.py` | Complete artifact audit |
 | E5 | Recovered-source GNPy replay and strict-version comparison | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/`, `run_e5_recovered_gnpy.py` | Complete; both arms 96/96 |
+| E6 | OpenAI per-call trace reproduction | `E6_llm_trace_reproduction/README.md` | `E6_llm_trace_reproduction/run_local.ps1` | Code and preflight complete; real API run pending local key |
 | W4C | Final three-RAT synthetic wireless sweep | release documentation | `W4C_THREE_RAT_SWEEP/` | Public; 48 configurations and 432 application-flow records |
 
 For E3, `E3_llm_baseline/prompt_inventory.md` records the author-confirmed

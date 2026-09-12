@@ -147,8 +147,10 @@ No exact size, licence, date, unit, or external dataset record was invented.
 
 The current text remains within the observed evidence. It permits an
 LLM-driven feasibility claim, deterministic enumeration baseline, and
-wireless W4C correctness evidence. It does not claim LLM superiority, lower
-cost/latency, or complete historical prompt/token/provider provenance.
+wireless W4C correctness evidence. The historical provider is author-confirmed
+as OpenAI and the source prompt templates are public. It does not claim LLM
+superiority, lower cost/latency, or a complete rendered prompt/response and
+token trace.
 
 The GNPy track now has two explicit numerical replays. The historical
 v2.12-compatible environment at commit

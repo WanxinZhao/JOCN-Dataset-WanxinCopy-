@@ -15,6 +15,11 @@ owner are isolated in `W5C_author_confirmation_required.md`.
 | E5 | Recovered-source GNPy replay and strict-version comparison | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/`, `run_e5_recovered_gnpy.py` | Complete; both arms 96/96 |
 | W4C | Final three-RAT synthetic wireless sweep | release documentation | `W4C_THREE_RAT_SWEEP/` | Public; 48 configurations and 432 application-flow records |
 
+For E3, `E3_llm_baseline/prompt_inventory.md` records the author-confirmed
+OpenAI provider, the three released prompt-template locations, the recovered
+model/settings, and the exact boundary between source templates and unavailable
+historical per-call API traces.
+
 The release also includes:
 
 - machine-readable Croissant 1.0 metadata in `croissant_metadata.json`;

@@ -46,8 +46,11 @@ available primary artifacts still cannot establish.
      its README; the revision/W4C repository does not state formal terms.
 
 4. **Historical LLM run provenance**
-   - If original run records exist, supply the actual provider/model snapshot,
-     calls, retries, tokens, cost, latency, failures, and human interventions.
+   - The provider is now author-confirmed as OpenAI, and the complete source
+     prompt templates are released.
+   - If original run records exist, supply the date-stamped model snapshot,
+     rendered calls/responses, retries, tokens, cost, latency, failures, and
+     human interventions.
    - If they do not exist, retain the manuscript's explicit `not reported`
      statement and the bounded workflow-feasibility claim.
 

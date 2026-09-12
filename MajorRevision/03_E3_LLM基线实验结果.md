@@ -13,9 +13,9 @@
 
 ## 恢复源码后可确认的实现信息
 
-后来找到的本地工程包含 Planner、Scenario Expander 和 Reflection 三处 LLM 调用及其完整 prompt/JSON 输出约束。源码默认 provider 为 OpenAI，硬编码模型名 `gpt-4o-mini`，system message 为 optical network expert，temperature=0.2，超时默认 90 s，最多尝试 3 次；两轮 refine 控制流至多触发 6 次 LLM 调用。源码快照和哈希保存在 `E5_recovered_gnpy_replay/source/recovered_orchestration_snapshot/`。
+后来找到的本地工程包含 Planner、Scenario Expander 和 Reflection 三处 LLM 调用及其完整 prompt 模板/JSON 输出约束。作者已确认历史运行使用 OpenAI；恢复的 OpenAI 路径硬编码模型名 `gpt-4o-mini`，system message 为 optical network expert，temperature=0.2，超时默认 90 s，最多尝试 3 次；两轮 refine 控制流至多触发 6 次 LLM 调用。源码快照和哈希保存在 `E5_recovered_gnpy_replay/source/recovered_orchestration_snapshot/`，模板与历史日志的区别见 `E3_llm_baseline/prompt_inventory.md`。
 
-这些是“恢复源码的默认值”，不是原运行的完整 API 证据：目录没有 Git 元数据，也没有当时的环境变量、逐调用请求/响应、实际重试次数、token、成本、延迟、失败率或人工干预日志。因此模型的日期快照、实际 provider 和逐次调用统计仍应标为 `not_reported`，不能根据控制流反推或编造。
+已经保存的是源码中的完整模板，而不是当时每次变量替换完成后的最终请求文本。目录没有 Git 元数据，也没有日期化模型快照、逐调用请求/响应、实际重试次数、token、成本、延迟、失败率或人工干预日志。因此 provider 可明确写为 OpenAI；模型字符串可按恢复源码报告为 `gpt-4o-mini`，但精确模型快照和逐次调用统计仍应标为 `not_reported`，不能根据控制流反推或编造。
 
 ## 论文修改建议
 

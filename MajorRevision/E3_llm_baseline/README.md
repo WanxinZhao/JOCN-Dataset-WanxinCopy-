@@ -9,9 +9,9 @@
 
 ## Recovered implementation evidence
 
-The later-recovered local source contains the Planner, Scenario Expander and Reflection prompts and JSON constraints. Its default OpenAI path uses `gpt-4o-mini`, temperature 0.2, a 90-second timeout and at most three attempts. A two-iteration refine path contains up to six LLM call sites. The source snapshot and hashes are retained under `../E5_recovered_gnpy_replay/source/`.
+The later-recovered local source contains the complete Planner, Scenario Expander and Reflection prompt templates and JSON constraints. The authors confirm that the historical run used OpenAI. The recovered OpenAI path uses `gpt-4o-mini`, temperature 0.2, a 90-second timeout and at most three attempts. A two-iteration refine path contains up to six LLM call sites. The source snapshot and hashes are retained under `../E5_recovered_gnpy_replay/source/`; `prompt_inventory.md` distinguishes saved templates and report evidence from unavailable rendered call traces.
 
-The archived run still lacks its environment variables, date-stamped model snapshot, per-call requests/responses, actual calls/retries, token usage, latency, cost, failures and human-intervention trace. Therefore the source default is reported separately from the unverified actual runtime, and those run-level fields remain `not_reported`. Single-LLM, no-reflection and repeated full multi-agent trials cannot be reconstructed without fabricating conditions.
+The archived run still lacks its date-stamped model snapshot, byte-exact rendered per-call prompts/responses, actual calls/retries, token usage, latency, cost, failures and human-intervention trace. The provider is author-confirmed as OpenAI, while the source model string and defaults are reported separately from the unavailable call trace. Those run-level fields remain `not_reported`. Single-LLM, no-reflection and repeated full multi-agent trials cannot be reconstructed without fabricating conditions.
 
 ## Published reflection evidence
 

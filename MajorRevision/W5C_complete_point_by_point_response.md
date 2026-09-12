@@ -62,13 +62,14 @@ are both explicit.
 6,144 expected GNPy configuration keys. It enumerates the set in 0.0063 s
 without an LLM/API call, while the published artifact contains 8,192
 execution records and 6,144 unique configurations. The recovered source
-supplies role prompts and JSON constraints and defaults to `gpt-4o-mini`,
-temperature 0.2, a 90-s timeout, at most three attempts, and a two-iteration
-control path containing up to six LLM invocations. The archived run does not
-retain its actual model snapshot, per-call traces, calls/retries, tokens, cost,
-latency, failures, or human interventions. We therefore report those items as
-not recorded, limit the claim to workflow feasibility, and do not claim LLM
-superiority over the deterministic script.
+supplies complete role-prompt templates and JSON constraints and uses
+`gpt-4o-mini`, temperature 0.2, a 90-s timeout, at most three attempts, and a
+two-iteration control path containing up to six LLM invocations. The authors
+confirm that the historical provider was OpenAI. The archived run does not
+retain its date-stamped model snapshot, rendered per-call prompts/responses,
+actual calls/retries, tokens, cost, latency, failures, or human interventions.
+We therefore report those items as not recorded, limit the claim to workflow
+feasibility, and do not claim LLM superiority over the deterministic script.
 
 **Exact manuscript change/location.** `JOCN_Telemetry.tex`,
 `Evaluation Protocol and Reproducibility Scope`, Table~\ref{tab:llm_baseline},
@@ -80,9 +81,10 @@ and GNPy results subsection. Existing evidence is summarized in
 against the expected set; the published artifact has 25% duplicate execution
 records. The current source contains no historical LLM trace bundle.
 
-**Limitation.** Source defaults do not prove the exact historical runtime
-provider or trace, and a controlled LLM-vs-script advantage study cannot be
-claimed without those logs or new trials.
+**Limitation.** The provider and source prompt templates are known, but they do
+not recover the byte-exact historical call trace or date-stamped model
+snapshot. A controlled LLM-vs-script advantage study cannot be claimed without
+those logs or new trials.
 
 **Status.** `CLOSED_WITH_UNAVAILABLE_HISTORICAL_TRACE`; all recoverable
 settings are reported and the claim is bounded accordingly.
@@ -489,9 +491,10 @@ output correctness under declared assumptions, not LLM superiority.
 records with 432/432 mapping passes; GNPy enumeration has 1.0 precision and
 recall against 6,144 keys.
 
-**Limitation.** Historical model/provider/version, prompt, token, cost,
-latency, retry, and human-intervention logs are unavailable. No claim of
-LLM-vs-script superiority is made.
+**Limitation.** OpenAI is author-confirmed and the prompt templates are public,
+but the historical date-stamped model snapshot, rendered prompts/responses,
+token, cost, latency, retry, and human-intervention logs are unavailable. No
+claim of LLM-vs-script superiority is made.
 
 **Status.** `CLOSED` for the bounded simulation-side feasibility claim;
 historical LLM metadata remains unreported.

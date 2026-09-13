@@ -15,7 +15,7 @@ These tests substantially strengthen confidence that the final synthetic dataset
 
 The FlowMonitor field is reported as the **FlowMonitor-reported packet-loss ratio**, `lostPackets/txPackets`. It is not interpreted as terminal packet loss at the finite simulation stopping time; in the W4C application table, 172/432 rows have `tx_packets-rx_packets` different from the FlowMonitor `lostPackets` field.
 
-Evidence: the public dataset repository contains the complete release at `W4C_THREE_RAT_SWEEP/`, including the source, preflight, 48 run directories, aggregate tables, independent LiFi tests, and final-source repeatability outputs. The release summary is `W4C_THREE_RAT_SWEEP/W4C_FINAL_SWEEP_REPORT.md`.
+Evidence: the public revision repository contains the complete final release at [`W4C_THREE_RAT_SWEEP/`](https://github.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/tree/main/W4C_THREE_RAT_SWEEP/), including the source, preflight, 48 run directories, aggregate tables, independent LiFi tests, and repeatability outputs. The release summary is `W4C_THREE_RAT_SWEEP/W4C_FINAL_SWEEP_REPORT.md`. The `NS3_Wireless/` directory in the separate upstream framework repository is an earlier LTE/EPC, IEEE 802.11n, and CSMA-surrogate baseline, not the implementation used for the final W4C results.
 
 ## Reviewer 3, Comment 3 — Simulation-side evaluation of the LLM workflow
 

@@ -176,8 +176,8 @@
       "description": "Release documentation for the project-local ns-3 source, configuration, per-run outputs, LiFi validation files, and analysis results for the final W4C dataset.",
       "contentUrl": "https://raw.githubusercontent.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/main/W4C_THREE_RAT_SWEEP/README.md",
       "encodingFormat": "text/markdown",
-      "contentSize": "3001 B",
-      "sha256": "a852cd8875a5ea46e83b362550920193b73106fc68058d64dcfbfaa4bdb7a743"
+      "contentSize": "3273 B",
+      "sha256": "cdb2c43c083388e4e79209bd10f85ef6661ce1e71d3fdf0ec9caee79212f5215"
     },
     {
       "@type": "cr:FileObject",

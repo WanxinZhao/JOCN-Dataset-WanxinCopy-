@@ -4,6 +4,11 @@ This directory contains the final W4C synthetic wireless dataset used in the
 manuscript. It is a generated simulation dataset, not a measurement from the
 practical wireless testbed.
 
+This is the release corresponding to the final three-RAT wireless results in
+the manuscript. The separate upstream framework repository's `NS3_Wireless/`
+directory is an earlier LTE/EPC, IEEE 802.11n, and CSMA-surrogate baseline; it
+is not the source of the W4C results.
+
 The scenarios were executed with ns-3.44 and CTTC 5G-LENA `5g-lena-v4.0.y`
 for the 5G NR branch, native ns-3 IEEE 802.11ax for the Wi-Fi branch, and an
 equation-driven line-of-sight LiFi/OWC model. The LiFi model includes the

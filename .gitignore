@@ -18,3 +18,14 @@ MajorRevision/paper_preview*/
 
 # Downloaded upstream GNPy source artifacts are reproducible from provenance.json.
 MajorRevision/E4_gnpy_audit/source/
+
+# Corrected E6 vector figure assets are manuscript inputs.
+!Figures/usecase1_corrected.pdf
+!MajorRevision/E6_llm_trace_reproduction/corrected_analysis/*.pdf
+
+# Local compiled review copy and rendered page previews.
+/MajorRevision/E6_corrected_build/
+
+# Publish the current compiled manuscript alongside its source.
+!/JOCN_Telemetry.pdf
+/MajorRevision/E6_upload_build/

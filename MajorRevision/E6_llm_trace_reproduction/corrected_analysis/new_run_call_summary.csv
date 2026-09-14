@@ -1,0 +1,7 @@
+call_id,call_name,provider,attempt,status,latency_seconds,response_id,response_model,system_fingerprint,prompt_tokens,cached_prompt_tokens,completion_tokens,total_tokens,estimated_cost_usd,error_type,error_message
+call_001_planner_agent,planner_agent,OpenAI,1,success,3.39487,chatcmpl-ENdvC86FNRSwqyPwM9yS4Wmcz3wjc,gpt-4o-mini-2024-07-18,fp_727abf95d6,670,0,217,887,0.0002307,,
+call_002_scenario_expander_agent,scenario_expander_agent,OpenAI,1,success,3.458379,chatcmpl-ENdvEGeG7ib5IilNOvT9IzwN6F6hl,gpt-4o-mini-2024-07-18,fp_53c3b1e564,2664,0,506,3170,0.0007032,,
+call_003_reflection_agent,reflection_agent,OpenAI,1,success,3.873777,chatcmpl-ENeK3jwJa6TsASffcI1QbX7fVhSfA,gpt-4o-mini-2024-07-18,fp_2d78c43f25,2329,0,360,2689,0.00056535,,
+call_004_planner_agent,planner_agent,OpenAI,1,success,2.877528,chatcmpl-ENeK6uj49BnBQDWWl8EBkLQ95tVYv,gpt-4o-mini-2024-07-18,fp_727abf95d6,1151,0,280,1431,0.00034065,,
+call_005_scenario_expander_agent,scenario_expander_agent,OpenAI,1,success,7.611695,chatcmpl-ENeK9ERO8sh1qB5xZbFAcYkx2kYip,gpt-4o-mini-2024-07-18,fp_53c3b1e564,96716,0,575,97291,0.0148524,,
+call_006_reflection_agent,reflection_agent,OpenAI,1,success,5.001051,chatcmpl-ENfocpIWjIvXpys1dk8AqXGhh8Roi,gpt-4o-mini-2024-07-18,fp_2d78c43f25,2511,0,329,2840,0.00057405,,

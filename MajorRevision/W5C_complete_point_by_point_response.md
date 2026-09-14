@@ -56,38 +56,21 @@ a contemporaneous or causal optical--wireless measurement.
 **Status.** `CLOSED`; the source lineage and constructed-benchmark boundary
 are both explicit.
 
-### R1C2 — Report the LLM model, calls, failures, cost, latency, human intervention, and a script baseline.
+### R1C2 ? Report the LLM model, calls, failures, cost, latency, human intervention, and a script baseline.
 
-**Response.** We added and retain a deterministic enumeration baseline for the
-6,144 expected GNPy configuration keys. It enumerates the set in 0.0063 s
-without an LLM/API call, while the published artifact contains 8,192
-execution records and 6,144 unique configurations. The recovered source
-supplies complete role-prompt templates and JSON constraints and uses
-`gpt-4o-mini`, temperature 0.2, a 90-s timeout, at most three attempts, and a
-two-iteration control path containing up to six LLM invocations. The authors
-confirm that the historical provider was OpenAI. The archived run does not
-retain its date-stamped model snapshot, rendered per-call prompts/responses,
-actual calls/retries, tokens, cost, latency, failures, or human interventions.
-We therefore report those items as not recorded, limit the claim to workflow
-feasibility, and do not claim LLM superiority over the deterministic script.
+**Response.** We limit the LLM contribution to a feasibility demonstration and retain the demonstrated Agent architecture. We added a separately identified new OpenAI reproduction using `gpt-4o-mini-2024-07-18`, temperature 0.2, timeout 90 s, maximum three attempts and strict mode. Six complete request/response pairs record six successful first attempts, 108,308 tokens, 26.22 s summed API latency and estimated text-token cost USD 0.01726635. These are observations from one invocation, not an estimate of general reliability. An earlier interrupted two-call invocation is reported separately (4,057 tokens; USD 0.0009339); the known API subtotal is USD 0.01820025, excluding computation, labour and unrecorded activity.
 
-**Exact manuscript change/location.** `JOCN_Telemetry.tex`,
-`Evaluation Protocol and Reproducibility Scope`, Table~\ref{tab:llm_baseline},
-and GNPy results subsection. Existing evidence is summarized in
-`MajorRevision/03_E3_LLM基线实验结果.md` and
-`E3_llm_baseline/observable_baseline_comparison.csv`.
+We disclose the environment, spectrum, extraction and single-channel repairs, manual interruption/resume, recovery diagnostics and replay of nine failed simulator cases. The resumed invocation's 2 h 1 min 25.3 s interval includes troubleshooting. Correcting a deterministic sweep override subsequently required an 85 min 9.0 s second-round replay with no new LLM calls. The original last Reflection was not recomputed on corrected data; convergence and unattended operation are not claimed.
 
-**Evidence/result.** Deterministic enumeration has precision and recall 1.0
-against the expected set; the published artifact has 25% duplicate execution
-records. The current source contains no historical LLM trace bundle.
+The corrected set at -6.5/-6.0/-5.5 dBm exactly matches an independently specified 6,144-key Cartesian product. The combined 8,192 records contain 2,048 repeated keys (25%). Deterministic configuration enumeration takes a median 0.00145 s over 31 local timing repeats; this excludes intent parsing and GNPy, is not an end-to-end comparison, and does not constitute independent LLM trials.
 
-**Limitation.** The provider and source prompt templates are known, but they do
-not recover the byte-exact historical call trace or date-stamped model
-snapshot. A controlled LLM-vs-script advantage study cannot be claimed without
-those logs or new trials.
+**Exact manuscript change/location.** Evaluation Protocol and Reproducibility Scope; `tab:llm_trace`; `tab:llm_baseline`; corrected GNPy results and `fig:usecase1`; Conclusions. Supporting material: `MajorRevision/13_E6_demonstration_revision.md` and `MajorRevision/E6_llm_trace_reproduction/corrected_analysis/`.
 
-**Status.** `CLOSED_WITH_UNAVAILABLE_HISTORICAL_TRACE`; all recoverable
-settings are reported and the claim is bounded accordingly.
+**Evidence/result.** The source archives are released at `WanxinZhao/JOCN-DATASET-Code@82914127b70acf3b220bc09a56a179cb7abd1252`; archive hashes, repaired source hashes, exact-set coverage and scenario/request/CLI/metric power consistency were checked. Both precision and recall are 1.0.
+
+**Limitation.** OpenAI is author-reported for the historical run; the new API evidence does not verify its missing dated snapshot, usage or operator history. API success and final zero residual simulator errors after repair do not imply an error-free development history, physical calibration or an advantage over scripting.
+
+**Status.** Addressed within the adopted feasibility-demonstration scope; historical missing metadata and the absence of convergence/repeated-trial evidence remain explicitly disclosed.
 
 ### R1C3 — Add a dataset summary table and machine-readable metadata such as Croissant.
 
@@ -474,30 +457,17 @@ ordering is claimed.
 
 **Status.** `CLOSED` for the bounded empirical privacy claim.
 
-### R3C3 — The LLM framework is insufficiently evaluated.
+### R3C3 ? The LLM framework is insufficiently evaluated.
 
-**Response.** The simulation-side evaluation now distinguishes the LLM
-workflow from generated-data validation. The workflow is demonstrated with
-GNPy and the final W4C three-RAT ns-3 scenario; the deterministic GNPy
-enumerator provides a non-LLM baseline. W4C provides independent LiFi
-equation checks, integrated flow mapping, fixed-seed repeatability, and a
-48-configuration synthetic dataset. These support executable workflow and
-output correctness under declared assumptions, not LLM superiority.
+**Response.** We adopt the reviewer's suggested feasibility-demonstration scope. The retained Agent architecture demonstrates natural-language-to-simulator workflow execution; we do not claim superiority over scripts, autonomous repair, convergence or general reliability. As detailed under R1C2, the new six-call trace reports exact prompts/responses, dated model, settings, actual attempts, tokens, latency and estimated cost, while manual repair/resume and a later zero-new-call corrected replay are separately accounted for.
 
-**Exact manuscript change/location.** LLM evaluation subsection,
-`sec:ns3_wireless`, Table~\ref{tab:ns3_validation}, and Conclusions.
+**Exact manuscript change/location.** Abstract; Evaluation Protocol and Reproducibility Scope; `tab:llm_trace`; `tab:llm_baseline`; GNPy results; Conclusions. Existing wireless results remain in `sec:ns3_wireless` and `tab:ns3_validation`.
 
-**Evidence/result.** W4C contains 48 configurations and 432 application-flow
-records with 432/432 mapping passes; GNPy enumeration has 1.0 precision and
-recall against 6,144 keys.
+**Evidence/result.** The corrected optical demonstration covers exactly 6,144 expected unique configurations in 8,192 execution records (25% repeated). It contains 6,120 unique `ok` and 24 expected all-off `no_signal` configurations. No configuration keys are missing or extra. W4C retains its independent wireless evidence: 48 configurations and 432 application-flow records with 432/432 mapping passes. Those simulator checks do not establish LLM efficacy.
 
-**Limitation.** OpenAI is author-confirmed and the prompt templates are public,
-but the historical date-stamped model snapshot, rendered prompts/responses,
-token, cost, latency, retry, and human-intervention logs are unavailable. No
-claim of LLM-vs-script superiority is made.
+**Limitation.** The original final Reflection used pre-correction results and requested another refinement at the configured two-iteration cap. It was not rerun on corrected results. The experiment does not supply independent LLM repetitions or single-LLM/no-Reflection ablations, and the historical API trace remains unavailable. The deterministic timing is enumeration only.
 
-**Status.** `CLOSED` for the bounded simulation-side feasibility claim;
-historical LLM metadata remains unreported.
+**Status.** Addressed through the explicitly bounded feasibility demonstration, additional trace disclosure and corrected configuration-set comparison.
 
 ### R3C4 — The generated data lack independent correctness validation.
 
@@ -532,6 +502,8 @@ GNPy v2.12 arm is an exact-output compatibility reconstruction rather than
 proof of the unavailable original run commit, while the v2.14.2 differences
 and persistent EDFA/ROADM warnings prevent a warning-free physical-calibration
 claim.
+
+**Corrected E6 scope.** The new corrected second-round set is audited separately: 6,144 unique configurations, 6,120 active scenarios with matching power across scenario/request/CLI/returned metric metadata, and 24 expected all-off cases. All 6,120 corrected result files retain EDFA and ROADM warnings. The historical 96-case comparison does not independently validate the changed E6 power sweep or its local single-channel patch. Corrected figures use signal-bandwidth metrics and second-round unique records only.
 
 **Status.** `CLOSED_WITH_DECLARED_MODEL_LIMITATIONS`; independent numerical,
 equation, mapping, repeatability, and version-sensitivity evidence is now

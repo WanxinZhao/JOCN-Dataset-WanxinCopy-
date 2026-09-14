@@ -1,0 +1,62 @@
+{
+  "evidence_commit": "82914127b70acf3b220bc09a56a179cb7abd1252",
+  "archive_sha256": {
+    "E6_corrected_second_round_20260914.tar.gz": "6d62aedad432140cefb06a652f52fe6e4ecac26bc8d42ac758f4e38db836e52e",
+    "E6_completed_reproduction_20260913_134829_038619.tar.gz": "d233ca08f2075084a75460a899b38ae36145349fad63db0d5056fe30ad2c7720"
+  },
+  "python": "3.12.10",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "execution_records": 8192,
+  "unique_configurations": 6144,
+  "duplicate_records_beyond_first": 2048,
+  "duplicate_rate": 0.25,
+  "expected_missing": 0,
+  "unexpected_extra": 0,
+  "set_precision": 1.0,
+  "set_recall": 1.0,
+  "second_round_status_counts": {
+    "ok": 6120,
+    "no_signal": 24
+  },
+  "combined_status_counts": {
+    "ok": 8160,
+    "no_signal": 32
+  },
+  "scenario_request_cli_metric_power_checks": 6120,
+  "power_mismatches": 0,
+  "no_signal_cases_without_cli": 24,
+  "enumeration_microbenchmark_repeats": 31,
+  "enumeration_seconds_median": 0.001449699979275465,
+  "enumeration_seconds_min": 0.0013541000662371516,
+  "enumeration_seconds_max": 0.047326199943199754,
+  "timing_scope": "Configuration tuple generation only; excludes set comparison, I/O and GNPy; not independent LLM trials.",
+  "new_run_llm_calls": 6,
+  "new_run_tokens": 108308,
+  "new_run_api_latency_seconds": 26.2173,
+  "new_run_estimated_cost_usd": 0.01726635,
+  "earlier_interrupted_attempt": {
+    "calls": 2,
+    "tokens": 4057,
+    "estimated_cost_usd": 0.0009339,
+    "source": "revision_documents/09_E6_20260913_new_run_trace_report.md"
+  },
+  "known_two_invocation_estimated_cost_usd": 0.01820025,
+  "corrected_replay_new_llm_calls": 0,
+  "corrected_replay_seconds": 5109.000982,
+  "corrected_result_warnings": {
+    "result_files": 6120,
+    "edfa_below_min_gain_occurrences": 48960,
+    "edfa_below_min_gain_affected_files": 6120,
+    "roadm_target_power_unmet_occurrences": 12240,
+    "roadm_target_power_unmet_affected_files": 6120
+  },
+  "joint_format_slot_pairs": 3060,
+  "joint_format_slot_mean_abs_gsnr_difference_db": 0.5495820261437908,
+  "joint_format_slot_max_abs_gsnr_difference_db": 1.088,
+  "limitations": [
+    "One new LLM reproduction with manual recovery, not independent repeated trials.",
+    "Corrected replay reuses saved model responses; old Reflection 2 is not an evaluation of corrected data.",
+    "The historical E5 96-case numerical comparison is not independent validation of the corrected E6 sweep.",
+    "Scenario means equally weight configurations, then average their active-channel metrics; no_signal is excluded."
+  ]
+}

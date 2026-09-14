@@ -1,0 +1,78 @@
+--------Reviewer Comments--------
+
+Reviewer 1:
+
+The paper addresses a relevant problem and presents a good collection of datasets and tools
+A few comments to improve the quality
+• The “cross-domain” claim is not really clear, the optical, sensing, and wireless datasets seem to originate from separate measurement campaigns. Please clarify
+• Provide details about the LLM (model used, number of attempts, tool interface, failure rate, cost, latency, or degree of human intervention). Would it be feasible a conventional scripting pipeline as baseline?
+• Would be nice to have a summary table for each dataset reporting the number of samples, features, labels, file format, storage size, licence... You may also consider to align with https://mlcommons.org/working-groups/data/croissant/
+
+
+Reviewer 2:
+
+This paper presents an open-source framework for constructing a dataset that integrates the optical- and wireless-communication domains. The dataset comprises both real-world and synthetic data. Overall, the paper presents substantial work and covers a broad range of topics. However, the paper does not always distinguish the primary contributions from supporting material, some descriptions are unclear, and the boundary between this study and the authors' previous work is insufficiently defined. The authors are requested to address the following comments and revise the manuscript accordingly.
+
+1. The hierarchy of the contributions presented in the Introduction is unclear
+The authors state that "this paper presents an open-source cross-domain dataset framework enabled by network telemetry, semantic data abstraction, and LLM-driven multi-agent DTs." However, these three elements are not fully parallel. The first two relate to practical datasets, whereas LLM-driven multi-agent DTs relate to generated datasets. The contribution could instead be stated as follows: "This paper presents an open-source cross-domain dataset framework that supports both practical and generated datasets: the former through network telemetry and semantic data abstraction, and the latter through LLM-driven multi-agent DTs."
+
+2. The Related Work section is not clearly organized
+Subsections A, B, and C contain repeated content and arguments, conflicting statements, an unclear progression of ideas, and insufficient transitions. Some specific issues are described below:
+1. The writing style and focus are inconsistent across the three subsections. Subsection A objectively summarizes existing studies without directly explaining the specific improvements introduced in this paper. Subsection B describes how previous work motivates and supports this study, but mentions the proposed improvement only in its final sentence. Subsection C objectively evaluates existing studies and briefly introduces the work related to this paper. The authors are advised to adopt a consistent structure: objectively assess the existing literature, identify its limitations, explain how it motivates or supports the present study where applicable, and then briefly introduce the proposed approach.
+
+2. The opening statements of Subsections A, B, and C are not fully consistent. Subsection A argues that existing datasets are inadequate and proposes supplementing real-world data through telemetry. Subsection B discusses semantic extraction and privacy protection for real-world data. However, Subsection C begins by stating: "However, real network measurements are difficult to collect at scale because of limited testbed access, operational cost, privacy constraints, safety requirements, and the rarity of abnormal or extreme operating conditions. This challenge is more pronounced in cross-domain optical-wireless networks, where heterogeneous infrastructures, telemetry interfaces, and data formats complicate data collection and alignment." This appears potentially self-contradictory. If the proposed work uses telemetry and, to some extent, addresses heterogeneous alignment and semantic extraction for real-world data, the quoted statement should be reconciled with those contributions. If the present work does not address these issues, the extensive discussion of these limitations in Subsections A and B appears less relevant. In addition, the transition from Subsections A and B to Subsection C needs to be strengthened.
+
+3. The discussion of limitations in existing work is repetitive. The lack of uniformity between optical and wireless infrastructures and data characteristics, as well as the resulting alignment challenges, are discussed repeatedly in Subsections A and C. It would be preferable to complete this discussion in Subsection A. Subsection C could then focus on the value and importance of generated data, the limitations of related studies, and the solution proposed in this paper, without reopening the same cross-domain issues from the perspective of generated data. In addition, all three subsections mention that existing studies primarily address a single domain rather than cross-domain settings, while both Subsections A and B discuss data-privacy concerns. Each subsection should have a clearly defined primary focus and supporting scope so that the Related Work section develops progressively and distinguishes the main points from secondary ones.
+
+4. The Introduction already presents the background, significance, and research content of this study. The authors should avoid turning the Related Work section into a more detailed, topic-by-topic version of the Introduction. Instead, this section should focus on the limitations of existing studies relative to the present work, the ways in which prior studies motivate or support this work, and the advances offered by the proposed approach.
+
+5. The first sentence of the fourth paragraph in Section III states: "The orchestrator coordinates the interactions among multiple agents, DTs, AI engines, data repositories, and network controllers." However, Fig. 1 appears to show only data-flow interactions between the orchestrator and the Agentic AI layer. How does the orchestrator coordinate or control the other components?
+
+6. Please add references to support the following statement in Section II-C: "Existing DT and LLM-agent workflows generally assume that simulation objectives, scenario spaces, parameter ranges, and data-generation requirements are manually specified. Limited work has considered dataset generation itself as an autonomous closed-loop workflow, especially across optical and wireless domains."
+
+7. The abstract states: "The proposed framework integrates distributed and centralised data repositories, Kafka-based telemetry pipelines, DTs, AI engines, and network controllers to support scalable data collection, cross-domain data fusion, and automated dataset generation." How is scalability demonstrated or evaluated in the paper?
+
+8. Section IV-A provides an extensive description of the data-acquisition system, but several issues should be addressed. First, the respective roles of InfluxDB and PostgreSQL are repeated in Section III and Sections IV-A.2 and IV-A.4; this implementation logic should not be described excessively. Second, this part of the system appears to be inherited from the authors' previous work, but the manuscript does not clearly distinguish the innovations of the present study from inherited components. If the entire acquisition system comes from previous work, the space devoted to it is disproportionate to that devoted to the cross-domain semantic modules introduced in this paper. Third, the manuscript includes excessive descriptions of the generic capabilities of third-party components. For example, a general introduction to Kafka is not an author contribution and should be shortened or removed. Finally, the authors should focus on functions that have actually been implemented rather than mixing implemented capabilities with future or potential ones. For example, have the following functions already been implemented: "In addition, lightweight local AI/ML modules can be deployed on distributed databases to support local inference, such as short-term performance forecasting and anomaly detection" in Section IV-A.2, and "It also supports on-demand aggregation, where only task-relevant telemetry streams are forwarded for cross-domain analysis, optimisation, or orchestration" in Section IV-A.3? The authors should review the manuscript and clearly distinguish implemented functions from prospective capabilities throughout.
+
+9. Section IV-B requires more detail. In Section IV-B.1, the authors state that eight semantic features are used. From which raw features are they calculated, how are they calculated, and why were these particular features selected? Does this step correspond to the "task-oriented semantic communication" discussed in Section II-B? The authors are advised to provide a more detailed description of this part of the work.
+
+10. Why is V3 described as "privacy-aware"? Does it introduce a substantive improvement over V2, or is the term used simply because three dimensions expose less information than eight dimensions and the added noise makes reconstruction more difficult?
+
+11. The sources of the optical-link signals are clearly described, whereas the wireless-signal source is identified only as "a wireless access network." Are the wireless signals converted from signals on one of the optical links, as suggested by Figs. 1 and 6?
+
+12. The overall multi-agent architecture appears to follow an orchestrator-executor pattern, yet the subagents (e.g., the planner and report agents) seem to operate in a fixed sequence. Is the role and placement of the orchestrator consistent with a conventional multi-agent architecture? Typically, an orchestrator receives the user request and then plans and dispatches tasks to subagents. Why is it positioned in the lower-right corner of the figure? The arrows beneath the first three agents appear to indicate direct communication with those agents. Does the orchestrator operate only for the final two agents, or do those arrows instead represent communication with the Agentic AI layer as a whole? The current diagram does not make this architecture clear.
+
+13. Figs. 1 and 6 are structurally very similar, which limits the additional information conveyed by Fig. 6. Moreover, why are the AI engines and network controllers absent from Fig. 6? Was the architecture revised, or were the functions of these two components absorbed by other modules in the figure? Fig. 1 and Section III also state that "AI engines provide ML and optimisation capabilities for data-driven inference" and that "Finally, the network controllers translate the optimised decisions or recommendations generated by the Agentic AI layer into executable network configurations, including path provisioning, cross-domain orchestration, and policy-based closed-loop control." However, these functions are not clearly demonstrated in the discussions or results presented in Sections IV and V. Please provide supporting results for these claimed capabilities.
+
+14. Are the five "agents" in Fig. 6 merely nodes that invoke an LLM, or are they autonomous agents? If they are agents, their internal structures should be incorporated into Fig. 6, including their tools, memory-management mechanisms, and intermediate scheduling components. Although a multi-agent architecture can improve flexibility and completeness, it also introduces inter-agent communication overhead, increases the number of LLM calls, and makes the overall framework less controllable. The authors should therefore explain why the Planner Agent, Scenario Expansion Agent, and Report Agent are implemented as agents when their assigned tasks do not appear particularly complex. If these components are not agents, the relevant descriptions should be revised and the characterization of the framework as multi-agent should be reconsidered.
+
+15. In Fig. 6, the font color used for the Reflection Agent is too similar to the background color, making the text difficult to read. Please avoid this color combination.
+
+16. Fig. 7 is not sufficiently clear and should be provided at a higher resolution.
+
+
+Reviewer 3:
+
+1. The semantic-fusion experiments are not reproducible. The manuscript does not identify the optical and wireless data used or explain how the fused dataset was constructed. Please provide sample counts, label definitions, semantic confidence scores, model architectures, training settings, and the evaluation protocol. Random record-level splitting may leak correlated samples; use temporal or session-grouped splits.
+
+2. Table 1 does not establish improved privacy. V3 has the highest RAT attack accuracy (0.988), while its lower Macro-F1 cannot be interpreted without class distributions and baselines. Please add majority and random baselines, attacker performance on raw telemetry, multiple attacker models, repeated runs, and confidence intervals. Until then, use “privacy-aware” rather than “privacy-preserving.”
+
+3. The LLM framework is demonstrated but not evaluated. The GNPy parameter space could be enumerated by a deterministic script, yet no baseline is provided. Report the LLM model, prompts, settings, trials, success rate, reflection iterations, human interventions, failures, runtime, and token cost. Alternatively, limit the claims to a feasibility demonstration.
+
+4. The generated data lack independent correctness validation. Runtime checks may catch execution failures but not plausible results from incorrect configurations. Add an audit using independently reproduced samples, a hand-written generator, established GNPy examples, or field measurements. Identify the repository commit and report simulator versions and material configuration assumptions.
+
+5. Separate implemented, evaluated, demonstrated, and proposed components in the abstract.
+
+6. Sections 3 and 4.A overlap; shorten Section 3 and use the space for methodology.
+
+7. Explain the relevance of the AC/DC power-supply detail or remove it.
+
+8. Support or soften the claim that −5 dBm provides optimal performance.
+
+9.  Standardise British or American English throughout the manuscript. The text currently mixes forms such as “centralised/centralized,” “optimisation/optimization,” “behaviour/behavior,” and “fibre/fiber.” Select one spelling convention and apply it consistently...
+
+10. Use “ns-3” consistently and standardise heading capitalisation.
+
+11. Replace or remove the placeholder DOI on page 1.
+
+12. Correct “includign BER,” “based over the NDFF topology,” and “formats,i.e.”.

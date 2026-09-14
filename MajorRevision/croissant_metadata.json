@@ -22,12 +22,9 @@
   "name": "JOCN cross-domain dataset revision evaluation bundle",
   "description": "Machine-readable metadata for two distinct 339-km NDFF Voyager campaigns, the processed wireless telemetry and materialised constructed-fusion table, the per-run evaluation artefacts, and the final W4C synthetic three-RAT wireless dataset used in the major-revision experiments. The optical and wireless measurements come from separate campaigns and are associated only through an explicitly constructed positional benchmark; they are not time-synchronised measurements of one physical event.",
   "conformsTo": "http://mlcommons.org/croissant/1.0",
-  "version": "1.3-optical-provenance",
-  "dateModified": "2026-09-11",
-  "license": {
-    "@type": "sc:CreativeWork",
-    "name": "Practical data are provided for academic, non-commercial research under the practical-repository README; the revision/W4C repository does not specify a formal SPDX licence"
-  },
+  "version": "1.4-licence-alignment",
+  "dateModified": "2026-09-15",
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
   "distribution": [
     {
       "@type": "cr:FileObject",
@@ -43,7 +40,7 @@
       "@type": "cr:FileObject",
       "@id": "voyager",
       "name": "Christmas 2025 raw Voyager optical telemetry",
-      "description": "A separate 2025-12-22 to 2026-01-24 campaign on the 339-km NDFF loop, containing 20,960 valid timestamped bit-error-rate records for eight Voyager channels. Real timestamps and 38 embedded headers from 39 acquisition segments are preserved in the source file.",
+      "description": "A separate 2025-12-22 to 2026-01-24 campaign on the 339-km NDFF loop, containing 20,960 valid timestamped bit-error-rate records for eight Voyager channels. Real timestamps and 38 embedded headers from 39 acquisition segments are preserved in the source file. Consecutive valid records are mostly 70 to 72 seconds apart, with acquisition gaps, and the data were not resampled to 15-minute intervals.",
       "contentUrl": "https://raw.githubusercontent.com/hpn-bristol/Open-Source-Data-for-Multi-Domain-Network-Monitoring-and-Sensing-in-Optical-and-Wireless-Networks/main/OTN%20Monitoring%20Data_one_month/NDFF_Voyager_Christmas_2025/Voyager_NDFF_339km_2025-12-22_to_2026-01-24_raw.csv",
       "encodingFormat": "text/csv",
       "contentSize": "1789223 B",

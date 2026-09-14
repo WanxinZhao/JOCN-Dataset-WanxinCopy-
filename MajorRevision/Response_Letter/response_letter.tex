@@ -1,0 +1,346 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.25cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\definecolor{reviewblue}{RGB}{31,78,121}
+\definecolor{responsegreen}{RGB}{32,112,74}
+\definecolor{lightblue}{RGB}{239,246,252}
+\newcommand{\manutitle}{Openly Available Cross-Domain Datasets Enabled by LLM-Driven Digital Twins and Network Telemetry}
+\newcommand{\commentheading}[1]{\subsection*{#1}}
+\newenvironment{reviewercomment}{\begin{quote}\color{reviewblue}\textbf{Reviewer comment.} }{\end{quote}}
+\newenvironment{authorresponse}{\color{responsegreen}\textbf{Response.} }{\par\color{black}}
+\newcommand{\change}[1]{\par\textbf{Change in the manuscript.} #1\par}
+\newcommand{\evidence}[1]{\par\textbf{Evidence and boundary.} #1\par}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Response to the Reviewers}\par
+\vspace{0.4em}
+{\large\itshape \manutitle}\par
+\vspace{0.6em}
+Sen Shen, Wanxin Zhao, Xuewen Chen, et al.
+\end{center}
+
+\hrule
+\vspace{0.8em}
+
+We thank the reviewers for their careful and constructive assessment. We revised the manuscript with three priorities: correcting submission-blocking errors, making the scientific scope explicit, and moving forensic or implementation-level detail from the article into this response and the public revision artefacts. No additional large-scale experiment was introduced in this final editing stage.
+
+The principal revisions are:
+\begin{enumerate}[leftmargin=1.6em]
+  \item We distinguish independently acquired practical campaigns, a constructed optical--wireless interoperability benchmark, and synthetic DT outputs.
+  \item We apply CC BY-NC 4.0 to the released datasets and associated metadata/documentation, use ``openly available'' consistently, and state the licence in Table~2 and Croissant metadata.
+  \item We retain the multi-agent architecture as an experimental workflow, define ``agent'' operationally as a schema-defined functional role, and limit the LLM contribution to a feasibility demonstration.
+  \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, versioned GNPy replay, and bounded ns-3 validation.
+  \item We remove the template DOI, rebuild all citations and references, enlarge Fig.~6, regenerate Fig.~7, and standardise terminology and British English.
+\end{enumerate}
+
+Text shown in green describes our response; reviewer comments are shown in blue. Repository paths are retained where they are the stable names of released artefacts.
+
+\section*{Reviewer 1}
+
+\commentheading{R1.1 -- Meaning of ``cross-domain''}
+\begin{reviewercomment}
+The ``cross-domain'' claim is unclear because the optical, sensing, and wireless datasets appear to originate from separate measurement campaigns.
+\end{reviewercomment}
+\begin{authorresponse}
+We agree. The practical campaigns are independent and are not presented as simultaneous end-to-end observations. We now define cross-domain in two bounded senses: common repository/metadata/representation across optical transport, fibre sensing, and wireless access; and an explicitly constructed interoperability benchmark used to test whether compact wireless representations remain useful in a common downstream model. The benchmark maps ordered records by relative sequence position and does not assert timestamp equality or physical causality.
+\end{authorresponse}
+\change{The Abstract, Introduction, framework section, semantic benchmark description, practical wireless subsection, and Conclusions now state this boundary. The wireless signals are explicitly identified as measurements from the 5G-CLARITY/REASON testbed, not conversions from the optical links.}
+\evidence{The constructed benchmark contains 2,848 one-step samples and records both optical and wireless source-row indices. The practical campaign timestamps do not overlap.}
+
+\commentheading{R1.2 -- LLM details and conventional scripting baseline}
+\begin{reviewercomment}
+Please provide the model, number of attempts, tool interface, failure rate, cost, latency, degree of human intervention, and consider a conventional scripting baseline.
+\end{reviewercomment}
+\begin{authorresponse}
+We now position the LLM workflow as a feasibility demonstration. A separately labelled instrumented run used \texttt{gpt-4o-mini-2024-07-18}, temperature 0.2, a 90-s timeout, at most three attempts per call, and strict mode without silent rule fallback. Planner, Scenario Expansion, and Reflection were each called twice. All six API calls succeeded on their first attempt, consuming 106,041 input and 2,267 output tokens (108,308 total), with 26.22~s summed API latency and an estimated text-token cost of US\$0.01727 using the dated price snapshot stored with the run.
+
+Manual recovery was required during simulator execution. An earlier invocation made two successful API calls (4,057 tokens; estimated US\$0.0009339) before it was stopped after 344 GNPy import failures and one all-off result. Recovery included installing the local package, correcting inactive-channel representation and result extraction, repairing a single-channel case, resuming from manifest-hashed files, correcting the recovery log callback, and rerunning nine failed scenarios. A later deterministic replay corrected a power-sweep override and reused three saved LLM responses, so it incurred no new API calls. These events are reported here and in the public trace; the article states only that manual recovery was required.
+
+The independent script enumerates the expected Cartesian product of four destinations, two modulation/slot-width settings, 256 occupancy patterns, and three powers. It generates 6,144 unique configuration keys without an LLM or simulator execution. The LLM-orchestrated history contains 8,192 execution records but the same 6,144 unique keys, hence a 25\% repetition rate and set precision/recall of 1.0. We do not compare enumeration-only time with end-to-end LLM plus GNPy runtime and make no superiority claim.
+\end{authorresponse}
+\change{Section~V-B and Tables~3--4 report the model/settings, observed calls, usage, cost, API latency, manual-recovery boundary, and deterministic baseline. Detailed chronology, hashes, requests, responses, and failure logs remain in the revision repository.}
+\evidence{The trace contains six rendered requests, six complete responses, per-call records, prompts, model identifiers, timings, token usage, source/input hashes, and recovery history. This new run does not reconstruct the unavailable historical API trace and is not a repeated-trial reliability estimate.}
+
+\commentheading{R1.3 -- Dataset summary and Croissant metadata}
+\begin{reviewercomment}
+Please add a summary table reporting samples, features, labels, format, storage size, licence, and consider alignment with MLCommons Croissant.
+\end{reviewercomment}
+\begin{authorresponse}
+We added a dataset summary table and a Croissant~1.0-compatible JSON-LD record. The table distinguishes the two 339-km Voyager campaigns, the 986-km and urban-sensing sources, wireless telemetry, the constructed benchmark, and both synthetic datasets. It reports record/sampling information, principal fields or labels, formats/sizes, and access/reuse terms.
+
+We cross-checked the practical-data README, Croissant record, Table~2, and manuscript text. The 2023--24 Voyager product contains 1,373 processed 15-minute records. The distinct 2025--26 campaign contains 20,960 raw eight-channel records with real timestamps, mostly 70--72-s spacing and acquisition gaps, and was not resampled to 15-minute intervals.
+
+We also resolved the licence terminology directly. The authors intend the datasets to be reusable for non-commercial research, so we added a repository-level data-licence notice applying Creative Commons Attribution--NonCommercial 4.0 International (CC BY-NC 4.0) to the released datasets and associated metadata/documentation. This licence permits sharing and adaptation with attribution for non-commercial purposes. Software and identified third-party material retain their own terms. Because the non-commercial condition is narrower than the formal open-source definition, the manuscript uses ``openly available'' rather than the potentially ambiguous ``open-source'' label.
+\end{authorresponse}
+\change{Table~2 and the practical dataset subsection now identify CC BY-NC 4.0 explicitly. The title, Abstract, Introduction, and Conclusions use ``openly available'', and the Croissant \texttt{license} field contains the canonical licence URL.}
+\evidence{The repository contains a root \texttt{LICENSE} notice; the practical-data release package links to the same terms. The Croissant record includes the licence, access locations, sizes, checksums, and field units where defined. Unknown external collection totals and undocumented raw wireless units are marked unavailable rather than inferred.}
+
+\section*{Reviewer 2}
+
+\commentheading{R2.1 -- Contribution hierarchy}
+\begin{reviewercomment}
+The contributions are not parallel; practical datasets and generated datasets should form the primary hierarchy.
+\end{reviewercomment}
+\begin{authorresponse}
+We adopted this hierarchy. Practical datasets are organised through telemetry and semantic abstraction; generated datasets are demonstrated through the LLM-driven DT workflow. The four contributions now follow this structure and distinguish inherited telemetry infrastructure from the new dataset organisation, semantic evaluation, DT demonstration, and reproducibility audit.
+\end{authorresponse}
+\change{The Abstract, final Introduction paragraphs, contribution list, and Conclusions were rewritten around practical versus generated data.}
+
+\commentheading{R2.2 -- Related Work organisation and transitions}
+\begin{reviewercomment}
+Related Work is repetitive, contains conflicting openings, and reads like a topic-by-topic repetition of the Introduction. Please use a consistent progression from prior work to limitations and the present advance.
+\end{reviewercomment}
+\begin{authorresponse}
+We reorganised the section into three functions: practical data availability and telemetry; semantic abstraction and empirical privacy evaluation; and DT/LLM-generated data. Each subsection now describes representative work, identifies the remaining limitation, and closes with how that limitation motivates the corresponding part of this study. The DT subsection begins with the distinct value of controllable synthetic data rather than reopening the telemetry-alignment discussion.
+\end{authorresponse}
+\change{Section~II was rewritten and redundant cross-domain/privacy statements were removed. The Introduction was shortened so it no longer duplicates the literature review.}
+
+\commentheading{R2.3 -- Repeated limitations in Related Work}
+\begin{reviewercomment}
+Cross-domain heterogeneity, single-domain scope, and privacy limitations are repeated across multiple subsections.
+\end{reviewercomment}
+\begin{authorresponse}
+We consolidated infrastructure and alignment limitations in Section~II-A, information selection and privacy in Section~II-B, and controllable scenario generation in Section~II-C. The three subsections now have separate primary questions.
+\end{authorresponse}
+\change{Repeated claims about heterogeneous formats and single-domain coverage were removed from the semantic and DT discussions.}
+
+\commentheading{R2.4 -- Overlap between Introduction and Related Work}
+\begin{reviewercomment}
+Related Work should focus on prior limitations and advances rather than becoming a more detailed Introduction.
+\end{reviewercomment}
+\begin{authorresponse}
+We shortened the Introduction to the problem, the two-part framework, and the contribution hierarchy. Evidence and literature comparisons are now confined to Related Work and the corresponding methods/results sections.
+\end{authorresponse}
+
+\commentheading{R2.5 -- Orchestrator scope in Fig. 1}
+\begin{reviewercomment}
+It is unclear how the orchestrator coordinates DTs, AI engines, repositories, and controllers when Fig.~1 only shows data-flow interaction with the Agentic AI layer.
+\end{reviewercomment}
+\begin{authorresponse}
+The original sentence overstated the evaluated scope. Fig.~1 is now labelled a scope map. The orchestrator dispatches the evaluated data-generation sequence and exchanges structured state with the DT interface; it is not claimed to control every component in Fig.~1. AI engines and network controllers are prospective integration points.
+\end{authorresponse}
+\change{Section~III and the Fig.~1 caption now distinguish the implemented path from contextual components.}
+
+\commentheading{R2.6 -- Support for the autonomous dataset-generation claim}
+\begin{reviewercomment}
+Please support the statement that existing DT/LLM workflows assume manually specified objectives and that autonomous dataset generation is little studied.
+\end{reviewercomment}
+\begin{authorresponse}
+We replaced the unsupported generalisation with a comparison tied to cited DT assistants and AI-agent studies. Those works automate modelling or network operation but use supplied objectives or parameter ranges. We describe dataset generation as the workflow-design problem examined here and limit our own result to feasibility.
+\end{authorresponse}
+\change{Section~II-C now cites the relevant GPT/DT assistant, LLM--DT management, local-agent, and DT-aided control studies immediately beside the bounded comparison.}
+
+\commentheading{R2.7 -- Unsupported scalability claim}
+\begin{reviewercomment}
+How is scalability demonstrated or evaluated?
+\end{reviewercomment}
+\begin{authorresponse}
+It is not evaluated. We removed scalability as a measured contribution and explicitly state that Kafka is an implementation component for which no throughput/latency benchmark is reported. Future larger-space evaluation is identified as future work.
+\end{authorresponse}
+\change{The Abstract, framework scope, telemetry section, and Conclusions no longer claim demonstrated scalability.}
+
+\commentheading{R2.8 -- Section IV-A verbosity, inherited components, and prospective functions}
+\begin{reviewercomment}
+Section IV-A repeats database roles and generic third-party capabilities, gives inherited acquisition infrastructure disproportionate space, and mixes implemented and prospective functions.
+\end{reviewercomment}
+\begin{authorresponse}
+We now state the scope once at the beginning of Section~IV-A. Implemented functions are acquisition, InfluxDB/PostgreSQL storage, Kafka transfer, semantic evaluation of exported records, and the reported DT interfaces. AI engines, local inference, controllers, and closed-loop actions are prospective. The telemetry platform is attributed to our earlier work; the present contribution is the dataset organisation and evaluated interfaces.
+\end{authorresponse}
+\change{Repeated disclaimers and generic Kafka/database descriptions were removed. Subsections now describe only the implemented data path needed to understand the released datasets.}
+
+\commentheading{R2.9 -- Semantic feature definitions}
+\begin{reviewercomment}
+Please explain the raw sources, calculation, selection, and task-oriented role of the eight semantic features.
+\end{reviewercomment}
+\begin{authorresponse}
+We specify the 12 input features derived from 30-s wireless records, training-only activity thresholds and scalers, the four targets (load, access diversity, stability, and congestion risk), and the exact equations for diversity, stability, and risk. V1 transmits eight deterministic indicators covering traffic intensity, temporal stability, multi-access availability, signal quality, inactivity, and composite risk. V2/V3 encode the same task context through learned bottlenecks.
+\end{authorresponse}
+\change{Section~IV-B.1 now gives the formulas, architecture sizes, optimisation settings, confidence definition, and rationale.}
+\evidence{The released material records exact seeds, preprocessing parameters, source fields, and per-seed outputs. The confidence value is a heuristic, not a calibrated probability.}
+
+\commentheading{R2.10 -- Meaning of ``privacy-aware''}
+\begin{reviewercomment}
+Does V3 substantively improve privacy, or is the term based only on lower dimension and added noise?
+\end{reviewercomment}
+\begin{authorresponse}
+We use privacy-aware to denote a design and evaluation objective, not a formal guarantee. V3 varies bottleneck dimension and training-time noise; attribute inference is evaluated with logistic regression, random forest, MLP, and histogram gradient boosting against raw, V1/V2, PCA, random-projection, majority, and random baselines. V3 moderately reduces observed CPE leakage relative to raw telemetry while maintaining V1-level binary utility, but PCA leaks less and also loses utility. V3 is not universally best.
+\end{authorresponse}
+\change{The semantic introduction, results, Fig.~5, Table~1, and Conclusions now use the bounded empirical interpretation.}
+
+\commentheading{R2.11 -- Wireless signal provenance}
+\begin{reviewercomment}
+Are the wireless signals converted from signals on one of the optical links?
+\end{reviewercomment}
+\begin{authorresponse}
+No. The wireless telemetry comes entirely from the separate 5G-CLARITY/REASON multi-access testbed. It is not converted from, transported over, or synchronised with either optical campaign. The figure shows system context, while the benchmark performs explicit positional association only.
+\end{authorresponse}
+\change{This distinction appears in the Abstract, framework description, semantic benchmark, and practical wireless subsection.}
+
+\commentheading{R2.12 -- Orchestrator placement and arrows in Fig. 6}
+\begin{reviewercomment}
+The orchestrator-executor sequence, lower-right orchestrator placement, and arrows under the roles are unclear.
+\end{reviewercomment}
+\begin{authorresponse}
+The orchestrator receives the request and owns the shared task state. It invokes planning, scenario expansion, execution, analysis, reflection, and reporting in sequence. The arrows beneath the roles denote access to that shared orchestration layer; they do not mean that the orchestrator serves only the last two roles. The lower-right position is a control-plane layout choice rather than execution order.
+\end{authorresponse}
+\change{The revised Fig.~6 distinguishes user input, role sequence, shared state, DT tool, and retained output. The article retains only the operational sequence; this layout-level explanation is provided here. The figure is now cropped to its content and displayed near full text width.}
+
+\commentheading{R2.13 -- Overlap between Figs. 1 and 6; absent AI/controller results}
+\begin{reviewercomment}
+Figs. 1 and 6 are similar, and AI engines/controllers appear in the architecture without supporting results.
+\end{reviewercomment}
+\begin{authorresponse}
+Fig.~1 is a framework scope map; Fig.~6 is the evaluated sequence. AI engines and controllers are shown only as contextual integration points and are not presented as implemented results. The evaluated paths are telemetry/semantic processing and GNPy/ns-3 execution.
+\end{authorresponse}
+\change{Captions and scope paragraphs now state this distinction directly; unsupported closed-loop claims were removed.}
+
+\commentheading{R2.14 -- Are the five components agents, and why use them?}
+\begin{reviewercomment}
+Please clarify whether the five nodes are autonomous agents, their tools/memory/scheduling, why simple functions are agents, and the communication/controllability overhead.
+\end{reviewercomment}
+\begin{authorresponse}
+We retain the multi-agent architecture as the experimental design and give an operational definition: the five agents are schema-defined functional roles coordinated through orchestrator-owned shared state. Planner, Scenario Expansion, and Reflection invoke the LLM; Results Analysis and Report are deterministic. Simulator wrappers, topology/equipment files, KPI definitions, and stored results are their tools and knowledge. Role separation provides explicit input/output contracts and traceable intermediate artefacts. We do not claim independent persistent schedulers, separate long-term memories, or that every role must use an LLM. Communication overhead was not evaluated, and no efficiency advantage is claimed.
+\end{authorresponse}
+\change{Section~V-A now retains only the operational definition and real module division. The more detailed rationale and absent-capability clarification are moved to this response.}
+
+\commentheading{R2.15 -- Reflection Agent contrast}
+\begin{reviewercomment}
+The Reflection Agent font colour is too similar to its background.
+\end{reviewercomment}
+\begin{authorresponse}
+Corrected as requested. The current high-resolution asset uses darker Reflection text and improved contrast.
+\end{authorresponse}
+
+\commentheading{R2.16 -- Fig. 7 resolution}
+\begin{reviewercomment}
+Fig. 7 is unclear and should be higher resolution.
+\end{reviewercomment}
+\begin{authorresponse}
+Fig.~7 was regenerated from the corrected unique configuration table and is included as a vector PDF. Its caption distinguishes execution records, unique configurations, valid configurations, and all-off cases.
+\end{authorresponse}
+
+\section*{Reviewer 3}
+
+\commentheading{R3.1 -- Semantic-fusion reproducibility and leakage}
+\begin{reviewercomment}
+Identify the data, sample counts, labels, confidence, architectures, training settings, and evaluation protocol; avoid record-level random splitting.
+\end{reviewercomment}
+\begin{authorresponse}
+We replaced the random split with chronological 60/20/20 train/validation/test segments and ten-record purge gaps, yielding 1,698/560/570 evaluated samples. All thresholds, scalers, encoders, classifiers, and attackers are fitted after splitting using training data only. The manuscript now defines the 12 wireless inputs, semantic features, confidence heuristic, optical and wireless risk rules, one-step targets, model architectures, optimiser settings, ten seeds, and evaluation metrics.
+\end{authorresponse}
+\change{Section~IV-B and the public materialised 2,848-row/52-field benchmark now record source indices, split membership, thresholds, features, and labels.}
+\evidence{The optical and wireless campaigns remain non-contemporaneous and the labels are rule-derived, not field-observed failures. No incremental fusion-gain claim is made without a matched wireless-only ablation.}
+
+\commentheading{R3.2 -- Privacy evidence and baselines}
+\begin{reviewercomment}
+Add raw telemetry, majority/random baselines, multiple attackers, repeated runs, confidence intervals, and class-distribution context; use privacy-aware rather than privacy-preserving.
+\end{reviewercomment}
+\begin{authorresponse}
+We added all requested comparisons. CPE Macro-F1 is the primary privacy metric because the RAT test set is highly imbalanced. Four attacker families are evaluated over ten seeds. Raw, PCA, random projection, majority, and stratified-random baselines are included, with 95\% confidence intervals. V3 achieves strongest-observed CPE attacker Macro-F1 $0.2382\pm0.0113$, compared with 0.2757 for raw features; PCA3 reaches $0.2174\pm0.0059$ but with lower utility.
+\end{authorresponse}
+\change{The manuscript consistently uses ``privacy-aware'' and states that there is no formal or universal privacy guarantee.}
+
+\commentheading{R3.3 -- LLM framework evaluation}
+\begin{reviewercomment}
+Report model, prompts, trials, success, reflection iterations, interventions, failures, runtime, and cost, or limit the claims to feasibility.
+\end{reviewercomment}
+\begin{authorresponse}
+We selected the suggested feasibility scope. The full instrumented-run details and deterministic baseline are reported under R1.2. The article retains the model/settings, six-call summary, cost/latency, baseline, and manual-recovery boundary. Complete prompts, responses, failure logs, and intervention chronology are released but moved out of the main narrative.
+\end{authorresponse}
+\evidence{The final Reflection response requested another refinement at the configured two-iteration limit and was not recomputed after the corrected replay; convergence and autonomous repair are therefore not claimed. No repeated LLM trial or role ablation is claimed.}
+
+\commentheading{R3.4 -- Independent correctness validation}
+\begin{reviewercomment}
+Runtime checks do not catch plausible results from incorrect configurations. Add independent reproduction or an established baseline and identify commits, versions, and assumptions.
+\end{reviewercomment}
+\begin{authorresponse}
+For GNPy, 96 cases stratified by path, joint modulation/slot-width setting, power, and channel load were regenerated independently. Official GNPy v2.12 (commit \texttt{7ce66501\allowbreak{}0970f57e\allowbreak{}46672db1\allowbreak{}ec0864ae\allowbreak{}448077e6}) completed 96/96. Its mean and maximum absolute GSNR differences from the archive were 0.00015 and 0.00050~dB. A schema-corrected GNPy v2.14.2 run completed 96/96, with corresponding differences of 0.628 and 1.435~dB, demonstrating version sensitivity. Both arms retain EDFA/ROADM warnings; ``successful'' therefore means numerically reproducible under declared assumptions, not physically calibrated.
+
+The corrected refined-pass audit contains 6,144 unique cases: 6,120 active scenarios with matching power in scenario metadata, request JSON, CLI arguments, and returned metrics, plus 24 expected all-off cases. Its 6,120 result files contain 48,960 EDFA minimum-gain warnings and 12,240 unmet ROADM target-power warnings. These exact counts and configuration repairs are retained in the repository rather than the article.
+
+For wireless data, independent LiFi equations pass 9/9 tests; compiled ns-3 probes agree with an independent Python reference in 15/15 values; one integrated run maps all nine application flows; same-seed outputs are byte-identical; and the 48-configuration sweep has 432/432 application mappings. These establish implementation consistency under the stated model, not calibration to the physical testbed.
+\end{authorresponse}
+\change{Section~V-C and Tables~5--6 report the essential versioned replay and wireless validation results; forensic counts and configuration changes are documented here and in the public artefacts.}
+
+\commentheading{R3.5 -- Separate implemented, evaluated, demonstrated, and proposed components}
+\begin{reviewercomment}
+Please separate implemented, evaluated, demonstrated, and proposed components in the Abstract.
+\end{reviewercomment}
+\begin{authorresponse}
+The revised Abstract distinguishes openly available practical campaigns, the evaluated constructed semantic benchmark, the demonstrated LLM/DT workflow, the deterministic baseline, and the versioned numerical replay. Prospective AI/controller integration is absent from the Abstract and clearly labelled in the framework text.
+\end{authorresponse}
+
+\commentheading{R3.6 -- Section overlap}
+\begin{reviewercomment}
+Sections III and IV-A overlap; shorten Section III and use the space for methodology.
+\end{reviewercomment}
+\begin{authorresponse}
+Section~III now gives only the two-branch framework and scope boundary. Section~IV-A begins with one consolidated implemented-versus-prospective paragraph and then describes the practical data path without repeated disclaimers.
+\end{authorresponse}
+
+\commentheading{R3.7 -- AC/DC power detail}
+\begin{reviewercomment}
+Explain the relevance of the AC/DC power-supply detail or remove it.
+\end{reviewercomment}
+\begin{authorresponse}
+Removed as requested because it is not needed for the dataset or DT claims.
+\end{authorresponse}
+
+\commentheading{R3.8 -- ``Optimal'' launch-power claim}
+\begin{reviewercomment}
+Support or soften the claim that $-5$~dBm provides optimal performance.
+\end{reviewercomment}
+\begin{authorresponse}
+We now call $-5$~dBm the operating point used for the practical campaign. The synthetic GNPy results are described as route-dependent sensitivity over three tested powers; no global optimum is claimed.
+\end{authorresponse}
+
+\commentheading{R3.9 -- British/American English}
+\begin{reviewercomment}
+Standardise British or American English.
+\end{reviewercomment}
+\begin{authorresponse}
+We selected British English and standardised active prose (for example, organised, optimisation, behaviour, fibre, centralised). Bibliographic titles and software identifiers retain their source spelling.
+\end{authorresponse}
+
+\commentheading{R3.10 -- ns-3 and heading capitalisation}
+\begin{reviewercomment}
+Use ``ns-3'' consistently and standardise heading capitalisation.
+\end{reviewercomment}
+\begin{authorresponse}
+Corrected throughout. The final synthetic backend is identified as ns-3.44 with CTTC 5G-LENA NR, native Wi-Fi 802.11ax, and an equation-driven LOS LiFi/OWC model. Internal development labels were removed from reader-facing prose except where they form stable repository paths.
+\end{authorresponse}
+
+\commentheading{R3.11 -- Placeholder DOI}
+\begin{reviewercomment}
+Replace or remove the placeholder DOI on page 1.
+\end{reviewercomment}
+\begin{authorresponse}
+Removed. The journal class inserts \texttt{http://dx.doi.org/10.1364/ao.XX.XXXXXX} by default, even when the template DOI line in the manuscript is commented. We now explicitly set \verb|\doi{}|, rebuild the article, and verify the first-page PDF text. The publisher can insert the assigned DOI after acceptance.
+\end{authorresponse}
+
+\commentheading{R3.12 -- Typographical corrections}
+\begin{reviewercomment}
+Correct ``includign BER'', ``based over the NDFF topology'', and ``formats,i.e.''.
+\end{reviewercomment}
+\begin{authorresponse}
+Corrected as requested. We also performed a final mechanical check of active prose, citations, references, terminology, and heading capitalisation.
+\end{authorresponse}
+
+\section*{Availability of revision evidence}
+
+The revised manuscript source, compiled PDF, figures, response letter, Croissant metadata, semantic evaluation outputs, deterministic baseline, GNPy replay, LLM trace, and synthetic wireless validation artefacts are collected in the cited revision repositories. The datasets and associated metadata/documentation are licensed under CC BY-NC 4.0, and the article uses ``openly available'' consistently with those terms. No broader software licence, physical calibration, historical API trace, or autonomous-convergence result is implied.
+
+\end{document}

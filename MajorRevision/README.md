@@ -1,5 +1,13 @@
 # Major-revision evidence and experiments
 
+The point-by-point reviewer response is maintained separately in
+[`Response_Letter/response_letter.tex`](Response_Letter/response_letter.tex),
+with a compiled review copy at
+[`Response_Letter/response_letter.pdf`](Response_Letter/response_letter.pdf).
+
+The released datasets, metadata, and associated documentation are covered by
+the repository-level [CC BY-NC 4.0 data licence](../LICENSE).
+
 Current LLM scope: feasibility demonstration with the existing Agent architecture. Corrected E6 baseline, result figures, phase-specific API costs, runtime and manual recovery are documented in [13_E6_demonstration_revision.md](13_E6_demonstration_revision.md). The corrected unique data and figures are in the E6 `corrected_analysis/` directory; older power-sweep reports remain historical evidence.
 
 This directory contains the experiments, raw outputs, reproducibility files,

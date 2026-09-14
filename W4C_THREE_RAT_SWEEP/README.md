@@ -62,6 +62,7 @@ time.
 The synthetic dataset uses the same technology classes as the practical
 multi-access testbed, but it is a separate, uncalibrated simulation artifact.
 The release does not imply numerical reproduction of the measured telemetry.
-The current public dataset repository does not provide a standard
-LICENSE/SPDX file; this release therefore does not assert formal legal
-reuse terms.
+The dataset, metadata, and associated documentation are licensed under
+[CC BY-NC 4.0](../LICENSE), permitting sharing and adaptation with
+attribution for non-commercial purposes. Software and identified third-party
+material retain their own terms.

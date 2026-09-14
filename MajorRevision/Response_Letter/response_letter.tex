@@ -43,7 +43,7 @@ The principal revisions are:
   \item We apply CC BY-NC 4.0 to the released datasets and associated metadata/documentation, use ``openly available'' consistently, and state the licence in Table~2 and Croissant metadata.
   \item We retain the multi-agent architecture as an experimental workflow, define ``agent'' operationally as a schema-defined functional role, and limit the LLM contribution to a feasibility demonstration.
   \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, versioned GNPy replay, and bounded ns-3 validation.
-  \item We remove the template DOI, rebuild all citations and references, enlarge Fig.~6, regenerate Fig.~7, and standardise terminology and British English.
+  \item We remove the template DOI and compilation date, rebuild all citations and references, enlarge Fig.~6, regenerate Fig.~7, and standardise terminology and British English.
 \end{enumerate}
 
 Text shown in green describes our response; reviewer comments are shown in blue. Repository paths are retained where they are the stable names of released artefacts.
@@ -328,7 +328,7 @@ Corrected throughout. The final synthetic backend is identified as ns-3.44 with 
 Replace or remove the placeholder DOI on page 1.
 \end{reviewercomment}
 \begin{authorresponse}
-Removed. The journal class inserts \texttt{http://dx.doi.org/10.1364/ao.XX.XXXXXX} by default, even when the template DOI line in the manuscript is commented. We now explicitly set \verb|\doi{}|, rebuild the article, and verify the first-page PDF text. The publisher can insert the assigned DOI after acceptance.
+Removed. The journal class inserts \texttt{http://dx.doi.org/10.1364/ao.XX.XXXXXX} by default, even when the template DOI line in the manuscript is commented. It also inserts \verb|Compiled \today| through its default date field. We now explicitly set both \verb|\doi{}| and \verb|\dates{}|, rebuild the article, and verify the first-page PDF text. The publisher can insert the assigned DOI and publication dates after acceptance.
 \end{authorresponse}
 
 \commentheading{R3.12 -- Typographical corrections}

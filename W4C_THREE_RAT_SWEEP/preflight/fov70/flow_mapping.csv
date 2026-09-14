@@ -1,4 +1,0 @@
-flow_id,branch,cpe_id,source_ip,destination_ip,source_port,destination_port,source_ipv4_interface,destination_ipv4_interface,source_device,destination_device,mapping_status,interface_route_status
-1,LiFi,1,10.30.0.1,10.30.0.2,49153,6000,1,1,ns3::PointToPointNetDevice,ns3::PointToPointNetDevice,MATCHED,PASS
-2,LiFi,2,10.30.1.1,10.30.1.2,49154,6001,2,1,ns3::PointToPointNetDevice,ns3::PointToPointNetDevice,MATCHED,PASS
-3,LiFi,3,10.30.2.1,10.30.2.2,49155,6002,3,1,ns3::PointToPointNetDevice,ns3::PointToPointNetDevice,MATCHED,PASS

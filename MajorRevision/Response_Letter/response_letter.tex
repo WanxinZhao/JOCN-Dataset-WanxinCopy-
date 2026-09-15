@@ -38,6 +38,7 @@ We thank the reviewers for their careful and constructive assessment. We revised
 
 The principal revisions are:
 \begin{enumerate}[leftmargin=1.6em]
+  \item We clarify that cross-domain describes the implemented system architecture and unified data-interface workflow, while platform scheduling required the practical datasets to be collected in different time periods.
   \item We apply CC BY-NC 4.0 to the released datasets and associated metadata/documentation, use ``openly available'' consistently, and state the licence in Table~2 and Croissant metadata.
   \item We retain the multi-agent architecture as an experimental workflow, define ``agent'' operationally as a schema-defined functional role, and limit the LLM contribution to a feasibility demonstration.
   \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, versioned GNPy replay, and bounded ns-3 validation.
@@ -56,9 +57,9 @@ A few comments to improve the quality
 \textbullet{} The ``cross-domain'' claim is not really clear, the optical, sensing, and wireless datasets seem to originate from separate measurement campaigns. Please clarify
 \end{reviewercomment}
 \begin{authorresponse}
-We thank the reviewer for this comment. In this paper, cross-domain describes the scope of the proposed dataset framework, which covers optical transport, fibre sensing, and wireless access and supports common telemetry, repository, and semantic-processing interfaces. The source of each practical dataset is identified in its corresponding subsection, and the optical--wireless semantic experiment evaluates the two feature types in a common downstream task.
+We thank the reviewer for this comment. Cross-domain refers to our system architecture and data-processing workflow. The framework connects optical transport, fibre sensing, and wireless access through common repository, semantic-processing, and training interfaces, and these functions can be invoked across the supported domains. Because of experimental-platform usage and scheduling constraints, the practical datasets had to be collected in different time periods. This is an acquisition condition rather than a limitation of the cross-domain architecture. In subsequent training, our unified data interface loads each source, invokes the corresponding domain-specific preprocessing, and supplies the optical and wireless features to the same learning workflow.
 \end{authorresponse}
-\change{The manuscript title remains unchanged. Section~IV identifies the source datasets and reports the semantic-fusion protocol.}
+\change{The manuscript title remains unchanged. The Abstract, Introduction, Section~III, Section~IV-B, the practical dataset description, and the Conclusions now distinguish the cross-domain system architecture from the different acquisition periods and describe the unified data-interface calls used during training.}
 
 \begin{reviewercomment}
 \textbullet{} Provide details about the LLM (model used, number of attempts, tool interface, failure rate, cost, latency, or degree of human intervention). Would it be feasible a conventional scripting pipeline as baseline?
@@ -173,7 +174,7 @@ We use privacy-aware to denote a design and evaluation objective, not a formal g
 11. The sources of the optical-link signals are clearly described, whereas the wireless-signal source is identified only as ``a wireless access network.'' Are the wireless signals converted from signals on one of the optical links, as suggested by Figs. 1 and 6?
 \end{reviewercomment}
 \begin{authorresponse}
-No. The wireless telemetry comes from the 5G-CLARITY/REASON multi-access testbed and is not converted from either optical link.
+No. The wireless telemetry comes from the 5G-CLARITY/REASON multi-access testbed and is not converted from either optical link. The optical and wireless datasets enter the cross-domain workflow through the unified data interface during subsequent processing and training.
 \end{authorresponse}
 \change{The practical wireless subsection now identifies the wireless testbed and its 5G, Wi-Fi, and LiFi configuration explicitly.}
 
@@ -224,7 +225,7 @@ Fig.~7 was regenerated from the corrected unique configuration table and is incl
 We replaced the random split with chronological 60/20/20 train/validation/test segments and ten-record purge gaps, yielding 1,698/560/570 evaluated samples. All thresholds, scalers, encoders, classifiers, and attackers are fitted after splitting using training data only. The manuscript now defines the 12 wireless inputs, semantic features, confidence heuristic, optical and wireless risk rules, one-step targets, model architectures, optimiser settings, ten seeds, and evaluation metrics.
 \end{authorresponse}
 \change{Section~IV-B and the public materialised 2,848-row/52-field benchmark now record source indices, split membership, thresholds, features, and labels.}
-\evidence{The source-row indices and rule-derived labels are included in the released benchmark table.}
+\evidence{The optical and wireless records were collected in different time periods because of experimental-platform scheduling. The released benchmark table records source-row indices, unified-interface outputs, split membership, and rule-derived labels.}
 
 \begin{reviewercomment}
 2. Table 1 does not establish improved privacy. V3 has the highest RAT attack accuracy (0.988), while its lower Macro-F1 cannot be interpreted without class distributions and baselines. Please add majority and random baselines, attacker performance on raw telemetry, multiple attacker models, repeated runs, and confidence intervals. Until then, use ``privacy-aware'' rather than ``privacy-preserving.''

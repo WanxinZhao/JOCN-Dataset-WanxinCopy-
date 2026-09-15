@@ -34,13 +34,13 @@ Sen Shen, Wanxin Zhao, Xuewen Chen, et al.
 \hrule
 \vspace{0.8em}
 
-We thank the reviewers for their careful and constructive assessment. We revised the manuscript with three priorities: correcting submission-blocking errors, making the scientific scope explicit, and moving forensic or implementation-level detail from the article into this response and the public revision artefacts. No additional large-scale experiment was introduced in this final editing stage.
+We thank the reviewers for their careful and constructive assessment. We reorganised the article around practical and generated datasets, clarified the contribution of the cross-domain architecture, expanded the experimental methodology, and added reproducibility and correctness checks. Detailed execution records and file-level metadata are provided in the public revision artefacts.
 
 The principal revisions are:
 \begin{enumerate}[leftmargin=1.6em]
   \item We clarify that cross-domain describes the implemented system architecture and unified data-interface workflow, while platform scheduling required the practical datasets to be collected in different time periods.
   \item We apply CC BY-NC 4.0 to the released datasets and associated metadata/documentation, use ``openly available'' consistently, and state the licence in Table~2 and Croissant metadata.
-  \item We retain the multi-agent architecture as an experimental workflow, define ``agent'' operationally as a schema-defined functional role, and limit the LLM contribution to a feasibility demonstration.
+  \item We define the multi-agent workflow operationally through schema-defined roles, shared orchestrator state, simulator tools, and retained intermediate artefacts, and evaluate it through an instrumented run and a deterministic baseline.
   \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, versioned GNPy replay, and bounded ns-3 validation.
   \item We remove the template DOI and compilation date, rebuild all citations and references, enlarge Fig.~6, regenerate Fig.~7, and standardise terminology and British English.
 \end{enumerate}
@@ -59,7 +59,7 @@ A few comments to improve the quality
 \begin{authorresponse}
 We thank the reviewer for this comment. Cross-domain refers to our system architecture and data-processing workflow. The framework connects optical transport, fibre sensing, and wireless access through common repository, semantic-processing, and training interfaces, and these functions can be invoked across the supported domains. Because of experimental-platform usage and scheduling constraints, the practical datasets had to be collected in different time periods. This is an acquisition condition rather than a limitation of the cross-domain architecture. In subsequent training, our unified data interface loads each source, invokes the corresponding domain-specific preprocessing, and supplies the optical and wireless features to the same learning workflow.
 \end{authorresponse}
-\change{The manuscript title remains unchanged. The Abstract, Introduction, Section~III, Section~IV-B, the practical dataset description, and the Conclusions now distinguish the cross-domain system architecture from the different acquisition periods and describe the unified data-interface calls used during training.}
+\change{The Abstract, Introduction, Section~III, Section~IV-B, the practical dataset description, and the Conclusions now distinguish the cross-domain system architecture from the different acquisition periods and describe the unified data-interface calls used during training.}
 
 \begin{reviewercomment}
 \textbullet{} Provide details about the LLM (model used, number of attempts, tool interface, failure rate, cost, latency, or degree of human intervention). Would it be feasible a conventional scripting pipeline as baseline?
@@ -84,7 +84,7 @@ We cross-checked the practical-data README, Croissant record, Table~2, and manus
 
 We also resolved the licence terminology directly. The authors intend the datasets to be reusable for non-commercial research, so we added a repository-level data-licence notice applying Creative Commons Attribution--NonCommercial 4.0 International (CC BY-NC 4.0) to the released datasets and associated metadata/documentation. This licence permits sharing and adaptation with attribution for non-commercial purposes. Software and identified third-party material retain their own terms. Because the non-commercial condition is narrower than the formal open-source definition, the manuscript uses ``openly available'' rather than the potentially ambiguous ``open-source'' label.
 \end{authorresponse}
-\change{Table~2 and the practical dataset subsection now identify CC BY-NC 4.0 explicitly. The Abstract, Introduction, and Conclusions use ``openly available'', and the Croissant \texttt{license} field contains the canonical licence URL. The manuscript title is retained unchanged.}
+\change{Table~2 and the practical dataset subsection now identify CC BY-NC 4.0 explicitly. The Abstract, Introduction, and Conclusions use ``openly available'', and the Croissant \texttt{license} field contains the canonical licence URL. The original manuscript title is retained.}
 \evidence{The repository contains a root \texttt{LICENSE} notice; the practical-data release package links to the same terms. The Croissant record includes the licence, access locations, sizes, checksums, and field units where defined. Unknown external collection totals and undocumented raw wireless units are marked unavailable rather than inferred.}
 
 \section*{Reviewer 2}
@@ -125,9 +125,9 @@ We consolidated data availability and telemetry in Section~II-A, information sel
 5. The first sentence of the fourth paragraph in Section III states: ``The orchestrator coordinates the interactions among multiple agents, DTs, AI engines, data repositories, and network controllers.'' However, Fig. 1 appears to show only data-flow interactions between the orchestrator and the Agentic AI layer. How does the orchestrator coordinate or control the other components?
 \end{reviewercomment}
 \begin{authorresponse}
-The original sentence overstated the evaluated scope. Fig.~1 is now labelled a scope map. The orchestrator dispatches the evaluated data-generation sequence and exchanges structured state with the DT interface; it is not claimed to control every component in Fig.~1. AI engines and network controllers are prospective integration points.
+We rewrote Section~III to describe the implemented relationships directly. The orchestrator owns the shared task state and schedules planning, scenario expansion, DT execution, result analysis, optional reflection, and reporting; it exchanges structured requests and results with the role modules and invokes GNPy or ns-3 through simulator adapters. The AI engine and SDN controller are separate services inherited from our implemented optical telemetry platform~[\emph{JOCN}, 17(2), 139--150, 2025]. They consume repository data and prediction outputs, but the DT-workflow orchestrator does not dispatch those services.
 \end{authorresponse}
-\change{Section~III and the Fig.~1 caption now distinguish the implemented path from contextual components.}
+\change{Section~III and the Fig.~1 caption now identify the orchestrator's control path, the simulator interface, and the connection to the previously implemented telemetry, AI-engine, and controller services.}
 
 \begin{reviewercomment}
 6. Please add references to support the following statement in Section II-C: ``Existing DT and LLM-agent workflows generally assume that simulation objectives, scenario spaces, parameter ranges, and data-generation requirements are manually specified. Limited work has considered dataset generation itself as an autonomous closed-loop workflow, especially across optical and wireless domains.''
@@ -141,7 +141,7 @@ We replaced the unsupported generalisation with a comparison tied to cited DT as
 7. The abstract states: ``The proposed framework integrates distributed and centralised data repositories, Kafka-based telemetry pipelines, DTs, AI engines, and network controllers to support scalable data collection, cross-domain data fusion, and automated dataset generation.'' How is scalability demonstrated or evaluated in the paper?
 \end{reviewercomment}
 \begin{authorresponse}
-It is not evaluated. We removed scalability as a measured contribution and explicitly state that Kafka is an implementation component for which no throughput/latency benchmark is reported. Future larger-space evaluation is identified as future work.
+Scalability was not evaluated in this study, so we removed it from the Abstract and from the claimed contributions. Kafka remains in the architecture as an implemented telemetry transport component, without a scalability conclusion.
 \end{authorresponse}
 \change{The Abstract, framework scope, telemetry section, and Conclusions no longer claim demonstrated scalability.}
 
@@ -149,9 +149,9 @@ It is not evaluated. We removed scalability as a measured contribution and expli
 8. Section IV-A provides an extensive description of the data-acquisition system, but several issues should be addressed. First, the respective roles of InfluxDB and PostgreSQL are repeated in Section III and Sections IV-A.2 and IV-A.4; this implementation logic should not be described excessively. Second, this part of the system appears to be inherited from the authors' previous work, but the manuscript does not clearly distinguish the innovations of the present study from inherited components. If the entire acquisition system comes from previous work, the space devoted to it is disproportionate to that devoted to the cross-domain semantic modules introduced in this paper. Third, the manuscript includes excessive descriptions of the generic capabilities of third-party components. For example, a general introduction to Kafka is not an author contribution and should be shortened or removed. Finally, the authors should focus on functions that have actually been implemented rather than mixing implemented capabilities with future or potential ones. For example, have the following functions already been implemented: ``In addition, lightweight local AI/ML modules can be deployed on distributed databases to support local inference, such as short-term performance forecasting and anomaly detection'' in Section IV-A.2, and ``It also supports on-demand aggregation, where only task-relevant telemetry streams are forwarded for cross-domain analysis, optimisation, or orchestration'' in Section IV-A.3? The authors should review the manuscript and clearly distinguish implemented functions from prospective capabilities throughout.
 \end{reviewercomment}
 \begin{authorresponse}
-We now state the scope once at the beginning of Section~IV-A. Implemented functions are acquisition, InfluxDB/PostgreSQL storage, Kafka transfer, semantic evaluation of exported records, and the reported DT interfaces. AI engines, local inference, controllers, and closed-loop actions are prospective. The telemetry platform is attributed to our earlier work; the present contribution is the dataset organisation and evaluated interfaces.
+We now state the inheritance and additions once at the beginning of Section~IV-A. The previous optical platform implemented acquisition, InfluxDB/PostgreSQL storage, Kafka transfer, OpenFaaS AI services, and SDN-controller interfaces. The cited field trial reported database-to-AI transfer below 0.05~s, multi-link ANN QoT inference below 0.3~s, and controller-driven Voyager reconfiguration. The present study adds wireless telemetry, semantic processing of exported records, the unified optical--wireless training interface, and the DT data-generation workflow. Generic Kafka/database explanations and unsupported local-inference statements were removed.
 \end{authorresponse}
-\change{Repeated disclaimers and generic Kafka/database descriptions were removed. Subsections now describe only the implemented data path needed to understand the released datasets.}
+\change{Section~IV-A now distinguishes the previously implemented platform from the additions in this study, gives concise evidence for the inherited AI/controller functions, and describes only the data path needed to understand the released datasets.}
 
 \begin{reviewercomment}
 9. Section IV-B requires more detail. In Section IV-B.1, the authors state that eight semantic features are used. From which raw features are they calculated, how are they calculated, and why were these particular features selected? Does this step correspond to the ``task-oriented semantic communication'' discussed in Section II-B? The authors are advised to provide a more detailed description of this part of the work.
@@ -190,17 +190,17 @@ The orchestrator receives the request and owns the shared task state. It invokes
 13. Figs. 1 and 6 are structurally very similar, which limits the additional information conveyed by Fig. 6. Moreover, why are the AI engines and network controllers absent from Fig. 6? Was the architecture revised, or were the functions of these two components absorbed by other modules in the figure? Fig. 1 and Section III also state that ``AI engines provide ML and optimisation capabilities for data-driven inference'' and that ``Finally, the network controllers translate the optimised decisions or recommendations generated by the Agentic AI layer into executable network configurations, including path provisioning, cross-domain orchestration, and policy-based closed-loop control.'' However, these functions are not clearly demonstrated in the discussions or results presented in Sections IV and V. Please provide supporting results for these claimed capabilities.
 \end{reviewercomment}
 \begin{authorresponse}
-Fig.~1 is a framework scope map; Fig.~6 is the evaluated sequence. AI engines and controllers are shown only as contextual integration points and are not presented as implemented results. The evaluated paths are telemetry/semantic processing and GNPy/ns-3 execution.
+The two figures now serve different purposes. Fig.~1 shows the complete system architecture and the connections among practical telemetry, repositories, semantic processing, DT generation, AI services, and controllers. Fig.~6 shows the internal sequence of the new orchestrated data-generation workflow, so it includes the shared task state, role-specific calls, simulator interface, and retained artefacts rather than repeating the AI/controller path. The AI engine and SDN controller were implemented and experimentally demonstrated in our earlier optical telemetry platform; Section~IV-A now cites that work and reports its measured transfer, inference, and reconfiguration times. The present experiments extend the platform's data path and evaluate semantic fusion and DT-based generation.
 \end{authorresponse}
-\change{Captions and scope paragraphs now state this distinction directly; unsupported closed-loop claims were removed.}
+\change{The Fig.~1 and Fig.~6 captions and Sections~III--V now state the distinct architectural and workflow roles. Section~IV-A provides the published implementation evidence for the AI-engine and controller blocks.}
 
 \begin{reviewercomment}
 14. Are the five ``agents'' in Fig. 6 merely nodes that invoke an LLM, or are they autonomous agents? If they are agents, their internal structures should be incorporated into Fig. 6, including their tools, memory-management mechanisms, and intermediate scheduling components. Although a multi-agent architecture can improve flexibility and completeness, it also introduces inter-agent communication overhead, increases the number of LLM calls, and makes the overall framework less controllable. The authors should therefore explain why the Planner Agent, Scenario Expansion Agent, and Report Agent are implemented as agents when their assigned tasks do not appear particularly complex. If these components are not agents, the relevant descriptions should be revised and the characterization of the framework as multi-agent should be reconsidered.
 \end{reviewercomment}
 \begin{authorresponse}
-We retain the multi-agent architecture as the experimental design and give an operational definition: the five agents are schema-defined functional roles coordinated through orchestrator-owned shared state. Planner, Scenario Expansion, and Reflection invoke the LLM; Results Analysis and Report are deterministic. Simulator wrappers, topology/equipment files, KPI definitions, and stored results are their tools and knowledge. Role separation provides explicit input/output contracts and traceable intermediate artefacts. We do not claim independent persistent schedulers, separate long-term memories, or that every role must use an LLM. Communication overhead was not evaluated, and no efficiency advantage is claimed.
+We retain the multi-agent architecture as the experimental design and give an operational definition: the five agents are schema-defined functional roles coordinated through orchestrator-owned shared state. Planner, Scenario Expansion, and Reflection invoke the LLM; Results Analysis and Report are deterministic. Simulator wrappers, topology/equipment files, KPI definitions, and stored results are their tools and knowledge. Role separation provides explicit input/output contracts, traceable intermediate artefacts, and deterministic replacement points. The roles exchange serialised state through the orchestrator rather than peer-to-peer messages. The instrumented run quantifies the observable LLM overhead as six calls, 108,308 tokens, and 26.22~s summed API latency; it does not isolate an inter-role communication ablation or establish an efficiency advantage.
 \end{authorresponse}
-\change{Section~V-A now retains only the operational definition and real module division. The more detailed rationale and absent-capability clarification are moved to this response.}
+\change{Fig.~6 and Section~V-A now show the operational role definitions, shared state, tools, retained artefacts, and orchestration sequence. Table~3 reports the measured call, token, latency, cost, retry, and failure totals.}
 
 \begin{reviewercomment}
 15. In Fig. 6, the font color used for the Reflection Agent is too similar to the background color, making the text difficult to read. Please avoid this color combination.
@@ -259,14 +259,14 @@ For wireless data, independent LiFi equations pass 9/9 tests; compiled ns-3 prob
 5. Separate implemented, evaluated, demonstrated, and proposed components in the abstract.
 \end{reviewercomment}
 \begin{authorresponse}
-The revised Abstract distinguishes openly available practical datasets, the evaluated semantic-fusion benchmark, the demonstrated LLM/DT workflow, the deterministic baseline, and the versioned numerical replay. Prospective AI/controller integration is absent from the Abstract and clearly labelled in the framework text.
+The revised Abstract distinguishes the implemented cross-domain architecture and unified interface, the separately timed practical acquisitions, the evaluated semantic-fusion benchmark, the LLM/DT workflow, the deterministic baseline, and the versioned numerical replay. The inherited AI-engine and controller implementation is described and cited in Sections~III and IV-A rather than presented as a new experimental result.
 \end{authorresponse}
 
 \begin{reviewercomment}
 6. Sections 3 and 4.A overlap; shorten Section 3 and use the space for methodology.
 \end{reviewercomment}
 \begin{authorresponse}
-Section~III now gives only the two-branch framework and scope boundary. Section~IV-A begins with one consolidated implemented-versus-prospective paragraph and then describes the practical data path without repeated disclaimers.
+Section~III now gives the two data workflows, the orchestrator relationship, and the boundary between inherited platform functions and the contributions of this study. Section~IV-A contains the component-level implementation details and the evidence for the inherited AI-engine/controller services. The repeated database, telemetry, and capability descriptions were removed.
 \end{authorresponse}
 
 \begin{reviewercomment}
@@ -313,6 +313,6 @@ Corrected as requested. We also performed a final mechanical check of active pro
 
 \section*{Availability of revision evidence}
 
-The revised manuscript source, compiled PDF, figures, response letter, Croissant metadata, semantic evaluation outputs, deterministic baseline, GNPy replay, LLM trace, and synthetic wireless validation artefacts are collected in the cited revision repositories. The datasets and associated metadata/documentation are licensed under CC BY-NC 4.0, and the article uses ``openly available'' consistently with those terms. No broader software licence, physical calibration, historical API trace, or autonomous-convergence result is implied.
+The revised manuscript source, compiled PDF, figures, response letter, Croissant metadata, semantic evaluation outputs, deterministic baseline, GNPy replay, LLM trace, and synthetic wireless validation artefacts are collected in the cited revision repositories. The datasets and associated metadata/documentation are licensed under CC BY-NC 4.0, and the article uses ``openly available'' consistently with those terms. Software and cited external datasets retain their stated licences; simulator-calibration and workflow-trace boundaries are documented with the corresponding evidence.
 
 \end{document}

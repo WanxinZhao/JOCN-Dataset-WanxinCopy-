@@ -1,0 +1,42 @@
+{
+  "detail_rows": 432,
+  "detail_rows_with_any_issue": 0,
+  "duplicate_application_flow_keys": {},
+  "duplicate_run_keys": {},
+  "expected": {
+    "application_flow_ids": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "application_flow_rows": 432,
+    "raw_flow_rows": 624,
+    "run_configurations": 48
+  },
+  "extra_configurations": [],
+  "generated_source_default_inconsistencies": {
+    "lifiRateMbps": 24,
+    "mobilitySpeed": 48,
+    "offeredLoadMbps": 36,
+    "seed": 32
+  },
+  "issue_counts": {},
+  "missing_configurations": [],
+  "observed": {
+    "archive_application_keys": 432,
+    "archive_run_configurations": 48,
+    "dataset_rows": 432,
+    "dataset_run_ids": 48
+  },
+  "top_level_scenario_inconsistencies": {
+    "scenario.lifi.data_rate_vs_expansion": 24,
+    "scenario.mobility.speed_mps_vs_expansion": 48,
+    "scenario.traffic.data_rate_vs_expansion": 36
+  }
+}

@@ -1,0 +1,1509 @@
+{
+  "access_counts": {
+    "LTE/EPC": 144,
+    "LiFi-surrogate": 144,
+    "Wi-Fi": 144
+  },
+  "access_diversity_counts": {
+    "0.75": 432
+  },
+  "application_rows": 432,
+  "congestion_risk_counts": {
+    "high": 42,
+    "low": 306,
+    "medium": 84
+  },
+  "effects": [
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 2.054196666666667,
+      "high_std": 0.00020169866866487203,
+      "low_mean": 2.054196666666667,
+      "low_std": 0.00020169866866487203,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 6.512442222222222,
+      "high_std": 0.8336434735160756,
+      "low_mean": 6.512442222222222,
+      "low_std": 0.8336434735160756,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.18209922222222222,
+      "high_std": 0.013501063442016679,
+      "low_mean": 0.18209922222222222,
+      "low_std": 0.013501063442016679,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 5.134333333333333,
+      "high_std": 0.00030667092921159237,
+      "low_mean": 5.134333333333333,
+      "low_std": 0.00030667092921159237,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 6.518265555555555,
+      "high_std": 0.006818502701104321,
+      "low_mean": 6.518265555555555,
+      "low_std": 0.006818502701104321,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 1.48725,
+      "high_std": 1.4552137502275312e-05,
+      "low_mean": 1.48725,
+      "low_std": 1.4552137502275312e-05,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "high_std": 0.0005169821933443376,
+      "low_mean": 5.827946666666667,
+      "low_std": 0.0005169821933443376,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 18.151633333333333,
+      "high_std": 0.006670920211679303,
+      "low_mean": 18.151633333333333,
+      "low_std": 0.006670920211679303,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 1.7420066666666667,
+      "high_std": 0.00047544406487357493,
+      "low_mean": 1.7420066666666667,
+      "low_std": 0.00047544406487357493,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "high_std": 0.0005169821933443376,
+      "low_mean": 5.827946666666667,
+      "low_std": 0.0005169821933443376,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 18.58971111111111,
+      "high_std": 0.006620724048629062,
+      "low_mean": 18.58971111111111,
+      "low_std": 0.006620724048629062,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 1.8543777777777777,
+      "high_std": 0.00039952259091771675,
+      "low_mean": 1.8543777777777777,
+      "low_std": 0.00039952259091771675,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 2.0551066666666666,
+      "high_std": 3.067859955395104e-05,
+      "low_mean": 2.0551066666666666,
+      "low_std": 3.067859955395104e-05,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 2.26881,
+      "high_std": 0.14504160401111693,
+      "low_mean": 2.26881,
+      "low_std": 0.14504160401111693,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.001621701877777778,
+      "high_std": 0.001429652889744899,
+      "low_mean": 0.001621701877777778,
+      "low_std": 0.001429652889744899,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 5.135683888888888,
+      "high_std": 0.0009006934510755378,
+      "low_mean": 5.135683888888888,
+      "low_std": 0.0009006934510755378,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 2.2680616666666666,
+      "high_std": 0.14510457913275554,
+      "low_mean": 2.2680616666666666,
+      "low_std": 0.14510457913275554,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0006615017,
+      "high_std": 0.0005757423167809056,
+      "low_mean": 0.0006615017,
+      "low_std": 0.0005757423167809056,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 10.269338888888889,
+      "high_std": 0.00297936805160547,
+      "low_mean": 10.269338888888889,
+      "low_std": 0.00297936805160547,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 2.2675005555555554,
+      "high_std": 0.14512638202097072,
+      "low_mean": 2.2675005555555554,
+      "low_std": 0.14512638202097072,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0003359877844444444,
+      "high_std": 0.00028385801367252004,
+      "low_mean": 0.0003359877844444444,
+      "low_std": 0.00028385801367252004,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 18.366794444444444,
+      "high_std": 2.232606920032966,
+      "low_mean": 18.366794444444444,
+      "low_std": 2.232606920032966,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.04586689725268891,
+      "high_std": 0.047196650483712875,
+      "low_mean": 0.04586689725268891,
+      "low_std": 0.047196650483712875,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 340.81385111111115,
+      "high_std": 348.4503202473024,
+      "low_mean": 340.81385111111115,
+      "low_std": 348.4503202473024,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.12020682695555555,
+      "high_std": 0.12352248568726922,
+      "low_mean": 0.12020682695555555,
+      "low_std": 0.12352248568726922,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": -5.555555555591951e-06,
+      "high_mean": 2.0549133333333334,
+      "high_std": 0.0001952976612010096,
+      "low_mean": 2.054918888888889,
+      "low_std": 0.00019795688445864768,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.012657777777777657,
+      "high_mean": 2.594263333333333,
+      "high_std": 0.29878923856516804,
+      "low_mean": 2.5816055555555555,
+      "low_std": 0.2930338307757057,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0009107600000000105,
+      "high_mean": 0.10255834111111112,
+      "high_std": 0.05669426161605225,
+      "low_mean": 0.10164758111111111,
+      "low_std": 0.056692862905512696,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": -1.111111111207208e-05,
+      "high_mean": 5.1341777777777775,
+      "high_std": 0.0016103983999419733,
+      "low_mean": 5.13418888888889,
+      "low_std": 0.0016202719048825178,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.013721111111111295,
+      "high_mean": 2.588826666666667,
+      "high_std": 0.2937808311529892,
+      "low_mean": 2.5751055555555555,
+      "low_std": 0.2879437086781378,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0016328000000000037,
+      "high_mean": 0.082716,
+      "high_std": 0.02895738748782424,
+      "low_mean": 0.0810832,
+      "low_std": 0.02833149497702056,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": -0.0002888888888890051,
+      "high_mean": 10.1396,
+      "high_std": 0.3677892587114656,
+      "low_mean": 10.139888888888889,
+      "low_std": 0.3669124192483718,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "high_std": 0.0,
+      "low_mean": 0.0,
+      "low_std": 0.0,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.05881000000000025,
+      "high_mean": 3.0071600000000003,
+      "high_std": 0.1714170552294299,
+      "low_mean": 2.94835,
+      "low_std": 0.1300259126210663,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.031199555555555536,
+      "high_mean": 0.5468078888888889,
+      "high_std": 0.18238697443006074,
+      "low_mean": 0.5156083333333333,
+      "low_std": 0.1954009573075472,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": -0.5919777777777782,
+      "high_mean": 17.61111111111111,
+      "high_std": 1.7616309117635982,
+      "low_mean": 18.20308888888889,
+      "low_std": 1.5474830071817718,
+      "metric": "throughput_mbps",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.0021440454699454548,
+      "high_mean": 0.06558554185186871,
+      "high_std": 0.02688123301926033,
+      "low_mean": 0.06344149638192326,
+      "low_std": 0.025904098521731662,
+      "metric": "packet_loss_ratio",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 81.14994444444443,
+      "high_mean": 403.5286444444444,
+      "high_std": 298.09696987606964,
+      "low_mean": 322.3787,
+      "low_std": 289.31916420987193,
+      "metric": "mean_delay_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "mobility_3.0_minus_0.5",
+      "difference": 0.00948944444444444,
+      "high_mean": 0.6058594444444444,
+      "high_std": 0.06321145422471004,
+      "low_mean": 0.59637,
+      "low_std": 0.05992525655691233,
+      "metric": "mean_jitter_ms",
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.054196666666667,
+      "low_mean": 2.054196666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 6.512442222222222,
+      "low_mean": 6.512442222222222,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.18209922222222222,
+      "low_mean": 0.18209922222222222,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.054196666666667,
+      "low_mean": 2.054196666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 6.512442222222222,
+      "low_mean": 6.512442222222222,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.18209922222222222,
+      "low_mean": 0.18209922222222222,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.134333333333333,
+      "low_mean": 5.134333333333333,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 6.518265555555555,
+      "low_mean": 6.518265555555555,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.48725,
+      "low_mean": 1.48725,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.134333333333333,
+      "low_mean": 5.134333333333333,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 6.518265555555555,
+      "low_mean": 6.518265555555555,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.48725,
+      "low_mean": 1.48725,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "low_mean": 5.827946666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 18.151633333333333,
+      "low_mean": 18.151633333333333,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.7420066666666667,
+      "low_mean": 1.7420066666666667,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "low_mean": 5.827946666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 18.151633333333333,
+      "low_mean": 18.151633333333333,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.7420066666666667,
+      "low_mean": 1.7420066666666667,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "low_mean": 5.827946666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 18.58971111111111,
+      "low_mean": 18.58971111111111,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.8543777777777777,
+      "low_mean": 1.8543777777777777,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.827946666666667,
+      "low_mean": 5.827946666666667,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 18.58971111111111,
+      "low_mean": 18.58971111111111,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LTE/EPC",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 1.8543777777777777,
+      "low_mean": 1.8543777777777777,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 3.333333333355171e-05,
+      "high_mean": 2.0551233333333334,
+      "low_mean": 2.05509,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17219333333333298,
+      "high_mean": 2.1827133333333335,
+      "low_mean": 2.3549066666666665,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -4.3204022222222355e-05,
+      "high_mean": 0.0016000998666666666,
+      "low_mean": 0.001643303888888889,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 3.333333333355171e-05,
+      "high_mean": 2.0551233333333334,
+      "low_mean": 2.05509,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17219333333333298,
+      "high_mean": 2.1827133333333335,
+      "low_mean": 2.3549066666666665,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -4.3204022222222355e-05,
+      "high_mean": 0.0016000998666666666,
+      "low_mean": 0.001643303888888889,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -5.55555555603604e-06,
+      "high_mean": 5.1356811111111105,
+      "low_mean": 5.1356866666666665,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17220333333333349,
+      "high_mean": 2.18196,
+      "low_mean": 2.3541633333333336,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -3.846815555555547e-05,
+      "high_mean": 0.0006422676222222223,
+      "low_mean": 0.0006807357777777778,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -5.55555555603604e-06,
+      "high_mean": 5.1356811111111105,
+      "low_mean": 5.1356866666666665,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17220333333333349,
+      "high_mean": 2.18196,
+      "low_mean": 2.3541633333333336,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -3.846815555555547e-05,
+      "high_mean": 0.0006422676222222223,
+      "low_mean": 0.0006807357777777778,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.00010000000000331966,
+      "high_mean": 10.26938888888889,
+      "low_mean": 10.269288888888887,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17221222222222154,
+      "high_mean": 2.181394444444445,
+      "low_mean": 2.3536066666666664,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -2.9639653333333375e-05,
+      "high_mean": 0.00032116795777777774,
+      "low_mean": 0.0003508076111111111,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.00010000000000331966,
+      "high_mean": 10.26938888888889,
+      "low_mean": 10.269288888888887,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.17221222222222154,
+      "high_mean": 2.181394444444445,
+      "low_mean": 2.3536066666666664,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -2.9639653333333375e-05,
+      "high_mean": 0.00032116795777777774,
+      "low_mean": 0.0003508076111111111,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 4.339388888888887,
+      "high_mean": 20.536488888888886,
+      "low_mean": 16.1971,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.09173379450537782,
+      "high_mean": 0.0,
+      "low_mean": 0.09173379450537782,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -677.2656311111111,
+      "high_mean": 2.1810355555555554,
+      "low_mean": 679.4466666666667,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.24007434608888886,
+      "high_mean": 0.00016965391111111111,
+      "low_mean": 0.24024399999999999,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 4.339388888888887,
+      "high_mean": 20.536488888888886,
+      "low_mean": 16.1971,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.09173379450537782,
+      "high_mean": 0.0,
+      "low_mean": 0.09173379450537782,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -677.2656311111111,
+      "high_mean": 2.1810355555555554,
+      "low_mean": 679.4466666666667,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "LiFi-surrogate",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": -0.24007434608888886,
+      "high_mean": 0.00016965391111111111,
+      "low_mean": 0.24024399999999999,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.054918888888889,
+      "low_mean": 2.054918888888889,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.5816055555555555,
+      "low_mean": 2.5816055555555555,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.10164758111111111,
+      "low_mean": 0.10164758111111111,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.0549133333333334,
+      "low_mean": 2.0549133333333334,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.594263333333333,
+      "low_mean": 2.594263333333333,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.10255834111111112,
+      "low_mean": 0.10255834111111112,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 2.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.13418888888889,
+      "low_mean": 5.13418888888889,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.5751055555555555,
+      "low_mean": 2.5751055555555555,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0810832,
+      "low_mean": 0.0810832,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 5.1341777777777775,
+      "low_mean": 5.1341777777777775,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.588826666666667,
+      "low_mean": 2.588826666666667,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.082716,
+      "low_mean": 0.082716,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 5.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 10.139888888888889,
+      "low_mean": 10.139888888888889,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 2.94835,
+      "low_mean": 2.94835,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.5156083333333333,
+      "low_mean": 0.5156083333333333,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 10.1396,
+      "low_mean": 10.1396,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.0,
+      "low_mean": 0.0,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 3.0071600000000003,
+      "low_mean": 3.0071600000000003,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.5468078888888889,
+      "low_mean": 0.5468078888888889,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 10.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 18.20308888888889,
+      "low_mean": 18.20308888888889,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.06344149638192326,
+      "low_mean": 0.06344149638192326,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 322.3787,
+      "low_mean": 322.3787,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.59637,
+      "low_mean": 0.59637,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 0.5,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 17.61111111111111,
+      "low_mean": 17.61111111111111,
+      "metric": "throughput_mbps",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.06558554185186871,
+      "low_mean": 0.06558554185186871,
+      "metric": "packet_loss_ratio",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 403.5286444444444,
+      "low_mean": 403.5286444444444,
+      "metric": "mean_delay_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    },
+    {
+      "access_type": "Wi-Fi",
+      "comparison": "lifi_rate_100_minus_50",
+      "difference": 0.0,
+      "high_mean": 0.6058594444444444,
+      "low_mean": 0.6058594444444444,
+      "metric": "mean_jitter_ms",
+      "mobility_speed_mps": 3.0,
+      "offered_load_mbps": 20.0
+    }
+  ],
+  "surprises": [
+    "access_diversity_score is invariant in scenarios.csv: 0.75 across 432 rows."
+  ]
+}

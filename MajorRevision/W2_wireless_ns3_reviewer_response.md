@@ -1,46 +1,67 @@
-# Wireless synthetic-data revision response
+# Wireless synthetic-data reviewer response
 
-## Reviewer 3, Comment 4 — Independent correctness and reproducibility validation
+## Reviewer 3, Comment 4 — Independent correctness validation
 
-We agree that a successful simulator build and run alone cannot detect a plausible but incorrectly configured scenario, KPI extractor, or flow mapping. In response, we replaced the former synthetic wireless result path with a bounded three-RAT W4C experiment using ns-3.44, CTTC 5G-LENA `5g-lena-v4.0.y` for 5G NR, native IEEE 802.11ax for Wi-Fi 6, and an equation-driven LOS LiFi/OWC link model. The previous LTE/EPC + 802.11n + CSMA-surrogate implementation is retained only as an explicitly labelled legacy/development baseline and is not used as the final synthetic result.
+We agree that successful compilation and execution alone cannot establish the
+correctness of generated simulation data. We therefore added independent
+validation for the released ns-3 dataset. Across all 48 archived runs, an
+independent parser reconstructed 624 FlowMonitor rows and the 432 explicitly
+mapped application-flow records. All application-flow packet counters agreed
+exactly with the exported KPI files. The maximum absolute differences caused
+by XML time serialisation were 5.57 × 10^-5 Mbps for throughput,
+3.16 × 10^-3 ms for mean delay, and 1.10 × 10^-5 ms for
+mean jitter.
 
-The final wireless evidence is:
+Three representative low-, medium-, and high-load configurations were then
+rebuilt and replayed with ns-3.44. All three executed successfully, reproduced
+the expected nine application flows, and gave zero KPI delta relative to the
+archived results. Two executions of the same fixed-seed configuration also
+produced identical application-flow KPIs. Finally, a separately written stock
+ns-3 reference implementation passed all five topology/configuration checks
+and all 63 keyed KPI comparisons.
 
-1. **Backend and equation qualification.** The 5G-LENA NR and native 802.11ax branches build and execute in the qualified ns-3.44 environment. The independent LiFi mathematical test suite passes 9/9 equation-behaviour tests. A compiled ns-3 LiFi link probe agrees with the independent Python reference for 15/15 compared values across aligned-near, aligned-far, and out-of-FOV geometries.
-2. **Integrated flow and interface mapping.** A final-source integrated acceptance run contains three NR, three Wi-Fi 802.11ax, and three LiFi application flows. All 9/9 declared five-tuple mappings resolve to the expected branch/CPE/interface.
-3. **Fixed-seed repeatability.** Two executions of the same final-source configuration with the same ns-3.44 build, seed, run number, workload, mobility, and FOV produce byte-identical run configuration, scenario metadata, flow mapping, KPI, FlowMonitor XML, and optical-state outputs.
-4. **Full bounded sweep.** The final grid contains 4 offered loads (2/5/10/20 Mbps), 2 mobility speeds (0.5/3 m/s), 2 LiFi receiver FOVs (40/70 degrees), and 3 seeds, giving 48 configurations. All 48 completed. Each contains 9 application flows, yielding 432 application-flow records; all 432 mappings pass. The raw FlowMonitor exports contain 624 rows because they also include non-application/control flows, which are excluded from the application table.
+These checks support the correctness and reproducibility of the released data
+under the declared simulation assumptions. They are not a validation of
+physical fidelity. The simulated branches are LTE/EPC, Wi-Fi 802.11n, and a
+CSMA-based LiFi surrogate; the latter is not a physical LiFi channel model.
+Loss is reported as the FlowMonitor-reported ratio
+`lostPackets/txPackets`, not as terminal packet loss at the finite simulation
+stop.
 
-These tests substantially strengthen confidence that the final synthetic dataset is reproducible and internally consistent with the declared ns-3 scenario and KPI/export pipeline. They do not establish physical-testbed calibration, universal RAT rankings, or physical-model fidelity. The LiFi model is an equation-driven LOS OWC/error abstraction behind a stock packet-access path, not a complete standardized LiFi PHY/MAC.
+## Reviewer 3, Comment 3 — Simulation-side workflow evidence
 
-The FlowMonitor field is reported as the **FlowMonitor-reported packet-loss ratio**, `lostPackets/txPackets`. It is not interpreted as terminal packet loss at the finite simulation stopping time; in the W4C application table, 172/432 rows have `tx_packets-rx_packets` different from the FlowMonitor `lostPackets` field.
+The wireless demonstration covers 48 bounded configurations and 432
+application-flow records. It establishes that the workflow can construct and
+execute the declared heterogeneous ns-3 scenarios, export mapped per-flow
+data, and reproduce representative configurations. The validation above
+supports simulator-output and KPI-pipeline correctness; it does not establish
+that an LLM workflow is superior to a deterministic or hand-written workflow.
+The manuscript treats the LLM component as a feasibility demonstration and
+reports its available trace information separately.
 
-Evidence: the public revision repository contains the complete final release at [`W4C_THREE_RAT_SWEEP/`](https://github.com/WanxinZhao/JOCN-Dataset-WanxinCopy-/tree/main/W4C_THREE_RAT_SWEEP/), including the source, preflight, 48 run directories, aggregate tables, independent LiFi tests, and repeatability outputs. The release summary is `W4C_THREE_RAT_SWEEP/W4C_FINAL_SWEEP_REPORT.md`. The `NS3_Wireless/` directory in the separate upstream framework repository is an earlier LTE/EPC, IEEE 802.11n, and CSMA-surrogate baseline, not the implementation used for the final W4C results.
+## Reviewer 3, Comment 10 — ns-3 terminology
 
-## Reviewer 3, Comment 3 — Simulation-side evaluation of the LLM workflow
-
-For the simulation-side part of this comment, the revised experiment evaluates more than one demonstration point. The LLM-driven workflow constructs and executes a heterogeneous synthetic scenario containing 5G NR, Wi-Fi 802.11ax, and an equation-driven LOS LiFi/OWC model, and produces a bounded 48-configuration dataset with 432 explicitly mapped application-flow records. The analysis averages the three CPE flows within each run and retains the three seeds as the replicate axis for factor summaries.
-
-The new evidence supports executable scenario construction, technology-class coverage, configuration coverage, deterministic repeatability under a fixed build/seed, independent LiFi equation checking, integrated branch/interface mapping, and full-sweep structural completion. It does not establish an LLM advantage over deterministic scripts and does not recover unavailable historical LLM token counts, API cost, latency, prompts, provider metadata, or model-version logs. No such historical quantities are inferred from the simulator outputs.
-
-The practical measured wireless dataset remains separate from the synthetic ns-3 dataset. Sharing the three technology classes does not imply that the synthetic outputs reproduce measured values.
-
-## Reviewer 3, Comment 10 — ns-3 terminology and model boundaries
-
-The final synthetic backend is now described consistently as:
-
-- **5G NR using CTTC 5G-LENA `5g-lena-v4.0.y` on ns-3.44**;
-- **Wi-Fi 6 / IEEE 802.11ax using native ns-3 APIs**;
-- **an equation-driven LOS LiFi/OWC model** with an explicitly documented stock packet-access abstraction.
-
-The final W4C experiment is not described as LTE/EPC, 802.11n, or a CSMA-only LiFi surrogate. Those terms refer only to the preserved legacy baseline when it is mentioned. The manuscript also states that the LiFi model does not provide a complete standardized LiFi PHY/MAC or calibrated optical-testbed emulation, and that cross-branch KPI differences are configuration-specific rather than universal technology rankings.
+The manuscript consistently uses `ns-3` and identifies the simulated access
+branches as LTE/EPC, Wi-Fi 802.11n, and a CSMA-based LiFi surrogate. These
+synthetic models are kept distinct from the separately measured practical
+5G NR, Wi-Fi 6, and LiFi testbed. No claim is made that the simulation
+reproduces or calibrates that practical testbed.
 
 ## Reviewer 1 — Synthetic wireless dataset summary
 
-The dataset-summary table now separates the practical measured wireless campaign from the generated synthetic wireless DT dataset. The synthetic entry identifies ns-3.44 and CTTC 5G-LENA, native 802.11ax, equation-driven LOS LiFi/OWC, 48 configurations, 432 application-flow records, 624 raw FlowMonitor records, the three seeds, the four-by-two-by-two-by-three sweep, and the validation artifacts. No unsupported synthetic file-size or licence assertion is added.
+The dataset summary now reports ns-3, 48 run-level configurations, 432
+application-flow records, 624 raw FlowMonitor rows, three seeds, four offered
+loads, two mobility speeds, two LiFi-surrogate link rates, 1024-byte packets,
+and 10-s runs. The released source, scenario metadata, FlowMonitor XML, KPI
+CSV, and aggregate table are available under `NS3_Wireless/` in the cited
+public data-generation repository. The independent reconstruction, replay,
+repeatability, and reference-implementation evidence is released under
+`MajorRevision/ns3_wireless_validation/` in the revision repository.
 
-## Evidence locations and claim boundary
+## Claim boundary
 
-The final manuscript locations are `sec:ns3_wireless`, `tab:dataset_summary`, `tab:ns3_validation`, `fig:w4c_throughput`, and `fig:w4c_lifi_fov`. The final synthetic application table is `W4C_THREE_RAT_SWEEP/analysis/final_application_flow_dataset.csv`; the structure summary is `W4C_THREE_RAT_SWEEP/analysis/sweep_structure_summary.json`; the run-aware factor analysis is `W4C_THREE_RAT_SWEEP/analysis/scientific_sweep_analysis.md`.
-
-The added evidence supports the claim that the workflow generated a bounded, reproducible, internally checked synthetic three-RAT dataset under declared ns-3 and optical-model assumptions. It does not support calibrated reproduction of the practical 5G NR/Wi-Fi 6/LiFi testbed, a complete physical LiFi simulator, a terminal-loss interpretation of the FlowMonitor field, or a universal superiority claim for any RAT.
+The dataset demonstrates bounded synthetic wireless data generation and
+implementation-level reproducibility. Cross-branch differences are reported
+only under the adopted configuration. The results do not establish a universal
+technology ranking, 5G NR behaviour, a physical LiFi model, or calibration to
+the practical wireless campaign.

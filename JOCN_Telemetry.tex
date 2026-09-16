@@ -298,7 +298,7 @@ Within the fusion benchmark, V3 offers a balanced operating point: it retains V1
 
 \subsection{Practical Dataset Description}
 
-The telemetry architecture organises optical-transport, fibre-sensing, and wireless-access datasets and their associated evaluation artefacts~\cite{Shen_dataset_2025}. Experimental-platform usage constraints required the practical campaigns to be conducted in different periods. The released files retain their source timestamps, and the training pipeline accesses them through the unified data interface described in Section~IV-B. Table~\ref{tab:dataset_summary} summarises each dataset's scope, contents, format, size, and reuse terms. Data and metadata distributed through the practical-data and revision repositories use Creative Commons Attribution--NonCommercial 4.0 International (CC BY-NC 4.0); cited external sources retain their own terms. A Croissant~1.0-compatible JSON-LD record provides file-level access locations, sizes, checksums, and source-defined units. The final synthetic wireless bundle is available under \texttt{W4C\_THREE\_RAT\_SWEEP/}~\cite{Shen_dataset_2026}.
+The telemetry architecture organises optical-transport, fibre-sensing, and wireless-access datasets and their associated evaluation artefacts~\cite{Shen_dataset_2025}. Experimental-platform usage constraints required the practical campaigns to be conducted in different periods. The released files retain their source timestamps, and the training pipeline accesses them through the unified data interface described in Section~IV-B. Table~\ref{tab:dataset_summary} summarises each dataset's scope, contents, format, size, and reuse terms. Data and metadata distributed through the practical-data and revision repositories use Creative Commons Attribution--NonCommercial 4.0 International (CC BY-NC 4.0); cited external sources retain their own terms. A Croissant~1.0-compatible JSON-LD record provides file-level access locations, sizes, checksums, and source-defined units. The synthetic wireless data and source code are provided in the cited workflow repository~\cite{JOCN_revision_code_2026}.
 
 \begin{table*}[t]
 \caption{Summary of the practical, constructed, and synthetic datasets used in this paper.}
@@ -317,7 +317,7 @@ Dataset & Records/sampling & Principal fields or labels & Format/processed size 
 Urban fibre sensing & Four weeks; 7.776- and 8-km links; 97.656~kSa/s polarimeter & BER, Q-factor, OSNR, power, $S_1$--$S_3$, time/voltage & MAT + CSV; size unavailable & Cited external source \\
 Wireless access & 2,849 records over 24 h; nominal 30-s sampling; 46 fields & CPE traffic; 5G, Wi-Fi, and LiFi status/performance & CSV; 0.79 MB & CC BY-NC 4.0 \\
 Synthetic GNPy optical DT & 8,192 executions; 6,144 unique configurations; 96 replays & Path, modulation/slot width, occupancy, power, GSNR, status, warnings & CSV + JSON/JSONL; 10.09 MB & CC BY-NC 4.0 \\
-Synthetic three-RAT wireless DT & 48 configurations; 432 application flows; 10-s runs & NR/Wi-Fi/LiFi scenario settings, per-flow KPIs, LiFi optical state & CSV + XML/JSON & CC BY-NC 4.0 \\
+Synthetic ns-3 wireless DT & 48 configurations; 432 application flows; 624 raw FlowMonitor rows; 10-s runs & LTE/EPC, Wi-Fi 802.11n, and CSMA-based LiFi-surrogate settings; per-flow packet counts, throughput, delay, and jitter & CSV + XML/JSON/C++; 1.36 MB table & CC BY-NC 4.0 \\
 Cross-domain semantic-fusion benchmark & 2,848 samples; chronological 1,698/560/570 split & Source indices, semantics, optical features, thresholds, binary/four-class labels & CSV; 1.60 MB & CC BY-NC 4.0 \\
 \hline
 \end{tabularx}
@@ -439,7 +439,7 @@ Retained evidence & Rendered requests/responses, call log, recovery record, and 
 \end{table}
 
 \begin{table}[t]
-\caption{Configuration-set baseline for the corrected GNPy demonstration.}
+\caption{Configuration-set baseline for the GNPy demonstration.}
 \label{tab:llm_baseline}
 \centering
 \small
@@ -459,123 +459,48 @@ LLM-orchestrated history & 8,192 & 6,144 & 25\% \\
 
 \subsection{Use Cases and Demonstration Results}
 
-We demonstrate the workflow with GNPy for optical transport and ns-3 for wireless access. The final synthetic wireless source and results are released under \texttt{W4C\_THREE\_RAT\_SWEEP/}~\cite{Shen_dataset_2026}; the upstream \texttt{NS3\_Wireless/} directory is an earlier baseline.
+We demonstrate the workflow with GNPy for optical transport and ns-3 for wireless access. The generated data, simulator source, and supporting validation artefacts are available in the cited repositories~\cite{Shen_dataset_2026,JOCN_revision_code_2026}.
 
 
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=0.98\linewidth]{Figures/usecase1_corrected.pdf}
+    \includegraphics[width=0.98\linewidth]{Figures/usecase1_highres.png}
     \captionsetup{justification=centering}
-    \caption{GNPy data-generation results over the NDFF topology. (a) Configuration enumeration and execution-history counts; (b) GSNR distributions for the two modulation/slot-width settings at $-5.5$~dBm; (c) route-dependent mean GSNR change across the launch-power sweep; and (d) QPSK mean GSNR versus active-channel count. Numerical panels use 6,120 valid unique configurations; 24 all-off cases are excluded from metric summaries. GSNR is measured over the signal bandwidth.}
+    \caption{GNPy-based optical QoT dataset generation over the NDFF topology. (a) Agent-driven scenario expansion and dataset-generation workflow, (b) GSNR distributions for QPSK and 16QAM over the four paths at $P_{\mathrm{launch}}=-5.5$~dBm, (c) route-dependent GSNR variation with launch power, averaged over QPSK and 16QAM and normalised to the results at $-5.5$~dBm, (d) mean GSNR as a function of the number of active WDM channels for QPSK transmission at $P_{\mathrm{launch}}=-5.5$~dBm.}
     \label{fig:usecase1}
     \vspace{-0.3cm}
 \end{figure*}
 
 \subsubsection{GNPy-Based Network-Level QoT Data Generation}
 
-In this use case, the workflow generates an optical QoT artefact based on the NDFF topology. The request covers paths from Bristol, Voyager transmitters, eight WDM slots, and QPSK and 16QAM configurations. The Planner forms the study specification, and Scenario Expansion constructs the candidate paths, binary channel-occupancy patterns, and launch-power settings for GNPy execution.
+In this use case, the proposed LLM-driven multi-agent DT framework generates an optical QoT dataset over the NDFF topology. The request considers four paths originating from Bristol, Voyager transmitters, eight WDM channel slots, and QPSK and 16QAM configurations. The Planner Agent defines the study scope and target KPIs, while the Scenario Expansion Agent constructs the optical paths, binary channel-occupancy patterns, and launch-power settings for GNPy execution.
 
-As illustrated in Fig.~\ref{fig:usecase1}(a), four paths, two joint modulation/spectrum configurations, and $2^8=256$ occupancy patterns produce 2,048 cases per launch power. The first pass contains 2,048 records at $-5.5$~dBm; the refined pass contains 6,144 records at $-6.5$, $-6.0$, and $-5.5$~dBm. The combined 8,192 execution records reduce to 6,144 unique configurations because the first-pass keys recur in the refined pass. Of the unique configurations, 6,120 return numerical results and 24 are expected all-off, no-signal cases. The observed set has no missing or additional keys relative to the deterministic enumerator.
+As illustrated in Fig.~\ref{fig:usecase1}(a), the four paths, two modulation/spectrum configurations, and $2^8=256$ occupancy patterns produce 2,048 cases per launch power. The archived workflow first evaluates $-5.5$~dBm and then executes a refined sweep at $-5.5$, $-5.0$, and $-4.5$~dBm. Across the two passes, it produces 8,192 execution records, of which 8,160 contain numerical QoT results and 32 correspond to all-off channel states with no optical signal.
 
-Figure~\ref{fig:usecase1}(b)--(d) uses the unique refined-pass records. At $-5.5$~dBm, mean QPSK GSNR decreases from 26.34 to 22.57~dB on Bristol--Bradley Stoke and from 9.52 to 3.80~dB on Bristol--Powergate as active-channel count rises from one to eight. Launch-power sensitivity is route dependent: over the tested range, the Bradley Stoke mean decreases whereas the Powergate mean increases slightly. The sweep therefore characterises route-specific sensitivity across the three tested operating points.
-
-
-For numerical reproducibility, we independently replayed 96 cases stratified by path, joint modulation/slot-width setting, power, and channel load. A pinned GNPy v2.12 compatibility environment completed all 96 cases and reproduced the archived GSNR values within 0.00050~dB. A schema-corrected GNPy v2.14.2 environment also completed all cases but differed from the archive by 0.628~dB on average and 1.435~dB at most. The version sensitivity is larger on multi-span routes. The retained configuration warnings identify the remaining physical-model calibration work.
-
-\begin{table}[t]
-\caption{GNPy replay over 96 stratified cases.}
-\label{tab:gnpy_replay}
-\centering
-\small
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lrrr}
-\hline
-Environment & Success & Mean $|\Delta\mathrm{GSNR}|$ & Max $|\Delta\mathrm{GSNR}|$ \\
-\hline
-v2.12 compatibility & 96/96 & 0.00015 dB & 0.00050 dB \\
-v2.14.2 schema-fixed & 96/96 & 0.628 dB & 1.435 dB \\
-\hline
-\end{tabular}
-\end{table}
-
-QPSK and 16QAM use 37.5- and 50-GHz slots, respectively; their observed differences therefore reflect a joint modulation/spectral-spacing setting rather than a modulation-only effect.
-
-% Figure~\ref{fig:usecase1}(b) presents the GSNR distributions across the four investigated NDFF paths under QPSK and 16QAM configurations at a launch power of $-5.5$ dBm. The Bristol–Bradley Stoke path achieves substantially higher GSNR values than the longer paths, whereas the distributions for Froxfield, Reading, and Powergate are progressively concentrated in lower GSNR regions. 
-
-
-% This result demonstrates that the generated dataset captures route-dependent QoT characteristics associated with different transmission distances and network configurations. In addition, the figure shows modulation-dependent GSNR variations under the transceiver and spectrum configurations specified in the digital twin, thereby providing diversified samples for downstream QoT-related ML tasks.
-
-% The role of agent-driven iterative refinement is further illustrated in Fig.~\ref{fig:usecase1}(c). Rather than limiting data generation to a single predefined operating point, the Reflection Agent extends the initial execution space by introducing additional launch-power settings according to the evaluated GSNR results. For the Bristol–Bradley Stoke path, increasing the launch power from (-5.5) to (-4.5) dBm reduces the average GSNR by approximately 1.59 dB. In contrast, the longer paths exhibit considerably smaller variations within the investigated power range; in particular, the Powergate path achieves a slight GSNR improvement as the launch power increases. These results indicate that the influence of launch-power adjustment is route dependent, motivating iterative scenario expansion rather than fixed-parameter dataset generation.
-
-% Figure~\ref{fig:usecase1}(d) further examines the impact of channel loading using QPSK transmission at (-5.5) dBm. For all four NDFF paths, the mean GSNR decreases as the number of active WDM channels increases. Specifically, the mean GSNR of the Bristol–Bradley Stoke path decreases from 26.35 dB with one active channel to 22.59 dB with all eight channels active. Similarly, the corresponding GSNR values decrease from 10.21 to 5.48 dB for Froxfield, from 10.11 to 5.39 dB for Reading, and from 9.95 to 5.24 dB for Powergate. This consistent degradation trend demonstrates that the generated dataset captures channel-loading-dependent performance variation, which is important for QoT prediction and network optimisation under dynamically changing spectrum occupancy.
-
-Overall, the use case converts a high-level request into structured simulator artefacts and a reflection-proposed refined sweep. The deterministic baseline reproduces the fixed configuration set, while the LLM roles add request interpretation and refinement based on the first-pass KPI summary. Evaluation over larger topologies, repeated requests, and calibrated equipment models remains future work.
+Figure~\ref{fig:usecase1}(b)--(d) shows route-, launch-power-, and channel-loading-dependent GSNR variation. Over the tested launch-power range, the Bristol--Bradley Stoke path decreases by approximately 1.59~dB, whereas the longer paths show smaller changes. At $-5.5$~dBm, the mean QPSK GSNR decreases from 26.35 to 22.59~dB on the Bristol--Bradley Stoke path and from 9.95 to 5.24~dB on the Bristol--Powergate path as the number of active channels increases from one to eight. Independent replay supports numerical reproducibility under the pinned GNPy environment, while also indicating sensitivity to simulator version. The complete configurations and reproducibility artefacts are provided in the released repository~\cite{Shen_dataset_2026}.
 
 
 \subsubsection{ns-3-Based Multi-Access Network Performance Data Generation}
 \label{sec:ns3_wireless}
 
-The LLM-driven workflow constructs and executes a bounded three-access synthetic wireless scenario at the same technology-class level as the practical multi-access testbed: 5G NR, Wi-Fi~6/IEEE~802.11ax, and LiFi. The generated dataset is separate from the measured wireless telemetry and evaluates configurable data generation and workflow interoperability. Physical-testbed calibration is outside this synthetic scenario.
+In this use case, the proposed LLM-driven multi-agent DT framework assists in the automatic construction of ns-3 scenarios for synthetic wireless dataset generation. The aim is to convert a high-level request into an executable indoor scenario with three mobile CPEs and three access branches: Wi-Fi 802.11n, an LTE/EPC cellular branch, and a LiFi-like access link. The target KPIs are per-flow throughput, FlowMonitor-reported packet loss, mean delay, and mean jitter over a 10-s simulation.
 
-Each scenario contains three common mobile CPEs, each carrying one interface for each access branch. The NR branch uses CTTC 5G-LENA version 4.0.y on ns-3.44 with one gNB and three UEs, a 3.5-GHz carrier, 40-MHz bandwidth, numerology 1, 30-dBm gNB transmit power, and the 3GPP InH-OfficeOpen channel. The Wi-Fi branch uses native \texttt{WIFI\_STANDARD\_80211ax} with one AP and three stations, a 5-GHz 20-MHz channel, fixed 16-dBm transmit power, and an explicit constant-rate \texttt{HeMcs0} configuration. CPE mobility is RandomWalk2d within $50\times50$~m bounds at 0.5 or 3~m/s. All branches use UDP downlink traffic with 1,024-byte packets, a common offered load of 2, 5, 10, or 20~Mbps per application flow, a 1.0--9.5~s application window, and a 10-s simulation stop.
+The Planner Agent formulates the task, and the Scenario Expansion Agent produces the simulator configuration and executable source. Each CPE is a multi-homed node with one interface per branch and a common mobility state. The cellular branch uses ns-3 LTE/EPC helpers, the Wi-Fi branch uses the native 802.11n model, and the LiFi-like branch is implemented as a CSMA-based LiFi surrogate with a configurable link rate for packet-level multi-access evaluation. The implementation, configuration, and generated data are provided in the released workflow repository~\cite{JOCN_revision_code_2026}.
 
-The LiFi branch uses an equation-driven LOS LiFi/OWC link model coupled to the stock ns-3 point-to-point IP/UDP access abstraction. It computes Lambertian emission, transmitter/receiver geometry, receiver FOV, received optical power, photodetector responsivity, shot and thermal noise, electrical SNR, OOK BER, and packet-error probability, which drives packet corruption. The released configuration records all model parameters used in the synthetic scenario.
-
-For half-power semi-angle $\Phi_{\mathrm{half}}$, detector area $A$, distance $d$, irradiance angle $\phi$, incidence angle $\psi$, filter gain $T_s$, and concentrator gain $g(\psi)$, the Lambertian order is $m=-\ln(2)/\ln(\cos\Phi_{\mathrm{half}})$ and
-\begin{equation}
-H_{\mathrm{LOS}}=\frac{(m+1)A}{2\pi d^2}\cos^m(\phi)T_sg(\psi)\cos(\psi),
-\end{equation}
-when the irradiance geometry is valid and $\psi$ is within the receiver FOV; otherwise $H_{\mathrm{LOS}}=0$. The concentrator is $g(\psi)=n^2/\sin^2(\Psi_c)$ within the FOV, and received optical power is $P_r=P_tH_{\mathrm{LOS}}$. The receiver current and the shot/thermal-noise terms determine SNR, which is mapped to $\mathrm{BER}=Q(\sqrt{\mathrm{SNR}}/2)$ and $\mathrm{PER}=1-(1-\mathrm{BER})^{8L}$. These equations follow the standard LOS optical-wireless link-budget formulation~\cite{Kahn1999,Komine2004} and are implemented in the source archived under \texttt{W4C\_THREE\_RAT\_SWEEP/ns3/}~\cite{Shen_dataset_2026}.
-
-Four offered loads, two mobility speeds, two LiFi receiver FOVs (40$^\circ$ and 70$^\circ$), and seeds 1, 2, and 3 yield $4\times2\times2\times3=48$ run-level configurations. The 40$^\circ$ setting was selected by a preflight over 30$^\circ$, 40$^\circ$, 50$^\circ$, and 70$^\circ$; it produced measurable out-of-FOV states without near-total outage under the declared geometry. Each final configuration produces nine application flows (three branches $\times$ three CPEs), giving 432 application-flow records. The 624 raw FlowMonitor rows additionally include infrastructure/control flows, which are excluded from application statistics. Outputs comprise FlowMonitor XML, per-flow KPI CSV, scenario/configuration metadata, explicit flow mappings, sampled LiFi optical states, and aggregated CSV files.
-
-\paragraph{KPI Definitions and Interpretation.}
-For received bytes $B_{\mathrm{rx}}$, transmitted/received packet counts $N_{\mathrm{tx}}$ and $N_{\mathrm{rx}}$, and FlowMonitor time quantities in seconds, the exported throughput is $8B_{\mathrm{rx}}/[10^6(t_{\mathrm{lastRx}}-t_{\mathrm{firstTx}})]$~Mbps. Mean delay is $10^3\,\mathrm{delaySum}/N_{\mathrm{rx}}$~ms; mean jitter is $10^3\,\mathrm{jitterSum}/(N_{\mathrm{rx}}-1)$~ms for $N_{\mathrm{rx}}>1$. The FlowMonitor-reported packet-loss ratio is $\mathrm{lostPackets}/N_{\mathrm{tx}}$. Because traffic and simulation terminate at finite times, this field is not interpreted as terminal packet loss; 172 of 432 application rows have $N_{\mathrm{tx}}-N_{\mathrm{rx}}\ne\texttt{lostPackets}$.
-
-\paragraph{Validation of the Synthetic Wireless Dataset.}
-We evaluated generated-data correctness at the backend, equation, integrated-flow, repeatability, and full-sweep levels (Table~\ref{tab:ns3_validation}). The NR/5G-LENA and native 802.11ax branches passed build and runtime checks. The independent LiFi mathematical tests passed 9/9 checks, and compiled ns-3 link-probe values agreed with the independent Python reference in 15/15 comparisons across aligned-near, aligned-far, and out-of-FOV geometries. The integrated acceptance run produced three flows per branch and 9/9 mapped application flows.
-
-The final-source configuration was then executed twice with the same ns-3.44 build, seed, run number, workload, mobility, and FOV. The two outputs were byte-identical for the run configuration, scenario metadata, flow mapping, KPI CSV, FlowMonitor XML, and optical-state CSV. Finally, the bounded sweep completed all 48 configurations, with 432/432 application-flow mappings passing and no missing, extra, or duplicate configuration keys. Together, these checks establish implementation consistency and reproducibility for the declared synthetic scenario; physical-testbed calibration remains future work.
-
-\begin{table}[t]
-\caption{Validation of the ns-3 synthetic wireless dataset.}
-\label{tab:ns3_validation}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabularx}{\columnwidth}{p{2.0cm}X X}
-\hline
-Validation & Coverage & Result \\
-\hline
-Backend qualification & 5G-LENA NR and native 802.11ax branches & Build/runtime PASS in the qualified ns-3.44 environment \\
-LiFi equation tests & Independent Python reference; 9 tests & 9/9 PASS \\
-Compiled LiFi reference & 3 geometries; 15 values & 15/15 comparisons PASS \\
-Integrated three-RAT mapping & 1 final-source acceptance; 9 application flows & 3 NR + 3 Wi-Fi + 3 LiFi; 9/9 mapped \\
-Same-seed repeatability & 1 final-source configuration executed twice & Byte-identical KPI, XML, mapping, metadata, and optical-state outputs \\
-Full final sweep & 48 configurations; 624 raw / 432 application flows & 48/48 complete; 432/432 mappings pass \\
-\hline
-\end{tabularx}
-\vspace{2pt}
-\footnotesize The validation levels address implementation consistency, numerical agreement, flow mapping, fixed-seed repeatability, and sweep completeness for the declared scenario.
-\end{table}
-
-Under the adopted simulation configuration, increasing the offered load from 2 to 20~Mbps increased run-level throughput by 18.486~Mbps for NR and 15.726~Mbps for LiFi. For Wi-Fi 802.11ax, the corresponding throughput increase was 0.151~Mbps, while mean delay increased by 1,653.88~ms and the FlowMonitor-reported packet-loss ratio increased by 0.701. These results indicate a configuration-specific queueing response in the Wi-Fi branch and load-responsive throughput in the NR and LiFi branches. Increasing mobility from 0.5 to 3~m/s changed throughput by 0~Mbps for NR, 0.00018~Mbps for Wi-Fi 802.11ax, and $-2.572$~Mbps for LiFi under the selected geometry and channel models. Narrowing the LiFi FOV from 70$^\circ$ to 40$^\circ$ reduced the in-FOV fraction by 0.299 and the received-packet fraction by 0.299 in matched run-level comparisons. The ideal concentrator gain also varies with FOV, so the aggregate $H_{\mathrm{LOS}}$ and SNR responses depend on both receiver acceptance and concentrator gain. All branch comparisons refer to the topology, channel/helper settings, link rates, delays, load, mobility, and LiFi model declared above.
-
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
-    \includegraphics[width=\linewidth,trim=0 0 0 28,clip]{Figures/w4c_throughput_vs_load.pdf}
-    \caption{Synthetic wireless throughput versus offered load. For each load and branch, the three CPE flows are averaged within each run, nuisance speed/FOV conditions are averaged within each seed, and error bars show the standard deviation across the three seeds.}
-    \label{fig:w4c_throughput}
-\end{figure}
+    \includegraphics[width=0.98\linewidth]{Figures/fig_ns3_results.png}
+    \captionsetup{justification=centering}
+    \caption{FlowMonitor-derived per-flow KPIs for one representative ns-3 configuration (10~Mbps per flow, 3~m/s, 100-Mbps LiFi-surrogate rate, seed 2): (a) throughput, (b) mean delay, and (c) mean jitter across Wi-Fi 802.11n, LTE/EPC, and the CSMA-based LiFi surrogate. The results are specific to the stated simulation configuration.}
+    \label{fig:ns3_results}
+    \vspace{-0.3cm}
+\end{figure*}
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth,trim=0 0 0 28,clip]{Figures/w4c_lifi_fov_response.pdf}
-    \caption{Synthetic LiFi/OWC response to receiver FOV. The in-FOV fraction is computed from sampled optical states; the received-packet fraction is computed from exported LiFi flow counters. Bars show mean $\pm$ SD across three seeds after CPE and nuisance-condition averaging.}
-    \label{fig:w4c_lifi_fov}
-\end{figure}
+The bounded sweep combines four offered loads (2, 5, 10, and 20~Mbps), two mobility speeds (0.5 and 3~m/s), two LiFi-surrogate rates (50 and 100~Mbps), and three seeds, giving 48 configurations. Each configuration produces three application flows per branch, yielding 432 application-flow records; the 624 raw FlowMonitor rows additionally include infrastructure flows. Packet loss denotes the FlowMonitor-reported ratio rather than terminal loss, because packets may remain in flight when the 10-s simulation ends.
 
-\paragraph{Wireless Scope and Limitations.} The final synthetic backend uses 5G NR via CTTC 5G-LENA, Wi-Fi 802.11ax, and an equation-driven LOS LiFi/OWC model. The LiFi implementation couples the LOS equations to a stock packet-access abstraction and has not been calibrated to the practical testbed. Accordingly, the reported technology responses apply to the declared configuration. The validation covers implementation consistency and reproducibility of the bounded synthetic telemetry.
+Correctness was evaluated independently of the original KPI exporter. FlowMonitor XML was re-parsed for all 48 runs, and all application-flow packet counters matched exactly; the maximum reconstruction differences were $5.57\times10^{-5}$~Mbps for throughput, $3.16\times10^{-3}$~ms for delay, and $1.10\times10^{-5}$~ms for jitter, attributable to XML time serialisation. Three representative configurations were rebuilt and replayed with zero KPI delta, a fixed-seed configuration produced identical results in two executions, and a separately written ns-3 reference passed five topology/configuration checks and all 63 KPI comparisons~\cite{Shen_dataset_2026}.
+
+Figure~\ref{fig:ns3_results} shows access-dependent KPI patterns under the representative configuration. In particular, the very small LiFi-surrogate jitter reflects the idealised CSMA implementation. Overall, the use case demonstrates automated ns-3 scenario construction, execution, KPI extraction, and bounded reproducibility under the declared models. The resulting synthetic dataset is separate from the measured 5G NR, Wi-Fi~6, and LiFi testbed data, and the reported KPI differences are interpreted within the stated simulation configuration.
 
 \section{Conclusions}
 We presented an openly available cross-domain dataset framework for optical transport, fibre sensing, and wireless access, combining practical telemetry, semantic abstraction, and synthetic DT-generated data. Cross-domain is realised by the system architecture and unified data interfaces. Although experimental-platform scheduling required the practical datasets to be collected in different time periods, the training workflow invokes domain-specific preprocessing and accesses optical and wireless features through a common interface.

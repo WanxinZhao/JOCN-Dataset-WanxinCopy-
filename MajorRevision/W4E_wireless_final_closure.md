@@ -157,13 +157,13 @@ repeatability, reproducibility, or physical fidelity.
 ## 9. Figures 8 and 9
 
 Figure 8 at `JOCN_Telemetry.tex:546-551` uses
-`Figures/w4c_throughput_vs_load.pdf`. Its caption identifies final W4C
+`Figures/three_rat_throughput_vs_load.pdf`. Its caption identifies final W4C
 synthetic wireless throughput, branch labels, CPE averaging within runs, and
 seed-level standard deviations. It contains no legacy labels or universal
 ranking claim.
 
 Figure 9 at `JOCN_Telemetry.tex:553-558` uses
-`Figures/w4c_lifi_fov_response.pdf`. Its caption identifies the final LiFi/OWC
+`Figures/three_rat_lifi_fov_response.pdf`. Its caption identifies the final LiFi/OWC
 FOV response, in-FOV and received-packet fractions, and seed-level variation.
 It contains no legacy labels or physical-calibration claim.
 

@@ -21,7 +21,7 @@ available primary artifacts still cannot establish.
   `semantic_case_v6/data/cross_domain_fusion_dataset.csv`, SHA-256
   `6f290cddd06836042699a6cff615aff90fb3e30a2d3790e1cdf92d8c01412681`.
 - The final W4C source, data dictionary, run outputs, and aggregate tables are
-  public under `W4C_THREE_RAT_SWEEP/` in the revision repository.
+  public under `synthetic_three_rat_wireless_dataset/` in the revision repository.
 - Reviewer 3 Comment 4 is the independent-correctness/reproducibility comment.
 - E5 now supplies a 96-case GNPy numerical replay in both the pinned v2.12
   compatibility environment and the schema-corrected v2.14.2 environment.

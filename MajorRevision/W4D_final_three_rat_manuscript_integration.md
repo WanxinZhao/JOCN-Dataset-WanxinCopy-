@@ -32,7 +32,7 @@ The active manuscript was checked against:
 - `/home/ubuntu/Desktop/LLM Driven wireless environment generation/WIRELESS_REVISION_W4A_NR_WIFI_LIFI_BACKEND_QUALIFICATION.md`;
 - `/home/ubuntu/Desktop/LLM Driven wireless environment generation/WIRELESS_REVISION_W4B_THREE_RAT_IMPLEMENTATION.md`;
 - `/home/ubuntu/Desktop/LLM Driven wireless environment generation/WIRELESS_REVISION_W4C_FINAL_SWEEP.md`;
-- `/home/ubuntu/Desktop/LLM Driven wireless environment generation/W4C_THREE_RAT_SWEEP/`.
+- `/home/ubuntu/Desktop/LLM Driven wireless environment generation/synthetic_three_rat_wireless_dataset/`.
 
 Evidence-to-text anchors in the final source are:
 
@@ -123,9 +123,9 @@ ideal concentrator term changes with FOV.
 Figures 8 and 9 are the two compact W4C figures integrated at
 `JOCN_Telemetry.tex:546-558`:
 
-- `Figures/w4c_throughput_vs_load.pdf`: per-branch throughput versus offered
+- `Figures/three_rat_throughput_vs_load.pdf`: per-branch throughput versus offered
   load, with CPE averaging within runs and seed-level SD bars;
-- `Figures/w4c_lifi_fov_response.pdf`: LiFi in-FOV and received-packet
+- `Figures/three_rat_lifi_fov_response.pdf`: LiFi in-FOV and received-packet
   fractions for 40/70 degrees, with seed-level SD bars.
 
 Both figures are generated from W4C analysis outputs and were visually

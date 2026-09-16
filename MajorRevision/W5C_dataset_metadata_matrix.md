@@ -19,13 +19,13 @@ record count is inferred where the current artifacts do not establish it.
 | Semantic utility result table | Derived evaluation artifact | Wireless semantic evaluation | `MajorRevision/run_e1_e2.py` | Chronological 60/20/20 split; 1,698/560/570 evaluated rows with ten-record purge | Per-seed result rows; exact row count is in the CSV | Representation, task, seed, Accuracy, Balanced Accuracy, Macro-F1, AUROC, AUPRC | Metrics are dimensionless; no raw physical units | CSV | 22,485 B in Croissant metadata | Revision repository has no formal SPDX licence | `MajorRevision/E1_semantic_utility/utility_results_per_seed.csv` | E1 revision artifact; ten seeds; optical source SHA fixed | Derived results, not a raw dataset; labels are rule-derived |
 | Privacy attack result table | Derived evaluation artifact | Wireless privacy/utility evaluation | `MajorRevision/run_e1_e2.py` | Same chronological split and purge as E1 | Per-seed attacker/representation/target rows; exact row count is in the CSV | Representation, attacker, target, seed, accuracy, balanced accuracy, Macro-F1 | Metrics are dimensionless | CSV | 85,616 B in Croissant metadata | **AUTHOR_CONFIRMATION_REQUIRED** | `MajorRevision/E2_privacy/privacy_results_per_seed.csv` | E2 revision artifact; ten seeds | Dominant RAT target is severely imbalanced; not a formal privacy guarantee |
 | Synthetic GNPy configuration artifact | Synthetic generated artifact | Optical transport | LLM-driven workflow with GNPy execution artifacts | Scenario execution history; exact physical time duration is not a dataset field | 8,192 execution records; 6,144 unique configurations; 6,120 `ok`, 24 no-signal; 96 stratified replay cases | Scenario/configuration fields, GSNR/status, replay differences and warnings | GSNR/OSNR in dB where present; other units follow source configurations | CSV, JSONL logs, frozen requirements, source/config manifests | `unique_configurations.csv` 10,091,783 B; replay results 22,566 B | Revision repository has no formal SPDX licence | `MajorRevision/E4_gnpy_audit/` and `MajorRevision/E5_recovered_gnpy_replay/` | v2.12 commit `7ce665010970f57e46672db1ec0864ae448077e6`; strict GNPy 2.14.2 | v2.12 reproduces 96/96 within 0.00050 dB max GSNR error; strict v2.14.2 differs by 0.628/1.435 dB mean/max and warnings persist |
-| Synthetic three-RAT wireless DT dataset | Synthetic generated dataset | Wireless simulation | ns-3.44, CTTC 5G-LENA v4.0.y, native Wi-Fi 802.11ax, equation-driven LOS LiFi/OWC | 10-s simulation runs; sweep metadata per run | 432 application-flow records; 624 raw FlowMonitor rows | 48 configurations; 144 NR, 144 Wi-Fi, 144 LiFi; per-flow KPIs, mappings, scenario metadata, LiFi optical state summaries | KPI and optical-state units are documented in `data_dictionary.csv` | FlowMonitor XML, CSV, JSON/metadata, optical-state CSV | 9,644,759 B for the public W4C bundle | Formal licence/reuse terms not specified in current public repository; no SPDX identifier | `W4C_THREE_RAT_SWEEP/` in the public dataset repository | ns-3.44; 5G-LENA v4.0.y; loads 2/5/10/20 Mbps, speeds 0.5/3 m/s, FOV 40/70 degrees, seeds 1/2/3 | Uncalibrated to practical testbed; LiFi is equation-driven LOS with stock packet-access abstraction; branch comparisons are configuration-specific |
+| Synthetic ns-3 wireless DT dataset | Synthetic generated dataset | Wireless simulation | ns-3.44; LTE/EPC; Wi-Fi 802.11n; CSMA-based LiFi surrogate | 10-s simulation runs | 432 application-flow records; 624 raw FlowMonitor rows | 48 configurations; three CPE flows per branch and run; packet counters, throughput, delay, jitter, FlowMonitor-reported loss, scenario metadata | Offered load and throughput in Mbps; mobility in m/s; LiFi-surrogate link rate in Mbps; delay and jitter in ms; packet counts and seed are dimensionless | CSV, FlowMonitor XML, JSON, C++ source, ZIP archive | Aggregate table 1,359,857 B; artifact archive 801,215 B; summary 185,874 B | Repository-level CC BY-NC 4.0 data licence in the revision repository; upstream source repository states academic/non-commercial use | `NS3_Wireless/` in the cited public data-generation repository | ns-3.44; loads 2/5/10/20 Mbps, speeds 0.5/3 m/s, LiFi-surrogate rates 50/100 Mbps, seeds 1/2/3 | LTE/EPC is not 5G NR; CSMA is a packet-link surrogate rather than a physical LiFi model; branch comparisons are configuration-specific and uncalibrated to the practical testbed |
 
 ## Machine-readable metadata already present
 
 `MajorRevision/croissant_metadata.json` documents the two 339-km Voyager
 products, processed practical tables, the materialised constructed benchmark,
-derived revision artifacts, GNPy replay, and the final W4C release:
+derived revision artifacts, GNPy replay, and the released ns-3 wireless data:
 
 - `semantic_case_v6/data/wireless_real_30s.csv`, 787,492 B in the current
   public snapshot;
@@ -38,14 +38,17 @@ derived revision artifacts, GNPy replay, and the final W4C release:
 - `E2_privacy/privacy_results_per_seed.csv`, 85,616 B;
 - `E4_gnpy_audit/unique_configurations.csv`, 10,091,783 B.
 
-- `W4C_THREE_RAT_SWEEP/analysis/final_application_flow_dataset.csv`, 91,708 B;
-  the complete W4C bundle is available under
-  `W4C_THREE_RAT_SWEEP/` in the public dataset repository.
+- `NS3_Wireless/scenarios.csv`, 1,359,857 B, SHA-256
+  `a9317161880af38993077da5b85712a6a3b4e259bf46b717485ff3f7e0262f4a`;
+- `NS3_Wireless/artifacts.zip`, 801,215 B, SHA-256
+  `f21bb0e9597ee80d794605f891dac14e35795578162bb235fb80408a88c2170f`;
+- `NS3_Wireless/summary.json`, 185,874 B, SHA-256
+  `5a1d7c0c01b31ebfa46df3e444e8f8b316dd083a7a4d082de1f795e0c2c3996b`.
 
 The JSON-LD file contains selected field mappings and SHA-256 values. It is a
-revision artifact, not proof of a formal legal licence. The public W4C bundle
-is described through its application-flow, optical-state, validation, and
-field-dictionary entries. Exact aggregate metadata for the externally
+revision artifact, not proof of a formal legal licence. The public ns-3 bundle
+is described through its application-flow fields, archived FlowMonitor data,
+scenario metadata, and source artifacts. Exact aggregate metadata for the externally
 referenced 986-km and urban-sensing collections remain to be consolidated.
 
 ## Release decisions required before submission
@@ -53,5 +56,6 @@ referenced 986-km and urban-sensing collections remain to be consolidated.
 1. Supply authoritative source paths and record/size metadata for the 986-km
    and urban sensing datasets, if they are claimed as released here.
 2. Confirm units and definitions for the practical wireless columns.
-3. Decide and document formal licence/reuse terms for the revision/W4C
-   repository and, if desired, add an SPDX identifier to the practical data.
+3. Confirm whether the repository-level CC BY-NC 4.0 terms are also intended
+   to govern every externally hosted dataset artifact and, if desired, add an
+   SPDX identifier to the practical data.

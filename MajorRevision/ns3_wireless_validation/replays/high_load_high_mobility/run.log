@@ -1,0 +1,6 @@
+COMMAND
+/home/ubuntu/Desktop/LLM Driven wireless environment generation/W1_NS3_VALIDATION/replays/high_load_high_mobility/archived_generated_rebuilt --outputDir=W1_NS3_VALIDATION/replays/high_load_high_mobility/fresh_results --simTime=10.0 --seed=3 --offeredLoadMbps=20 --packetSize=1024 --mobilitySpeed=3 --lifiRateMbps=100
+
+STDOUT
+
+STDERR

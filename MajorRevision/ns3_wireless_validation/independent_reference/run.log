@@ -1,0 +1,6 @@
+COMMAND
+/home/ubuntu/Desktop/LLM Driven wireless environment generation/W1_NS3_VALIDATION/independent_reference/reference --outputDir=W1_NS3_VALIDATION/independent_reference/results
+
+STDOUT
+
+STDERR

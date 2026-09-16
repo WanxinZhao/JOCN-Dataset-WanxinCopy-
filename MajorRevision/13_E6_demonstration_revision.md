@@ -108,10 +108,11 @@ returned metric metadata for all 6,120 active scenarios: zero mismatches. The
 24 all-off configurations do not invoke propagation. This is configuration
 consistency validation, not an independent optical propagation implementation.
 
-`usecase1_corrected.pdf` and its 400-dpi PNG provide the replacement numerical
-result figure; the separate Agent architecture figure is unchanged. The four
-panels show configuration counts, joint-format GSNR distributions, the corrected
-power sweep and QPSK channel-loading means. `corrected_power_metrics.pdf` and PNG
+`usecase1_corrected.pdf` and its 400-dpi PNG provide the replacement result
+figure; the separate Agent architecture figure is unchanged. Panel (a) retains
+the request--scenario-expansion--DT-execution--dataset-output workflow, and
+panels (b)--(d) show joint-format GSNR distributions, the corrected power sweep,
+and QPSK channel-loading means. `corrected_power_metrics.pdf` and PNG
 add route-level GSNR and OSNR sweeps. Metrics use signal bandwidth throughout.
 Each configuration first averages its active-channel metrics; plotted means then
 weight configurations equally. Boxplots show medians, quartiles and 1.5-IQR

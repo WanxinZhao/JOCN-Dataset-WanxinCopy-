@@ -24,7 +24,8 @@ owner are isolated in `W5C_author_confirmation_required.md`.
 | E4 | GNPy uniqueness, warning, and provenance audit | `04_E4_GNPy正确性实验结果.md` | `E4_gnpy_audit/`, `run_e3_e4.py` | Complete artifact audit |
 | E5 | Recovered-source GNPy replay and strict-version comparison | `07_E5_恢复源码复现实验结果.md` | `E5_recovered_gnpy_replay/`, `run_e5_recovered_gnpy.py` | Complete; both arms 96/96 |
 | E6 | OpenAI per-call trace reproduction | `E6_llm_trace_reproduction/README.md` | Public archive at `JOCN-DATASET-Code@553cbb1` | Complete new reproduction: 6/6 calls, exact requests/responses, 108,308 tokens |
-| W4C | Final three-RAT synthetic wireless sweep | release documentation | `W4C_THREE_RAT_SWEEP/` | Public; 48 configurations and 432 application-flow records |
+| Wireless validation | Released synthetic ns-3 dataset validation | `W2_wireless_ns3_reviewer_response.md` | `ns3_wireless_validation/` and the simulator/data release in the cited workflow repository | Current manuscript evidence; 48 configurations and 432 application-flow records |
+| Three-RAT dataset | Experimental three-RAT backend study | historical development reports | `synthetic_three_rat_wireless_dataset/` | Retained as development evidence; not used in the current manuscript claim path |
 
 For E3, `E3_llm_baseline/prompt_inventory.md` records the author-confirmed
 OpenAI provider, the three released prompt-template locations, the recovered
@@ -55,5 +56,6 @@ Important interpretation boundaries:
 - The pinned GNPy v2.12-compatible replay closely reproduces the released
   GSNR values; the larger GNPy 2.14.2 differences are reported as version/model
   sensitivity.
-- W4C validates reproducible bounded synthetic telemetry, not calibrated
-  fidelity to the practical wireless testbed.
+- The released ns-3 dataset validates reproducible bounded synthetic
+  telemetry for LTE/EPC, Wi-Fi 802.11n, and a CSMA-based LiFi surrogate; it
+  does not establish calibrated fidelity to the practical wireless testbed.

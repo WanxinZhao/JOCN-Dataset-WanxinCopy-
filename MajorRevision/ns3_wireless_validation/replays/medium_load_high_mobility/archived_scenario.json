@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "name": "indoor-hybrid",
+  "technology": "hybrid",
+  "duration_s": 10.0,
+  "random_seed": 2,
+  "mobility": {
+    "mode": "random_walk",
+    "area_width_m": 50.0,
+    "area_height_m": 50.0,
+    "speed_mps": 1.5
+  },
+  "traffic": {
+    "protocol": "udp",
+    "packet_size_bytes": 1024,
+    "data_rate": "10Mbps",
+    "start_s": 1.0,
+    "stop_s": 10.0
+  },
+  "metrics": {
+    "throughput": true,
+    "packet_loss": true,
+    "delay": true,
+    "jitter": true,
+    "flow_monitor": true,
+    "pcap": false,
+    "ascii_trace": false
+  },
+  "wifi": {
+    "mode": "infrastructure",
+    "stations": 3,
+    "access_points": 1,
+    "standard": "802.11n",
+    "channel_width_mhz": 20
+  },
+  "lte": {
+    "enodebs": 1,
+    "ues": 3,
+    "use_epc": true
+  },
+  "lifi": {
+    "access_points": 1,
+    "cpes": 3,
+    "data_rate": "100Mbps",
+    "coverage_radius_m": 10.0
+  },
+  "assumptions": [
+    "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+    "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+    "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+    "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+    "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+  ],
+  "unsupported": [],
+  "expansion_parameters": {
+    "offered_load_mbps": 10.0,
+    "packet_size_bytes": 1024,
+    "mobility_speed_mps": 3.0,
+    "lifi_rate_mbps": 100.0
+  }
+}

@@ -76,11 +76,10 @@ The corrected set at -6.5/-6.0/-5.5 dBm exactly matches an independently specifi
 
 **Response.** We added the dataset summary table and retained
 `MajorRevision/croissant_metadata.json`. The public dataset repository now
-contains the final W4C release at `W4C_THREE_RAT_SWEEP/`. The
-Croissant record identifies the two distinct 339-km Voyager products, the
-materialised constructed-fusion table, final application-flow table, run-level
-and LiFi summaries, structural validation, source documentation, and the
-complete application/optical-state field dictionary with units. Unknown raw
+contains the wireless release at `NS3_Wireless/`. The Croissant record
+identifies the two distinct 339-km Voyager products, the materialised
+constructed-fusion table, the ns-3 application-flow table, archived run
+artifacts, and the released KPI fields with units. Unknown raw
 practical-telemetry units and formal licence terms remain explicitly marked
 rather than fabricated.
 
@@ -91,9 +90,10 @@ dataset subsection. The complete machine-readable audit is
 **Evidence/result.** The current Croissant file documents the processed
 wireless table, both Voyager campaigns, the 2,848-row/52-field materialised benchmark,
 E1/E2 result tables, deduplicated GNPy audit CSV, recovered GNPy replay, and
-the public W4C release with recorded paths, sizes, hashes, and field units.
-The final W4C row reports 48 configurations, 432 application-flow records,
-and 624 raw FlowMonitor rows.
+the public wireless release with recorded paths, sizes, hashes, and field units.
+The wireless row reports 48 configurations, 432 application-flow records,
+and 624 raw FlowMonitor rows for the released LTE/EPC, Wi-Fi 802.11n, and
+CSMA-based LiFi-surrogate experiment.
 
 **Limitation.** Exact aggregate counts and sizes for the externally referenced
 986-km and urban-sensing collections are not consolidated in the manuscript.
@@ -101,7 +101,7 @@ The practical wireless source does not preserve formal units for every raw
 field, and no standard LICENSE/SPDX file is present; these facts are stated as
 release limitations rather than inferred.
 
-**Status.** `PARTIALLY_CLOSED`; the Voyager, constructed-fusion, and W4C
+**Status.** `PARTIALLY_CLOSED`; the Voyager, constructed-fusion, and wireless
 release metadata are closed, while externally referenced collection totals,
 undocumented practical-field units, and formal licence terms remain author
 confirmation items.
@@ -223,13 +223,13 @@ made.
 
 **Response.** We removed scalability as a demonstrated result. The framework
 is described as extensible, while the current evidence is limited to the
-reported configuration spaces and bounded W4C sweep.
+reported configuration spaces and bounded wireless sweep.
 
 **Exact manuscript change/location.** Framework and LLM evaluation text,
 including the explicit future-work statement for larger scenario spaces.
 
 **Evidence/result.** The available evidence covers the 6,144-key GNPy
-configuration set and the W4C 48-run wireless sweep; no extrapolated scaling
+configuration set and the 48-run wireless sweep; no extrapolated scaling
 curve is reported.
 
 **Limitation.** Larger-scale execution and cost/latency scaling remain future
@@ -392,12 +392,14 @@ and the Fig. 6/architecture reference.
 
 ### R2C16 — Fig. 7 resolution is insufficient and its counts are confusing.
 
-**Response.** Fig. 7 was regenerated at higher resolution and its caption now
-distinguishes execution records, unique configurations, valid records, and
+**Response.** Fig. 7 was regenerated as a vector figure. Panel (a) retains the
+original request--scenario-expansion--DT-execution--dataset-output workflow,
+while panels (b)--(d) use the corrected unique configuration table. The caption
+distinguishes execution records, unique configurations, numerical records, and
 no-signal records.
 
-**Exact manuscript change/location.** `Figures/usecase1_revision.png` and
-the GNPy figure caption.
+**Exact manuscript change/location.** `Figures/usecase1_corrected.pdf` and the
+GNPy figure caption.
 
 **Evidence/result.** The active caption reports 8,192 executions, 6,144 unique
 configurations, 6,120 valid, and 24 no-signal configurations.
@@ -461,9 +463,9 @@ ordering is claimed.
 
 **Response.** We adopt the reviewer's suggested feasibility-demonstration scope. The retained Agent architecture demonstrates natural-language-to-simulator workflow execution; we do not claim superiority over scripts, autonomous repair, convergence or general reliability. As detailed under R1C2, the new six-call trace reports exact prompts/responses, dated model, settings, actual attempts, tokens, latency and estimated cost, while manual repair/resume and a later zero-new-call corrected replay are separately accounted for.
 
-**Exact manuscript change/location.** Abstract; Evaluation Protocol and Reproducibility Scope; `tab:llm_trace`; `tab:llm_baseline`; GNPy results; Conclusions. Existing wireless results remain in `sec:ns3_wireless` and `tab:ns3_validation`.
+**Exact manuscript change/location.** Abstract; Evaluation Protocol and Reproducibility Scope; `tab:llm_trace`; `tab:llm_baseline`; GNPy results; Conclusions. The wireless evidence is reported in `sec:ns3_wireless`, `tab:dataset_summary`, and `fig:ns3_results`.
 
-**Evidence/result.** The corrected optical demonstration covers exactly 6,144 expected unique configurations in 8,192 execution records (25% repeated). It contains 6,120 unique `ok` and 24 expected all-off `no_signal` configurations. No configuration keys are missing or extra. W4C retains its independent wireless evidence: 48 configurations and 432 application-flow records with 432/432 mapping passes. Those simulator checks do not establish LLM efficacy.
+**Evidence/result.** The corrected optical demonstration covers exactly 6,144 expected unique configurations in 8,192 execution records (25% repeated). It contains 6,120 unique `ok` and 24 expected all-off `no_signal` configurations. No configuration keys are missing or extra. The released wireless experiment contains 48 configurations and 432 application-flow records; independent reconstruction, representative replay, fixed-seed repetition, and a separately written ns-3 reference validate the generated data under its declared assumptions. Those simulator checks do not establish LLM efficacy.
 
 **Limitation.** The original final Reflection used pre-correction results and requested another refinement at the configured two-iteration cap. It was not rerun on corrected results. The experiment does not supply independent LLM repetitions or single-LLM/no-Reflection ablations, and the historical API trace remains unavailable. The deterministic timing is enumeration only.
 
@@ -473,11 +475,15 @@ ordering is claimed.
 
 **Response.** We agree that successful execution alone cannot detect a
 plausible but incorrectly configured simulator, KPI extractor, or flow
-mapping. The final wireless track adds: (1) independent LiFi equation tests,
-9/9 pass; (2) 15/15 compiled-ns-3 versus independent-Python LiFi comparisons;
-(3) integrated three-RAT mapping with 9/9 application flows mapped; (4)
-byte-identical same-seed repeatability; and (5) a complete W4C sweep with
-48/48 configurations and 432/432 mappings passing. For GNPy, we recovered the
+mapping. For the released wireless dataset, an independent parser reconstructed
+all 48 runs, 624 FlowMonitor rows, and 432 explicitly mapped application-flow
+records. Packet counters matched exactly; the maximum absolute differences
+were 5.57 × 10^-5 Mbps for throughput, 3.16 × 10^-3 ms for
+mean delay, and 1.10 × 10^-5 ms for mean jitter, attributable to XML
+time serialisation. Three representative configurations rebuilt and replayed
+with zero KPI delta, a fixed-seed configuration repeated identically, and a
+separately written stock ns-3 implementation passed five topology/configuration
+checks and 63 keyed KPI comparisons. For GNPy, we recovered the
 legacy equipment and scenario artifacts and replayed 96 cases stratified by
 path, modulation/spectrum configuration, launch power, and active-channel
 load. Official GNPy v2.12 at commit
@@ -487,12 +493,15 @@ schema-corrected GNPy 2.14.2 run also completed 96/96, with mean/max GSNR
 differences of 0.628/1.435 dB.
 
 **Exact manuscript change/location.** Synthetic GNPy results;
-Table~\ref{tab:gnpy_replay}; `sec:ns3_wireless`;
-Table~\ref{tab:ns3_validation}; `MajorRevision/E5_recovered_gnpy_replay/`;
-and public W4C evidence under `W4C_THREE_RAT_SWEEP/`.
+`sec:ns3_wireless`; Table~\ref{tab:dataset_summary};
+`MajorRevision/E5_recovered_gnpy_replay/`;
+the simulator/data release under `NS3_Wireless/` in the cited workflow
+repository; and independent wireless validation evidence under
+`MajorRevision/ns3_wireless_validation/` in the revision repository.
 
-**Evidence/result.** W4C confirms the final synthetic wireless structural and
-equation checks. E5 records 96/96 successful CLI runs in both GNPy replay arms,
+**Evidence/result.** The wireless release confirms KPI extraction, flow
+mapping, representative replay, repeatability, and implementation consistency.
+E5 records 96/96 successful CLI runs in both GNPy replay arms,
 case-level comparisons, frozen dependencies, source manifests, input files,
 and logs.
 
@@ -514,7 +523,7 @@ reported for both generated-data tracks.
 **Response.** The Abstract and framework text now distinguish practical data
 organisation, constructed semantic evaluation, demonstrated GNPy/ns-3
 workflows, and prospective AI/controller integration points. The GNPy
-artifact and W4C wireless dataset are reported with their respective
+artifact and final wireless dataset are reported with their respective
 validation limitations.
 
 **Exact manuscript change/location.** Abstract, framework overview, and LLM
@@ -590,20 +599,21 @@ spelling variants.
 
 ### R3C10 — Use ns-3 terminology and consistent title capitalisation.
 
-**Response.** The final synthetic wireless backend is described as ns-3.44
-with CTTC 5G-LENA 5G NR, native Wi-Fi 802.11ax, and an equation-driven LOS
-LiFi/OWC model. The preserved LTE/EPC + 802.11n + CSMA-surrogate code is
-labelled legacy/development only and is not used as the final synthetic
-claim path.
+**Response.** The synthetic wireless experiment is consistently described as
+ns-3 with an LTE/EPC branch, Wi-Fi 802.11n, and a CSMA-based LiFi
+surrogate. The practical measured 5G NR, Wi-Fi 6, and LiFi dataset is described
+separately and is not presented as being reproduced by the simulation.
 
-**Exact manuscript change/location.** `sec:ns3_wireless`, Table~\ref{tab:ns3_validation},
+**Exact manuscript change/location.** `sec:ns3_wireless`, Table~\ref{tab:dataset_summary},
 wireless figures/captions, and Conclusions.
 
-**Evidence/result.** W4C final evidence reports 48 configurations, 432
-application records, and 144 records per branch.
+**Evidence/result.** The released evidence reports 48 configurations, 432
+application records, and 624 raw FlowMonitor rows.
 
-**Limitation.** The LiFi branch is not a complete standardized PHY/MAC and is
-not calibrated to the practical testbed.
+**Limitation.** The LTE/EPC branch is not 5G NR, and the CSMA-based
+LiFi-surrogate branch is not a physical LiFi model. Cross-branch KPI
+differences are configuration-specific and are not calibrated to the practical
+testbed.
 
 **Status.** `CLOSED`.
 
@@ -642,7 +652,7 @@ full text is not present locally.
 
 For the current bounded manuscript claims, no new experiment is required. The
 Voyager lineage, constructed-benchmark release, reviewer identifier set, GNPy
-numerical replay, and final W4C release are closed. Remaining author actions
+numerical replay, and final wireless release are closed. Remaining author actions
 are limited to exact metadata for externally referenced collections,
 undocumented practical-wireless units, formal licence terms, and any historical
 LLM run traces that may still exist. The final response preserves the

@@ -17,7 +17,10 @@ interpretation and reviewer-response text.
 - `new_run_call_summary.csv`: six original API attempts, copied from the archive.
 - `power_summary_by_route_and_format.csv`: equally weighted configuration means
   of active-channel-average GSNR/OSNR in signal bandwidth; no_signal excluded.
-- `usecase1_corrected.pdf/png`: main result figure, vector PDF and 400-dpi PNG.
+- `usecase1_corrected.pdf/png`: manuscript result figure, with the original
+  workflow in panel (a) and corrected E6 data in panels (b)--(d). In this
+  manuscript checkout it is regenerated from the audited CSV by
+  `MajorRevision/generate_manuscript_figures.py`.
 - `corrected_power_metrics.pdf/png`: GSNR and OSNR by route and launch power.
 - `analysis_requirements.txt`: local analysis environment, not simulator runtime.
 

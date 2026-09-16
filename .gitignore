@@ -19,8 +19,9 @@ MajorRevision/paper_preview*/
 # Downloaded upstream GNPy source artifacts are reproducible from provenance.json.
 MajorRevision/E4_gnpy_audit/source/
 
-# Corrected E6 vector figure assets are manuscript inputs.
+# PDF figure assets used by the manuscript.
 !Figures/usecase1_corrected.pdf
+!Figures/Architecture_Fig6.pdf
 !MajorRevision/E6_llm_trace_reproduction/corrected_analysis/*.pdf
 !MajorRevision/Response_Letter/response_letter.pdf
 

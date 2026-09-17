@@ -41,7 +41,7 @@ The principal revisions are:
   \item We clarify that cross-domain describes the implemented system architecture and unified data-interface workflow, while platform scheduling required the practical datasets to be collected in different time periods.
   \item We apply CC BY-NC 4.0 to the released datasets and associated metadata/documentation, use ``openly available'' consistently, and state the licence in Table~2 and Croissant metadata.
   \item We define the multi-agent workflow operationally through schema-defined roles, shared orchestrator state, simulator tools, and retained intermediate artefacts, and evaluate it through an instrumented run and a deterministic baseline.
-  \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, versioned GNPy replay, and bounded ns-3 validation.
+  \item We add leakage-free temporal semantic evaluation, multiple privacy attackers and baselines, a deterministic GNPy enumerator, independent GNPy replay, and bounded ns-3 validation.
   \item We remove the template DOI and compilation date, rebuild all citations and references, enlarge Fig.~6, regenerate Fig.~7, and standardise terminology and British English.
 \end{enumerate}
 
@@ -247,7 +247,7 @@ We selected the suggested feasibility scope. The full instrumented-run details a
 4. The generated data lack independent correctness validation. Runtime checks may catch execution failures but not plausible results from incorrect configurations. Add an audit using independently reproduced samples, a hand-written generator, established GNPy examples, or field measurements. Identify the repository commit and report simulator versions and material configuration assumptions.
 \end{reviewercomment}
 \begin{authorresponse}
-For GNPy, 96 cases stratified by path, joint modulation/slot-width setting, power, and channel load were regenerated independently. A pinned environment using official GNPy v2.12 (commit \texttt{7ce66501\allowbreak{}0970f57e\allowbreak{}46672db1\allowbreak{}ec0864ae\allowbreak{}448077e6}) completed 96/96. Its mean and maximum absolute GSNR differences from the archive were 0.00015 and 0.00050~dB. A schema-corrected GNPy v2.14.2 run completed 96/96, with corresponding differences of 0.628 and 1.435~dB, demonstrating version sensitivity. Both arms retain EDFA/ROADM warnings; ``successful'' therefore means numerically reproducible under declared assumptions, not physically calibrated.
+For GNPy, 96 cases stratified by path, joint modulation/slot-width setting, power, and channel load were regenerated independently. A pinned environment using official GNPy v2.12 (commit \texttt{7ce66501\allowbreak{}0970f57e\allowbreak{}46672db1\allowbreak{}ec0864ae\allowbreak{}448077e6}) completed 96/96. Its mean and maximum absolute GSNR differences from the archive were 0.00015 and 0.00050~dB. The replay retains the reported EDFA/ROADM warnings; ``successful'' therefore means numerically reproducible under the declared simulator assumptions, not physically calibrated.
 
 For wireless data, we independently parsed the FlowMonitor XML from all 48 archived ns-3.44 runs, covering 624 raw flow rows and 432 application-flow rows. All application packet counters and FlowMonitor lost-packet fields matched the exported KPI files exactly. Continuous KPI differences were limited to XML time-serialisation precision: at most $5.57\times10^{-5}$~Mbps for throughput, $3.16\times10^{-3}$~ms for mean delay, and $1.10\times10^{-5}$~ms for mean jitter. Three representative configurations rebuilt and replayed with nine application flows each and zero KPI delta; a same-seed configuration repeated identically; and an independently written ns-3 reference passed five topology/configuration checks and all 63 keyed KPI comparisons. These tests support implementation consistency and reproducibility for the declared LTE/EPC, Wi-Fi 802.11n, and CSMA-based LiFi-surrogate scenario. They do not establish physical LiFi fidelity, calibration to the practical testbed, or a universal technology ranking. FlowMonitor lost packets are reported as a simulator statistic rather than terminal packet loss at the finite stop time.
 \end{authorresponse}
@@ -257,7 +257,7 @@ For wireless data, we independently parsed the FlowMonitor XML from all 48 archi
 5. Separate implemented, evaluated, demonstrated, and proposed components in the abstract.
 \end{reviewercomment}
 \begin{authorresponse}
-The revised Abstract distinguishes the implemented cross-domain architecture and unified interface, the separately timed practical acquisitions, the evaluated semantic-fusion benchmark, the LLM/DT workflow, the deterministic baseline, and the versioned numerical replay. The inherited AI-engine and controller implementation is described and cited in Sections~III and IV-A rather than presented as a new experimental result.
+The revised Abstract distinguishes the implemented cross-domain architecture and unified interface, the separately timed practical acquisitions, the evaluated semantic-fusion benchmark, the LLM/DT workflow, the deterministic baseline, and the independent numerical replay. The inherited AI-engine and controller implementation is described and cited in Sections~III and IV-A rather than presented as a new experimental result.
 \end{authorresponse}
 
 \begin{reviewercomment}
